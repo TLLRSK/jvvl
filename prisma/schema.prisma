@@ -19,7 +19,9 @@ model Product {
   name String
   description String
   featured Boolean
-  image String
+  thumbnail_image String
+  model_image String
+  images_gallery String[]
   price Int
   attributes String[]
   createdAt DateTime @default(now())

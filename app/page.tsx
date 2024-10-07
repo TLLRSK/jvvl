@@ -4,7 +4,7 @@ import React from 'react'
 
 function HomePage() {
   return (
-    <main className='mt-[45px]'>
+    <main className='mt-[45px] overflow-x-hidden'>
       <Hero />
       <FeaturedProducts />
     </main>

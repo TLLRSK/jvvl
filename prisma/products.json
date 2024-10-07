@@ -1,10 +1,15 @@
 [
     {
-      "name": "avant-garde lamp",
+      "name": "golden collar",
       "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
       "featured": true,
-      "image": "https://images.pexels.com/photos/943150/pexels-photo-943150.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "price": 100,
+      "thumbnail_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/golden-collar-1-thumbnail.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2dvbGRlbi1jb2xsYXItMS10aHVtYm5haWwuanBnIiwiaWF0IjoxNzI4MjkyMDIxLCJleHAiOjE3NTk4MjgwMjF9.M1bnB89tLovqyBvV9eW2ki-lEzQvyEb3vEz4xie6Enk&t=2024-10-07T09%3A07%3A02.406Z",
+      "model_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/golden-collar-model.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2dvbGRlbi1jb2xsYXItbW9kZWwuanBnIiwiaWF0IjoxNzI4MjkyMjc4LCJleHAiOjE3NTk4MjgyNzh9.yRbHUw5fB_EPLt41PJtPeqlno8sJC7nhCCf1GNN9iac&t=2024-10-07T09%3A11%3A19.352Z",
+      "images_gallery": [
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/golden-collar-1.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2dvbGRlbi1jb2xsYXItMS5qcGciLCJpYXQiOjE3MjgyOTIwMDYsImV4cCI6MTc1OTgyODAwNn0.PPgvUIzkEFQLrWWLgN8Kp0H23HKRNlb0WjbqL_LfIhc&t=2024-10-07T09%3A06%3A46.978Z",
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/golden-collar-2.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2dvbGRlbi1jb2xsYXItMi5qcGciLCJpYXQiOjE3MjgyOTIwNDQsImV4cCI6MTc1OTgyODA0NH0.PNwEKcGJxH1p-PiP6g3ne4c6MgPGWyXIWVVYbnwQHJw&t=2024-10-07T09%3A07%3A24.664Z"
+      ],
+      "price": 330,
       "attributes": [
         "attribute one",
         "attribute two",
@@ -13,11 +18,16 @@
       "clerkId": "clerkId"
     },
     {
-      "name": "chic chair",
+      "name": "diamond collar",
       "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
       "featured": true,
-      "image": "https://images.pexels.com/photos/5705090/pexels-photo-5705090.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "price": 200,
+      "thumbnail_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-collar-thumbnail.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1jb2xsYXItdGh1bWJuYWlsLmpwZyIsImlhdCI6MTcyODI5MjM2OCwiZXhwIjoxNzU5ODI4MzY4fQ.d-ypmKPLzQu40EvrwiQP4MQ4Jz15CFklg4UF7WIKqH4&t=2024-10-07T09%3A12%3A49.588Z",
+      "model_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-collar-model.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1jb2xsYXItbW9kZWwuanBnIiwiaWF0IjoxNzI4MjkyMzg1LCJleHAiOjE3NTk4MjgzODV9.rHyD1fGhydxGomVHx_ZbGbESxEDJmB3f6V6cJA-heZk&t=2024-10-07T09%3A13%3A06.502Z",
+      "images_gallery": [
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-collar-1.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1jb2xsYXItMS5qcGciLCJpYXQiOjE3MjgyOTI0MDAsImV4cCI6MTc1OTgyODQwMH0.ZwjkPJodFsYVPwYa5a8NiLLOcd6d315aijr9Qq1rT00&t=2024-10-07T09%3A13%3A21.323Z",
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-collar-2.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1jb2xsYXItMi5qcGciLCJpYXQiOjE3MjgyOTI0MTAsImV4cCI6MTc1OTgyODQxMH0.zWjAOlR_CJNwbdJ0HkMeQHyFD8eOW_9Ir1AM6Xgbhtw&t=2024-10-07T09%3A13%3A30.705Z"
+      ],
+      "price": 390,
       "attributes": [
         "attribute one",
         "attribute two",
@@ -26,11 +36,16 @@
       "clerkId": "clerkId"
     },
     {
-      "name": "comfy bed",
+      "name": "black earrings",
       "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
       "featured": true,
-      "image": "https://images.pexels.com/photos/1034584/pexels-photo-1034584.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "price": 300,
+      "thumbnail_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/black-earrings-earrings.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2JsYWNrLWVhcnJpbmdzLWVhcnJpbmdzLmpwZyIsImlhdCI6MTcyODI5MjQyMywiZXhwIjoxNzU5ODI4NDIzfQ.dNr1hG4WT3_l2kA1w8gCJi4Ya0oPWn7DujnbvdSEV1Q&t=2024-10-07T09%3A13%3A44.106Z",
+      "model_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/black-earrings-earrings-model.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2JsYWNrLWVhcnJpbmdzLWVhcnJpbmdzLW1vZGVsLmpwZyIsImlhdCI6MTcyODI5MjQ3MywiZXhwIjoxNzU5ODI4NDczfQ.dpKmJsLmlCm6QQ-TLV3okXmzVBODk6zUPpcUYrZ5Hz8&t=2024-10-07T09%3A14%3A34.037Z",
+      "images_gallery": [
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/black-earrings-1.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2JsYWNrLWVhcnJpbmdzLTEuanBnIiwiaWF0IjoxNzI4MjkyNDQ5LCJleHAiOjE3NTk4Mjg0NDl9.-mG1hEtX0g4EOgZ-ig0OoqE6dxVUGiIfQZbpstxecgQ&t=2024-10-07T09%3A14%3A09.819Z",
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/black-earrings-2.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2JsYWNrLWVhcnJpbmdzLTIuanBnIiwiaWF0IjoxNzI4MjkyNDU2LCJleHAiOjE3NTk4Mjg0NTZ9.wdBW08fT02_JGo1imNaN4T-7yyzPbM3ONSbiljW1CJc&t=2024-10-07T09%3A14%3A17.447Z"
+      ],
+      "price": 240,
       "attributes": [
         "attribute one",
         "attribute two",
@@ -39,11 +54,16 @@
       "clerkId": "clerkId"
     },
     {
-      "name": "contemporary sofa",
+      "name": "diamond earrings",
       "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
-      "featured": false,
-      "image": "https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      "price": 400,
+      "featured": true,
+      "thumbnail_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-earrings-thumbnail.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1lYXJyaW5ncy10aHVtYm5haWwuanBnIiwiaWF0IjoxNzI4MjkyNjAyLCJleHAiOjE3NTk4Mjg2MDJ9.PNcKfmxj-WsaO6ZpI2AkXAtqmMb8IXg-cvqHGXTGbzs&t=2024-10-07T09%3A16%3A43.147Z",
+      "model_image": "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-earrings-model.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1lYXJyaW5ncy1tb2RlbC5qcGciLCJpYXQiOjE3MjgyOTI2MjksImV4cCI6MTc1OTgyODYyOX0.Ao1723WjLNjzEI7s2ENatMG4t_6Iitz4e7aoiqPIGCU&t=2024-10-07T09%3A17%3A10.567Z",
+      "images_gallery": [
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-earrings-1.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1lYXJyaW5ncy0xLmpwZyIsImlhdCI6MTcyODI5MjYxMSwiZXhwIjoxNzU5ODI4NjExfQ.l7kNFfCzki2J7KUpDmAqOehucVh-2wyDu6EMRgfEtJs&t=2024-10-07T09%3A16%3A51.837Z",
+        "https://uqyxqjsufmhzosvtcxuh.supabase.co/storage/v1/object/sign/xopxop-bucket/diamon-earrings-2.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ4b3B4b3AtYnVja2V0L2RpYW1vbi1lYXJyaW5ncy0yLmpwZyIsImlhdCI6MTcyODI5MjYyMSwiZXhwIjoxNzU5ODI4NjIxfQ.PXziCoiOQESq5tv_wSaNVliYTvwm4pQkJl8_eNZQkvY&t=2024-10-07T09%3A17%3A01.747Z"
+      ],
+      "price": 350,
       "attributes": [
         "attribute one",
         "attribute two",

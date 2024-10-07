@@ -5,36 +5,53 @@ import Image from "next/image";
 import Link from "next/link";
 
 function ProductCard({ product }: { product: Product }) {
-  const { id, name, image, price } = product;
+  const { id, name, thumbnail_image, model_image, price } = product;
 
   return (
-    <li className="group grid border-b-[1px] border-r-[1px] border-primary">
-      <button className="ml-auto p-2 hover:[&>*]:opacity-100">
+    <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted">
+      <button className="ml-auto p-2 hover:[&>*]:opacity-100 mb-6">
         <FavIcon className="text-foreground w-4 h-4 opacity-50" />
       </button>
       <Link
         href={`/products/${id}`}
         className="relative h-[60vw] md:h-[33vw] lg:h-[25vw] flex flex-col "
       >
-        <figure className="relative flex-1">
+        <div className="relative flex m-auto h-[60%] w-[75%] md:h-[80%] md:w-[80%]">
           <Image
-            src={image}
+            src={thumbnail_image}
             alt={name}
-            className="-z-10 opacity-20"
+            className="-z-10"
             sizes=""
             fill
-            objectPosition="cover"
             priority
           />
-        </figure>
+        </div>
 
-        <figcaption
-          className="mt-auto p-3 py-2 z-10 -right-[1px] -left-[1px]
-          md:hidden md:absolute md:bg-background md:-bottom-10 md:border-[1px] md:border-primary md:group-hover:block"
-        >
+        <div className="w-full mt-auto p-3 py-2 z-10 md:hidden">
           <p className="text-md font-semibold">$ {price}</p>
           <h3 className="capitalize">{name}</h3>
-        </figcaption>
+        </div>
+
+        <div
+          className="
+            absolute top-0 -right-[1px] -bottom-8 -left-[1px] bg-background drop-shadow-md z-20
+            hidden md:group-hover:flex flex-col"
+        >
+          <div className="relative h-full">
+            <Image
+              src={model_image}
+              alt={name}
+              className="-z-10"
+              sizes=""
+              fill
+              priority
+            />
+          </div>
+          <div className="w-full bg-background mt-auto p-3 py-2 z-10">
+            <p className="text-md font-semibold">$ {price}</p>
+            <h3 className="capitalize">{name}</h3>
+          </div>
+        </div>
       </Link>
     </li>
   );
