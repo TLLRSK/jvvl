@@ -9,6 +9,18 @@ export const fetchFeaturedProducts = async () => {
   });
   return products;
 };
+export const fetchAllProducts = ({ search = '' }: { search: string }) => {
+  return db.product.findMany({
+    where: {
+      OR: [
+        { name: { contains: search, mode: 'insensitive' } }
+      ],
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+};
 export const fetchSingleProduct = async ( productId: string ) => {
   const product = await db.product.findUnique({
     where: {

@@ -1,9 +1,13 @@
+import ProductsContainer from '@/components/products/ProductsContainer';
 import React from 'react'
 
-function ProductsPage() {
-  return (
-    <div>ProductsPage</div>
-  )
-}
+function ProductsPage({
+  searchParams,
+}: {
+  searchParams: { search?: string };
+}) {
+  const search = searchParams.search || '';
 
-export default ProductsPage
+  return <ProductsContainer search={search} />;
+}
+export default ProductsPage;

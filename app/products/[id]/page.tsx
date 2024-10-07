@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/single_product/AddToCartButton";
 import BreadCrumbs from "@/components/single_product/BreadCrumbs";
 import SizeForm from "@/components/single_product/SizeForm";
 import {
@@ -52,6 +53,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
             <h3 className="uppercase font-medium">{name}</h3>
           </div>
           {sizes && <SizeForm sizes={sizes} />}
+          <AddToCartButton />
         </div>
     </section>
   );
