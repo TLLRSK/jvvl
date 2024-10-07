@@ -8,7 +8,7 @@ function Container({
     className?: string;
 }) {
   return (
-    <div className={cn('mx-auto max-w-screen-2xl px-8', className)}>
+    <div className={cn('mx-auto max-w-screen-2xl md:px-8', className)}>
         {children}
     </div>
   )

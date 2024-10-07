@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gelasio.variable} ${commissioner.variable} font-sans antialiased`}
+        className={`${gelasio.variable} ${commissioner.variable} font-sans antialiased mt-[45px]`}
       >
         <Navbar />
         {children}
