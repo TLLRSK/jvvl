@@ -11,11 +11,10 @@ function Hero() {
           <Image
             src="/images/hero-image.webp"
             alt="Hero background"
-            layout="fill"
-            objectFit="cover"
+            fill
             quality={100}
             priority
-            className='opacity-60'
+            className='opacity-60 object-cover'
           />
           <div className='absolute inset-0 bg-gradient-to-b from-black/50 to-transparent' />
         </div>

@@ -21,7 +21,7 @@ function ProductCard({ product }: { product: Product }) {
             src={thumbnail_image}
             alt={name}
             className="-z-10"
-            sizes=""
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             fill
             priority
           />
@@ -42,7 +42,7 @@ function ProductCard({ product }: { product: Product }) {
               src={model_image}
               alt={name}
               className="-z-10 object-cover"
-              sizes=""
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
               priority
             />
