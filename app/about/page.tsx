@@ -7,15 +7,6 @@ function AboutPage() {
   return (
     <section>
       <SectionTitle text={"about"} />
-      <div className="relative w-full aspect-square lg:aspect-auto lg:h-[80dvh]">
-        <Image
-          src="/images/workshop.png"
-          alt="workshop"
-          fill
-          objectPosition="cover"
-          className="object-cover"
-        />
-      </div>
       <Container>
         <article className="flex flex-col py-3 md:py-4">
           <h2 className="font-serif leading-[80%] text-3xl md:text-[16vw] text-center py-3 uppercase">
@@ -71,6 +62,15 @@ function AboutPage() {
           </div>
         </article>
       </Container>
+      <div className="relative w-full aspect-square lg:aspect-auto lg:h-[80dvh]">
+        <Image
+          src="/images/workshop.png"
+          alt="workshop"
+          fill
+          priority
+          className="object-cover"
+        />
+      </div>
     </section>
   );
 }

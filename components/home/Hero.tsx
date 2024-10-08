@@ -5,7 +5,7 @@ import CtaButton from './CtaButton'
 
 function Hero() {
   return (
-    <section className='relative border-b-[1px] border-primary'>
+    <section className='relative border-b-[1px] border-muted'>
       <Container className='flex flex-col'>
         <div className='absolute inset-0 -z-10'>
           <Image

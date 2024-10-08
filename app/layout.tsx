@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/global/Footer";
 import Providers from "./providers";
+import { ClerkProvider } from '@clerk/nextjs';
 
 const orienta = Orienta({
   weight: '400',
@@ -29,7 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <ClerkProvider>
+      <html lang="en">
       <body
         className={`${orienta.variable} ${comme.variable} font-sans antialiased mt-[45px]`}
       >
@@ -40,5 +42,6 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

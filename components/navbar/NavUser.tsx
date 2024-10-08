@@ -1,6 +1,6 @@
 import React from "react";
-import UserIcon from "../icons/UserIcon";
 import UserDropdown from "./UserDropdown";
+import UserAvatar from "./UserAvatar";
 
 const links = [
   {href: '/login', label: 'Login'},
@@ -9,7 +9,7 @@ const links = [
 
 function NavUser() {
   return (
-    <UserDropdown icon={<UserIcon className="text-foreground" />} links={links} />
+    <UserDropdown icon={<UserAvatar/>} links={links} />
   );
 }
 
