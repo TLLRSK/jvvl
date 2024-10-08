@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Container from '../global/Container'
-import { CtaButton } from '../global/Buttons'
+import CtaButton from './CtaButton'
 
 function Hero() {
   return (

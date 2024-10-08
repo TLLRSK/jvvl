@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-interface SizeFormProps {
+interface SizeInputProps {
   sizes: string[];
 }
 
-function SizeForm({ sizes }: SizeFormProps) {
+function SizeInput({ sizes }: SizeInputProps) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   return (
-    <form className="mx-auto flex flex-col gap-2">
+    <div className="mx-auto flex flex-col gap-2">
       <p className="text-md uppercase text-center border-primary border-b-[1px] pb-2">
         Sizes
       </p>
@@ -30,7 +30,7 @@ function SizeForm({ sizes }: SizeFormProps) {
               <Label
                 htmlFor={`size-${size}`}
                 className={`text-md cursor-pointer hover:underline ${
-                selectedSize === size ? "font-bold opacity-100" : "opacity-80"
+                selectedSize === size ? "font-bold opacity-100" : "opacity-60"
                 }`}
               >
                 {size}
@@ -39,8 +39,8 @@ function SizeForm({ sizes }: SizeFormProps) {
           ))}
         </div>
       </RadioGroup>
-    </form>
+    </div>
   );
 }
 
-export default SizeForm;
+export default SizeInput;

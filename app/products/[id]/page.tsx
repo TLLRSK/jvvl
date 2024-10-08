@@ -1,6 +1,5 @@
-import AddToCartButton from "@/components/single_product/AddToCartButton";
+import AddToCart from "@/components/single_product/AddToCart";
 import BreadCrumbs from "@/components/single_product/BreadCrumbs";
-import SizeForm from "@/components/single_product/SizeForm";
 import {
   Carousel,
   CarouselContent,
@@ -14,21 +13,30 @@ import React from "react";
 
 async function SingleProductPage({ params }: { params: { id: string } }) {
   const product = await fetchSingleProduct(params.id);
-  const { id, name, images_gallery, model_image, price, description, attributes } = product;
+  const {
+    id,
+    name,
+    images_gallery,
+    model_image,
+    price,
+    description,
+    attributes,
+  } = product;
   const carouselImages = [...images_gallery, model_image];
-  const sizes = ['11', '12', '13', '15'];
+  const sizes = ["11", "12", "13", "15"];
   return (
-    <section className="w-full max-w-screen-xl mx-auto">
+    <section className="">
       <BreadCrumbs name={name} />
-      <Carousel className="w-full bg-muted-background">
-          <CarouselContent className="min-h-[100vw] h-[66dvh]">
+      <div className="lg:grid lg:grid-cols-6 xl:grid-cols-2">
+        <Carousel className="w-full bg-muted-background lg:col-span-4 xl:col-span-1">
+          <CarouselContent className="min-h-[100vw] h-[66dvh] lg:min-h-0 lg:h-[calc(100dvh-90px)]">
             {carouselImages.map((image, index) => (
-              <CarouselItem 
-                key={index} 
+              <CarouselItem
+                key={index}
                 className={`relative w-full my-auto ${
-                  index === carouselImages.length - 1 
-                    ? 'h-full' 
-                    : 'h-[100vw] max-h-[66dvh]'
+                  index === carouselImages.length - 1
+                    ? "h-full"
+                    : "aspect-square xl:h-3/4"
                 }`}
               >
                 <Image
@@ -36,9 +44,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
                   alt={`${name} - Image ${index + 1}`}
                   fill
                   className={`object-contain ${
-                    index === carouselImages.length - 1 
-                      ? 'object-cover' 
-                      : ''
+                    index === carouselImages.length - 1 ? "object-cover" : ""
                   }`}
                 />
               </CarouselItem>
@@ -47,14 +53,27 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
           <CarouselPrevious variant="ghost" className="left-0 ml-2" />
           <CarouselNext variant="ghost" className="right-0 mr-2" />
         </Carousel>
-        <div className="flex flex-col gap-8">
-          <div className="w-fit mx-auto text-center">
-            <p className="font-medium">${price}</p>
-            <h3 className="uppercase font-medium">{name}</h3>
+        <div className="flex flex-col gap-8 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
+          <div className="w-fit mx-auto text-center md:my-auto">
+            <h3 className="uppercase font-medium md:text-xl">{name}</h3>
+            <p className="font-medium md:text-xl">${price}</p>
           </div>
-          {sizes && <SizeForm sizes={sizes} />}
-          <AddToCartButton />
+          <AddToCart productId={id} sizes={sizes} />
+          <div className="p-3">
+            <h3 className="uppercase font-semibold mb-3">product details</h3>
+            <p className="mb-3 font-light">{description}</p>
+            <ul>
+              {attributes.map((attribute, i) => {
+                return (
+                  <li key={i}>
+                    <p>- {attribute}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
+      </div>
     </section>
   );
 }

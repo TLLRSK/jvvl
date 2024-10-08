@@ -1,7 +1,8 @@
+
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-export function CtaButton({ text }: { text: string }) {
+function CtaButton({ text }: { text: string }) {
   return (
     <Link href="/products/" className="w-fit mx-auto mb-6">
       <Button
@@ -13,3 +14,5 @@ export function CtaButton({ text }: { text: string }) {
     </Link>
   );
 }
+
+export default CtaButton;

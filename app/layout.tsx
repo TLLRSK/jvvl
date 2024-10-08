@@ -3,6 +3,7 @@ import { Gelasio, Commissioner } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/global/Footer";
+import Providers from "./providers";
 
 const gelasio = Gelasio({
   subsets: ['latin'],
@@ -31,9 +32,11 @@ export default function RootLayout({
       <body
         className={`${gelasio.variable} ${commissioner.variable} font-sans antialiased mt-[45px]`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

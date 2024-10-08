@@ -30,3 +30,6 @@ export const fetchSingleProduct = async (productId: string) => {
   }
   return product;
 };
+export const addToCartAction = async ( prevState: any, formData: FormData ) => {
+  return { message: 'product added to the cart '}
+}
