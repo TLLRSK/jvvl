@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Gelasio, Commissioner } from "next/font/google";
+import { Orienta, Comme } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/global/Footer";
 import Providers from "./providers";
 
-const gelasio = Gelasio({
+const orienta = Orienta({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-gelasio',
+  variable: '--font-orienta',
   display: 'swap',
 });
 
-const commissioner = Commissioner({
+const comme = Comme({
   subsets: ['latin'],
-  variable: '--font-commissioner',
+  variable: '--font-comme',
   display: 'swap',
 });
 
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gelasio.variable} ${commissioner.variable} font-sans antialiased mt-[45px]`}
+        className={`${orienta.variable} ${comme.variable} font-sans antialiased mt-[45px]`}
       >
         <Providers>
           <Navbar />

@@ -21,7 +21,7 @@ function Hero() {
         </div>
         <div className='h-[calc(75dvh)] md:h-[calc(70dvh)] flex flex-col'>
           <div className='text-primary-foreground text-center my-auto'>
-            <p className='text-2xl drop-shadow-lg uppercase'>our products</p>
+            <p className='text-2xl drop-shadow-lg uppercase'>our collection</p>
             <h2 className='text-6xl font-semibold drop-shadow-lg uppercase'>Golden Silence</h2>
           </div>
           <CtaButton text='Discover more'/>
