@@ -12,7 +12,7 @@ function Navbar() {
       <Container className="grid grid-cols-2 items-center justify-center max-w-screen-xl mx-auto">
         <Link href="/" className="h-fit">
           <h1 className="font-serif font-bold text-xl uppercase text-foreground">
-            xopxop
+            G
           </h1>
         </Link>
 
