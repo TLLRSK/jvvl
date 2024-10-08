@@ -14,9 +14,9 @@ function ProductCard({ product }: { product: Product }) {
       </button>
       <Link
         href={`/products/${id}`}
-        className="relative h-[60vw] md:h-[33vw] lg:h-[25vw] flex flex-col "
+        className="relative h-[60vw] md:h-[33vw] lg:h-[33vw] xl:h-[25vw] flex flex-col "
       >
-        <div className="relative flex m-auto h-[60%] w-[75%] md:h-[80%] md:w-[80%]">
+        <div className="relative flex m-auto h-[60%] w-[75%] md:w-[100%] md:h-[100%] lg:w-[75%] lg:h-[75%] xl:w-[80%] xl:h-[80%]">
           <Image
             src={thumbnail_image}
             alt={name}
@@ -41,7 +41,7 @@ function ProductCard({ product }: { product: Product }) {
             <Image
               src={model_image}
               alt={name}
-              className="-z-10"
+              className="-z-10 object-cover"
               sizes=""
               fill
               priority
