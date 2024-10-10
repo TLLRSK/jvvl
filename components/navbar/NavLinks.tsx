@@ -1,13 +1,6 @@
 import DropdownIcon from '../icons/DropdownIcon';
-import ButtonDropdown from './LinksDropdown';
-import { Link } from '@/utils/types';
 import LinksDropdown from './LinksDropdown';
-
-const links: Link[] = [
-  { href: '/', label: 'home' },
-  { href: '/about', label: 'about' },
-  { href: '/products', label: 'products' },
-];
+import { links } from '@/utils/links';
 
 function NavLinks() {
   return (

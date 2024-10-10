@@ -8,7 +8,7 @@ import NavLinks from "./NavLinks";
 
 function Navbar() {
   return (
-    <nav className="bg-background px-4 py-1 border-b-[1px] border-foreground fixed top-0 right-0 left-0 z-30 w-full">
+    <nav className="bg-background px-4 py-2 fixed top-0 right-0 left-0 z-30 w-full">
       <Container className="grid grid-cols-2 items-center justify-center">
         <Link href="/" className="h-fit">
           <h1 className="font-serif font-bold text-xl uppercase text-foreground">

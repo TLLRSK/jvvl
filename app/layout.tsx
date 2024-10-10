@@ -33,7 +33,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
       <body
-        className={`${orienta.variable} ${comme.variable} font-sans antialiased mt-[45px]`}
+        className={`${orienta.variable} ${comme.variable} font-sans antialiased mt-[52px]`}
       >
         <Providers>
           <Navbar />
