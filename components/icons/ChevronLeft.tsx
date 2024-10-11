@@ -1,6 +1,6 @@
 import React from "react";
 
-function ChevronLeft({ className }: { className: string }) {
+function ChevronLeft({ className = '' }: { className: string }) {
   return (
     <svg width="24" height="25" viewBox="0 0 24 25" className={className}>
       <path

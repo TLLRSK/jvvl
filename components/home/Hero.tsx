@@ -16,12 +16,12 @@ function Hero() {
             priority
             className='opacity-60 object-cover'
           />
-          <div className='absolute inset-0 bg-gradient-to-b from-black/50 to-transparent' />
+          <div className='absolute inset-0 bg-gradient-to-b from-black/50 to-black/25' />
         </div>
-        <div className='h-[calc(75dvh)] md:h-[calc(70dvh)] flex flex-col'>
+        <div className='h-[100dvh] flex flex-col'>
           <div className='text-primary-foreground text-center my-auto'>
-            <p className='text-2xl drop-shadow-lg uppercase'>our collection</p>
-            <h2 className='text-6xl font-semibold drop-shadow-lg uppercase'>Golden Silence</h2>
+            <h2 className='text-[20vw] md:text-[12vw] leading-[80%] font-serif font-semibold drop-shadow-lg uppercase'>gewlyn</h2>
+            <p className='text-lg md:text-2xl md:mt-4 uppercase'>luxury & golden silence</p>
           </div>
           <CtaButton text='Discover more'/>
         </div>

@@ -40,7 +40,7 @@ function NavSearch() {
           size="icon"
           className="flex gap-4 max-w-[100px]"
         >
-          <SearchIcon className="text-foreground" />
+          <SearchIcon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

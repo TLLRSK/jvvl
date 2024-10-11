@@ -22,7 +22,7 @@ function NavUser() {
           size="icon"
           className="flex gap-4 max-w-[100px]"
         >
-          <UserIcon className="text-foreground" />
+          <UserIcon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="start" sideOffset={6}>

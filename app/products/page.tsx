@@ -6,7 +6,7 @@ function ProductsPage({ searchParams }: { searchParams: { search?: string } }) {
   const search = searchParams.search || "";
 
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden mt-[68px]">
       <BreadCrumbs />
       <ProductsContainer search={search} />
     </main>

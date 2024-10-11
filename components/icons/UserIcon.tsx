@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserIcon({ className }:{ className: string }) {
+function UserIcon({ className = '' }:{ className: string }) {
   return (
     <svg width="24" height="25" viewBox="0 0 24 25" className={className}>
       <path
