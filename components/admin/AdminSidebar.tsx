@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 function AdminSidebar() {
   const pathname = usePathname();
   return (
-    <aside className="flex flex-col">
+    <aside className="flex flex-col gap-4">
       {dashboardLinks.map((link, i) => {
         const isActivePage = link.href === pathname;
         const variant = isActivePage ? "default" : "ghost";
