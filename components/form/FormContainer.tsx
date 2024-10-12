@@ -10,9 +10,11 @@ const initialState = {
 
 function FormContainer({
   action,
+  className,
   children,
 }: {
   action: actionFunction;
+  className: string;
   children: React.ReactNode;
 }) {
   const [state, formAction] = useFormState(action, initialState);
@@ -22,7 +24,7 @@ function FormContainer({
       toast({ description: state.message });
     }
   }, [state]);
-  return <form action={formAction} className="grid gap-4">{children}</form>;
+  return <form action={formAction} className={`grid gap-4 ${className}`}>{children}</form>;
 }
 
 export default FormContainer;

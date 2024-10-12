@@ -31,13 +31,14 @@ export const fetchSingleProduct = async (productId: string) => {
   return product;
 };
 export const addToCartAction = async ( prevState: any, formData: FormData ) => {
-  return { message: 'Product added to the cart '}
+  return { message: 'product added to the cart '}
 }
 
 export const createProductAction = async(
   prevstate: any,
   formData: FormData,
 ): Promise<{message: string}> => {
-  
-  return { message: 'Product created succesfully'}
+  const data = Object.fromEntries(formData);
+  console.log(data)
+  return { message: `Product created succesfully`}
 }

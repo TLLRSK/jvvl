@@ -47,9 +47,9 @@ function NavUser() {
         </SignedOut>
         <SignedIn>
           <DropdownMenuGroup>
-            {userLinks.map((link) => {
+            {userLinks.map((link, index) => {
               return (
-                <DropdownMenuItem key={link.label}>
+                <DropdownMenuItem key={index}>
                   <Link
                     href={link.href}
                     className="w-full text-lg text-left uppercase"

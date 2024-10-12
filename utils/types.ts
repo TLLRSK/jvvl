@@ -21,20 +21,35 @@ export type actionFunction = (
 ) => Promise<{ message: string }>;
 
 export type formInputProps = {
-  type: string,
-  name: string,
-  label?: string,
-  defaultValue?: string,
-  placeholder?: string,
+  type: string;
+  name: string;
+  label?: string;
+  value?: string;
+  defaultValue?: string;
+  placeholder?: string;
+  required?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type TextAreaInputProps = {
-  name: string,
-  label: string,
-  defaultValue?: string,
-}
+  name: string;
+  label: string;
+  defaultValue?: string;
+};
 
 export type SingleImageInputProps = {
-  name: string,
+  name: string;
   label?: string;
-}
+};
+
+export type ListInputProps = {
+  name: string;
+  label: string;
+  placeholder?: string;
+};
+
+export type CheckboxInputProps = {
+  name: string;
+  label: string;
+  defaultChecked: boolean;
+};

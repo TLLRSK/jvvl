@@ -3,6 +3,8 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { SingleImageInputProps } from "@/utils/types";
 import { ChangeEvent, useRef, useState } from "react";
+import { Button } from "../ui/button";
+import DashboardProductImage from "../images/DashboardProductImage";
 
 function SingleImageInput({ name, label }: SingleImageInputProps) {
   const [image, setImage] = useState<File | null>(null);
@@ -13,7 +15,7 @@ function SingleImageInput({ name, label }: SingleImageInputProps) {
       setImage(e.target.files[0]);
     }
   };
-  const handleRemoveImage = () => {
+  const removeImage = () => {
     setImage(null);
     if (filesInputRef.current) {
       filesInputRef.current.value = "";
@@ -21,31 +23,16 @@ function SingleImageInput({ name, label }: SingleImageInputProps) {
   };
   return (
     <div>
-      <Label htmlFor={name} className="capitalize">
+      <Label htmlFor={name} className="capitalize mb-12">
         {label || name}
       </Label>
       {image ? (
-        <div className="relative w-1/4">
-          <img
-            src={URL.createObjectURL(image)}
-            alt="image"
-            className="aspect-square object-cover rounded-md"
-          />
-          <button
-            onClick={() => handleRemoveImage()}
-            className="absolute top-0 right-0 min-w-3 min-h-3 p-0 rounded-full text-lg font-semibold opacity-80 hover:opacity-100"
-          >
-            x
-          </button>
-        </div>
+        <DashboardProductImage image={image} removeAction={removeImage}/>
       ) : (
-        <span></span>
+        <span className="block w-40 h-40 border-[1px] border-input" />
       )}
 
-      <div
-        className="border-2 border-dashed border-primary p-4 text-center cursor-pointer opacity-80 hover:opacity-100"
-        onClick={() => filesInputRef.current?.click()}
-      >
+      <div className="mt-3">
         <Input
           id={name}
           name={name}
@@ -54,8 +41,11 @@ function SingleImageInput({ name, label }: SingleImageInputProps) {
           accept="image/*"
           className="hidden"
           onChange={handleFileChange}
+          required
         />
-        <p className="text-lg">Add image</p>
+        <Button type="button" onClick={() => filesInputRef.current?.click()} variant="default" className="w-full">
+          Add image
+        </Button>
       </div>
     </div>
   );

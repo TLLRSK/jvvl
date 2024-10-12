@@ -2,6 +2,8 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import DashboardProductImage from "../images/DashboardProductImage";
 
 function MultipleImagesInput({ name, label }: { name: string; label: string }) {
   const [images, setImages] = useState<File[]>([]);
@@ -13,7 +15,7 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
       setImages((prevImages) => [...prevImages, ...newFiles]);
     }
   };
-  const handleRemoveImage = (index: number) => {
+  const removeImages = (index: number) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
     if (filesInputRef.current) {
       filesInputRef.current.value = "";
@@ -25,29 +27,13 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
       <Label htmlFor={name} className="capitalize">
         {label}
       </Label>
-      <ul className="grid grid-cols-3 gap-4">
+      <ul className="flex flex-wrap gap-6">
         {images.map((image, index) => {
-          return (
-            <li className="relative" key={index}>
-              <img
-                src={URL.createObjectURL(image)}
-                alt="image"
-                className="w-full aspect-square object-cover rounded-md"
-              />
-              <button
-                onClick={() => handleRemoveImage(index)}
-                className="absolute top-0 right-0 min-w-3 min-h-3 p-0 rounded-full text-lg font-semibold opacity-80 hover:opacity-100"
-              >
-                x
-              </button>
-            </li>
-          );
+          return <DashboardProductImage key={index} index={index} image={image} removeAction={removeImages}/>
         })}
+        <span className="block w-40 h-40 border-[1px] border-input" />
       </ul>
-      <div
-        className="border-2 border-dashed border-primary p-4 text-center cursor-pointer opacity-80 hover:opacity-100"
-        onClick={() => filesInputRef.current?.click()}
-      >
+      <div className="mt-3">
         <Input
           id={name}
           name={name}
@@ -57,8 +43,11 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
           accept="image/*"
           className="hidden"
           onChange={handleFilesChange}
+          required
         />
-        <p className="text-lg">Add images</p>
+        <Button type="button" onClick={() => filesInputRef.current?.click()} variant="default" className="w-full">
+          Add images
+        </Button>
       </div>
     </div>
   );

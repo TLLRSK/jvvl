@@ -7,18 +7,23 @@ function FormInput({
   type,
   name,
   label,
+  value,
   defaultValue,
   placeholder,
+  required = true,
+  onChange,
 }: formInputProps) {
   return (
-    <div>
-      <Label>{label || name}</Label>
+    <div className={`${type === 'hidden' ? 'hidden' : 'block'}`}>
+      <Label className="capitalize">{label || name}</Label>
       <Input
         type={type}
         name={name}
+        value={value}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        required
+        required={required}
+        onChange={onChange}
       />
     </div>
   );

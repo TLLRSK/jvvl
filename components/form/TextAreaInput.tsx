@@ -5,7 +5,7 @@ import { Textarea } from "../ui/textarea";
 function TextAreaInput({ name, label, defaultValue }:TextAreaInputProps) {
   return (
     <div>
-      <Label>{label}</Label>
+      <Label className="capitalize">{label || name}</Label>
       <Textarea
         id={name}
         name={name}
