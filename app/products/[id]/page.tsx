@@ -16,13 +16,13 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
   const {
     id,
     name,
-    images_gallery,
-    model_image,
+    galleryImages,
+    modelImage,
     price,
     description,
     attributes,
   } = product;
-  const carouselImages = [...images_gallery, model_image];
+  const carouselImages = [...galleryImages, modelImage];
   const sizes = ["11", "12", "13", "15"];
   return (
     <section>

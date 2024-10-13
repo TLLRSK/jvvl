@@ -12,7 +12,7 @@ export function SubmitButton({
   return (
     <Button 
         type='submit'
-        className={`mx-auto uppercase ${className}`}
+        className={`mx-auto capitalize h-fit ${className}`}
     >
       {text}
     </Button>

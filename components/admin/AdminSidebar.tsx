@@ -11,7 +11,7 @@ function AdminSidebar() {
     <aside className="flex lg:flex-col gap-4">
       {dashboardLinks.map((link, i) => {
         const isActivePage = link.href === pathname;
-        const variant = isActivePage ? "default" : "ghost";
+        const variant = isActivePage ? "default" : "outline";
         return (
           <Button variant={variant} key={i}>
             <Link href={link.href} className="text-left capitalize text-lg">

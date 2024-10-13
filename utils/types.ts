@@ -8,9 +8,9 @@ export type Product = {
   name: string;
   description: string;
   featured: boolean;
-  thumbnail_image: string;
-  model_image: string;
-  images_gallery: string[];
+  thumbnailImage: string;
+  modelImage: string;
+  galleryImages: string[];
   price: number;
   attributes: string[];
 };

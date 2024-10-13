@@ -3,7 +3,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import DashboardProductImage from "../images/DashboardProductImage";
+import AdminProductImage from "../admin/AdminProductImage";
 
 function MultipleImagesInput({ name, label }: { name: string; label: string }) {
   const [images, setImages] = useState<File[]>([]);
@@ -13,12 +13,13 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
       setImages((prevImages) => [...prevImages, ...newFiles]);
+      console.log(filesInputRef?.current?.value)
     }
   };
   const removeImages = (index: number) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
     if (filesInputRef.current) {
-      filesInputRef.current.value = "";
+      console.log(filesInputRef.current.value)
     }
   };
 
@@ -29,9 +30,16 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
       </Label>
       <ul className="flex flex-wrap gap-6">
         {images.map((image, index) => {
-          return <DashboardProductImage key={index} index={index} image={image} removeAction={removeImages}/>
+          return (
+            <AdminProductImage
+              key={index}
+              index={index}
+              image={image}
+              removeAction={removeImages}
+            />
+          );
         })}
-        <span className="block w-40 h-40 border-[1px] border-input" />
+        <span className="block w-40 h-40 border-[1px] border-primary border-dashed" />
       </ul>
       <div className="mt-3">
         <Input
@@ -45,7 +53,12 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
           onChange={handleFilesChange}
           required
         />
-        <Button type="button" onClick={() => filesInputRef.current?.click()} variant="default" className="w-full">
+        <Button
+          type="button"
+          onClick={() => filesInputRef.current?.click()}
+          variant="default"
+          className="w-full"
+        >
           Add images
         </Button>
       </div>

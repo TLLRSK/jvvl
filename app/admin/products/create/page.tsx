@@ -16,9 +16,9 @@ function CreateProductPage() {
       <h2 className="text-lg font-semibold mb-6">Create product</h2>
       <FormContainer
         action={createProductAction}
-        className="grid-cols-2 gap-24"
+        className="grid grid-cols-2"
       >
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6">
           <FormInput
             type="text"
             name="name"
@@ -34,19 +34,19 @@ function CreateProductPage() {
           />
           <ListInput name="sizes" label="sizes" placeholder="Write a size" />
         </div>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 ml-12">
           <div className="flex gap-6">
-            <SingleImageInput name="thumbnail image" />
-            <SingleImageInput name="model image" />
+            <SingleImageInput name="thumbnailImage" label="thumbnail image"/>
+            <SingleImageInput name="modelImage" label="model image"/>
           </div>
-          <MultipleImagesInput name="gallery-images" label="gallery images" />
+          <MultipleImagesInput name="galleryImages" label="gallery images" />
           <CheckboxInput
             name="featured"
             label="featured"
             defaultChecked={false}
           />
         </div>
-        <SubmitButton text="Create Product" className="col-span-2 w-full py-6 text-lg" />
+        <SubmitButton text="Create Product" className="col-span-2 w-full py-3 text-lg mt-12" />
       </FormContainer>
     </section>
   );

@@ -10,11 +10,11 @@ const initialState = {
 
 function FormContainer({
   action,
-  className,
+  className = '',
   children,
 }: {
   action: actionFunction;
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   const [state, formAction] = useFormState(action, initialState);

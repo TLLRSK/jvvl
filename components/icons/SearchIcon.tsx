@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchIcon({ className = '' }: { className: string }) {
+function SearchIcon({ className = '' }: { className?: string }) {
   return (
     <svg width="20" height="24"  className={className}>
       <path

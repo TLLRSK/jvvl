@@ -26,12 +26,12 @@ function NavSearch() {
     }
     replace(`/products?${params.toString()}`);
   }, 500);
-
+  const params = searchParams.get("search");
   useEffect(() => {
     if (!searchParams.get("search")) {
       setSearch("");
     }
-  }, [searchParams.get("search")]);
+  }, [params]);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

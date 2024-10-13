@@ -3,18 +3,18 @@
 import Image from "next/image";
 import DeleteIcon from "../icons/DeleteIcon";
 
-function DashboardProductImage({
+function AdminProductImage({
   index = 0,
   image,
   removeAction,
 }: {
   index?: number;
   image: File;
-  removeAction?: (index?: number) => void;
+  removeAction: (index: number) => void;
 }) {
   const handleRemoveAction = () => {
     if (removeAction) {
-      removeAction(index); // Pasamos index si removeAction está definida
+      removeAction(index);
     }
   };
   return (
@@ -35,4 +35,4 @@ function DashboardProductImage({
   );
 }
 
-export default DashboardProductImage;
+export default AdminProductImage;

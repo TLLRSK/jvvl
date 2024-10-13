@@ -68,7 +68,7 @@ function ListInput({ name, label, placeholder }: ListInputProps) {
         </Button>
       </div>
 
-      <FormInput type="hidden" name={name} value={JSON.stringify(items)} />
+      <FormInput type="hidden" name={name} value={JSON.stringify(items)} required />
     </div>
   );
 }

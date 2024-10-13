@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { SingleImageInputProps } from "@/utils/types";
 import { ChangeEvent, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import DashboardProductImage from "../images/DashboardProductImage";
+import AdminProductImage from "../admin/AdminProductImage";
 
 function SingleImageInput({ name, label }: SingleImageInputProps) {
   const [image, setImage] = useState<File | null>(null);
@@ -27,9 +27,9 @@ function SingleImageInput({ name, label }: SingleImageInputProps) {
         {label || name}
       </Label>
       {image ? (
-        <DashboardProductImage image={image} removeAction={removeImage}/>
+        <AdminProductImage image={image} removeAction={removeImage} />
       ) : (
-        <span className="block w-40 h-40 border-[1px] border-input" />
+        <span className="block w-40 h-40 border-[1px] border-primary border-dashed" />
       )}
 
       <div className="mt-3">
@@ -43,7 +43,12 @@ function SingleImageInput({ name, label }: SingleImageInputProps) {
           onChange={handleFileChange}
           required
         />
-        <Button type="button" onClick={() => filesInputRef.current?.click()} variant="default" className="w-full">
+        <Button
+          type="button"
+          onClick={() => filesInputRef.current?.click()}
+          variant="default"
+          className="w-full"
+        >
           Add image
         </Button>
       </div>

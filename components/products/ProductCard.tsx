@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 function ProductCard({ product }: { product: Product }) {
-  const { id, name, thumbnail_image, model_image, price } = product;
+  const { id, name, thumbnailImage, modelImage, price } = product;
 
   return (
     <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted">
@@ -18,7 +18,7 @@ function ProductCard({ product }: { product: Product }) {
       >
         <div className="relative flex m-auto h-[60%] w-[75%] md:w-[100%] md:h-[100%] lg:w-[75%] lg:h-[75%] xl:w-[80%] xl:h-[80%]">
           <Image
-            src={thumbnail_image}
+            src={thumbnailImage}
             alt={name}
             className="-z-10"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -39,7 +39,7 @@ function ProductCard({ product }: { product: Product }) {
         >
           <div className="relative h-full">
             <Image
-              src={model_image}
+              src={modelImage}
               alt={name}
               className="-z-10 object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
