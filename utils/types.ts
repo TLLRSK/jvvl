@@ -53,3 +53,11 @@ export type CheckboxInputProps = {
   label: string;
   defaultChecked: boolean;
 };
+
+export type ImageInputContainerProps = {
+  image: string;
+  name: string;
+  action: actionFunction;
+  text: string,
+  children?: React.ReactNode;
+}

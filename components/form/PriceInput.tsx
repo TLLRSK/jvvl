@@ -1,7 +1,11 @@
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 
-function PriceInput() {
+function PriceInput({
+  defaultValue = 100,
+}: {
+  defaultValue?: number,
+}) {
   return (
     <div>
       <Label htmlFor="price" className="capitalize">
@@ -12,7 +16,7 @@ function PriceInput() {
         type="number"
         name="price"
         min={0}
-        defaultValue={100}
+        defaultValue={defaultValue}
         required
       />
     </div>

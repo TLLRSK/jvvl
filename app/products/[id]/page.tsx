@@ -21,9 +21,9 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
     price,
     description,
     attributes,
+    sizes,
   } = product;
   const carouselImages = [...galleryImages, modelImage];
-  const sizes = ["11", "12", "13", "15"];
   return (
     <section>
       <BreadCrumbs name={name} />

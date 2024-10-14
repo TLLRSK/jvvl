@@ -14,10 +14,7 @@ function CreateProductPage() {
   return (
     <section className="col-span-10">
       <h2 className="text-lg font-semibold mb-6">Create product</h2>
-      <FormContainer
-        action={createProductAction}
-        className="grid grid-cols-2"
-      >
+      <FormContainer action={createProductAction} className="grid grid-cols-2">
         <div className="flex flex-col gap-6">
           <FormInput
             type="text"
@@ -26,7 +23,11 @@ function CreateProductPage() {
             defaultValue="new product"
           />
           <PriceInput />
-          <TextArea name="description" label="product description" />
+          <TextArea
+            name="description"
+            label="product description"
+            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra dignissim libero, eu tempor risus feugiat id. Phasellus ornare pretium urna. Nam ullamcorper ac nulla non dictum. Suspendisse sed lorem consectetur, tincidunt nunc non, maximus felis. Maecenas auctor arcu ac purus gravida volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam vitae mi erat. Cras diam nisi, ornare at dui nec, egestas consequat risus. Pellentesque nec eros sapien. Phasellus et nulla arcu. Suspendisse potenti. Nunc placerat risus eu sagittis lobortis. Curabitur consectetur tortor urna, sed sodales felis euismod sit amet. Donec euismod diam at ligula sagittis, id cursus urna volutpat. Nunc ullamcorper luctus ultricies."
+          />
           <ListInput
             name="attributes"
             label="attributes"
@@ -36,8 +37,8 @@ function CreateProductPage() {
         </div>
         <div className="flex flex-col gap-6 ml-12">
           <div className="flex gap-6">
-            <SingleImageInput name="thumbnailImage" label="thumbnail image"/>
-            <SingleImageInput name="modelImage" label="model image"/>
+            <SingleImageInput name="thumbnailImage" label="thumbnail image" />
+            <SingleImageInput name="modelImage" label="model image" />
           </div>
           <MultipleImagesInput name="galleryImages" label="gallery images" />
           <CheckboxInput
@@ -46,7 +47,10 @@ function CreateProductPage() {
             defaultChecked={false}
           />
         </div>
-        <SubmitButton text="Create Product" className="col-span-2 w-full py-3 text-lg mt-12" />
+        <SubmitButton
+          text="Create Product"
+          className="col-span-2 w-full py-3 text-lg mt-12"
+        />
       </FormContainer>
     </section>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-function DropdownIcon({ className = '' }: { className: string }) {
+function DropdownIcon({ className = '' }: { className?: string }) {
   return (
     <svg width="24" height="25" viewBox="0 0 24 25" className={className}>
       <path

@@ -1,12 +1,12 @@
 import { z, ZodSchema } from "zod";
 
-const fileSchema = z.instanceof(File);
-
 const validateImageFile = () => {
   const maxUploadSize = 1024 * 1024;
   const acceptedFileTypes = ["image/"];
   return z
-    .instanceof(File)
+    .instanceof(File, {
+      message: "Please select an image file"
+    })
     .refine((file) => {
       return !file || file.size <= maxUploadSize;
     }, "File size must be less than 1MB")
@@ -15,6 +15,19 @@ const validateImageFile = () => {
         !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
       );
     }, "File must be an image");
+};
+
+
+const validateStringArraySchema = () => {
+  return z.preprocess((val) => {
+    if (typeof val === "string") {
+      try {
+        return JSON.parse(val);
+      } catch {
+        return [];
+      }
+    }
+  }, z.array(z.string()).min(1, "At least one item is required"));
 };
 
 export const productSchema = z.object({
@@ -38,31 +51,11 @@ export const productSchema = z.object({
       message: "Description length must be between 10 and 1000 words",
     }
   ),
-  attributes: z.preprocess(
-    (val) => (typeof val === "string" ? JSON.parse(val) : val),
-    z.array(z.string()).refine(
-      (attributes) => {
-        return attributes.length > 0;
-      },
-      {
-        message: "Must be 1 attribute at least",
-      }
-    )
-  ),
-  sizes: z.preprocess(
-    (val) => (typeof val === "string" ? JSON.parse(val) : val),
-    z.array(z.string()).refine(
-      (sizes) => {
-        return sizes.length > 0;
-      },
-      {
-        message: "Must be 1 size at least",
-      }
-    )
-  ),
+  attributes: validateStringArraySchema(),
+  sizes: validateStringArraySchema(),
   thumbnailImage: validateImageFile(),
   modelImage: validateImageFile(),
-  galleryImages: z.array(fileSchema),
+  galleryImages: z.array(validateImageFile()),
   featured: z.coerce.boolean(),
 });
 
@@ -73,7 +66,6 @@ export function validateWithZodSchema<T>(
   data: unknown
 ): T {
   const result = schema.safeParse(data);
-  console.log(result)
   if (!result.success) {
     const errors = result.error.errors.map((error) => error.message);
     throw new Error(errors.join(", "));

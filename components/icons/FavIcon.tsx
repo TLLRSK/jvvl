@@ -1,6 +1,6 @@
 import React from "react";
 
-function FavIcon({ className = '' }: { className: string }) {
+function FavIcon({ className = '' }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 12 10"

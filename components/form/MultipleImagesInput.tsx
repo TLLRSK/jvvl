@@ -49,18 +49,8 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
           ref={filesInputRef}
           multiple
           accept="image/*"
-          className="hidden"
           onChange={handleFilesChange}
-          required
         />
-        <Button
-          type="button"
-          onClick={() => filesInputRef.current?.click()}
-          variant="default"
-          className="w-full"
-        >
-          Add images
-        </Button>
       </div>
     </div>
   );

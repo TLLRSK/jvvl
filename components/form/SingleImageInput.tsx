@@ -39,18 +39,8 @@ function SingleImageInput({ name, label }: SingleImageInputProps) {
           type="file"
           ref={filesInputRef}
           accept="image/*"
-          className="hidden"
           onChange={handleFileChange}
-          required
         />
-        <Button
-          type="button"
-          onClick={() => filesInputRef.current?.click()}
-          variant="default"
-          className="w-full"
-        >
-          Add image
-        </Button>
       </div>
     </div>
   );
