@@ -6,7 +6,7 @@ import { Label } from "../ui/label";
 import { ListInputProps } from "@/utils/types";
 import DeleteIcon from "../icons/DeleteIcon";
 
-function ListInput({ name, label, placeholder }: ListInputProps) {
+function ListInput({ name, label, placeholder, onChange}: ListInputProps) {
   const [items, setItems] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -18,13 +18,17 @@ function ListInput({ name, label, placeholder }: ListInputProps) {
     e.preventDefault();
     const newItem = inputValue;
     if (newItem && newItem.trim() !== "") {
-      setItems((prevItems) => [...prevItems, newItem.trim()]);
+      const newItems = [...items, newItem.trim()];
+      setItems(newItems);
+      onChange(name, newItems);
     }
     setInputValue("");
   };
 
   const removeItem = (index: number) => {
-    setItems(prevItems => prevItems.filter((_,i) => i !== index))
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
+    onChange(name, newItems);
   };
 
   return (
@@ -68,7 +72,7 @@ function ListInput({ name, label, placeholder }: ListInputProps) {
         </Button>
       </div>
 
-      <FormInput type="hidden" name={name} value={JSON.stringify(items)} />
+      <FormInput type="hidden" onChange={onChange} name={name} value={JSON.stringify(items)} />
     </div>
   );
 }

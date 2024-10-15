@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckboxInputProps } from "@/utils/types";
 
-function CheckboxInput({ name, label, defaultChecked }: CheckboxInputProps) {
+function CheckboxInput({ name, label, defaultChecked, onChange }: CheckboxInputProps) {
   return (
     <label
       htmlFor={name}
@@ -14,6 +14,7 @@ function CheckboxInput({ name, label, defaultChecked }: CheckboxInputProps) {
         id={name}
         name={name}
         defaultChecked={defaultChecked}
+        onChange={onChange}
       />
       <div
         className="

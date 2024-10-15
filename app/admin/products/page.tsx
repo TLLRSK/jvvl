@@ -1,8 +1,6 @@
 import { IconButton } from "@/components/form/Buttons";
 import DeleteProduct from "@/components/form/DeleteProduct";
 import EmptyList from "@/components/global/EmptyList";
-import DeleteIcon from "@/components/icons/DeleteIcon";
-import EditIcon from "@/components/icons/EditIcon";
 import {
   Table,
   TableBody,

@@ -22,11 +22,11 @@ async function EditProductPage({ params }: { params: { id: string } }) {
     name,
     price,
     description,
-    attributes,
-    sizes,
+    // attributes,
+    // sizes,
     thumbnailImage,
     modelImage,
-    galleryImages,
+    // galleryImages,
     featured,
   } = product;
   return (

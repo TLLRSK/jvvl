@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import FormContainer from "./FormContainer";
-import SingleImageInput from "./SingleImageInput";
 import { SubmitButton } from "./Buttons";
 import { Input } from "../ui/input";
 

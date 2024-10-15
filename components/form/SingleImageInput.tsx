@@ -3,7 +3,6 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { SingleImageInputProps } from "@/utils/types";
 import { ChangeEvent, useRef, useState } from "react";
-import { Button } from "../ui/button";
 import AdminProductImage from "../admin/AdminProductImage";
 
 function SingleImageInput({ name, label }: SingleImageInputProps) {

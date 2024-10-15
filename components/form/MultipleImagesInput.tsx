@@ -2,7 +2,6 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import AdminProductImage from "../admin/AdminProductImage";
 
 function MultipleImagesInput({ name, label }: { name: string; label: string }) {

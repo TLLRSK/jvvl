@@ -3,8 +3,10 @@ import { Input } from "../ui/input";
 
 function PriceInput({
   defaultValue = 100,
+  onChange 
 }: {
   defaultValue?: number,
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }) {
   return (
     <div>
@@ -17,6 +19,7 @@ function PriceInput({
         name="price"
         min={0}
         defaultValue={defaultValue}
+        onChange={onChange}
         required
       />
     </div>
