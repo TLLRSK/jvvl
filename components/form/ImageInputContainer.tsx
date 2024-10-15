@@ -34,7 +34,7 @@ function ImageInputContainer(props: ImageInputContainerProps) {
             {children}
             <Input
               id={name}
-              name={name}
+              name="image"
               type="file"
               accept="image/*"
             />

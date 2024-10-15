@@ -40,7 +40,6 @@ async function EditProductPage({ params }: { params: { id: string } }) {
           text="Update Thumbnail Image"
         >
           <input type="hidden" name="id" value={id} />
-          <input type="hidden" name="imageType" value="thumbnailImage" />
           <input type="hidden" name="url" value={product.thumbnailImage} />
         </ImageInputContainer>
         <ImageInputContainer
@@ -50,7 +49,6 @@ async function EditProductPage({ params }: { params: { id: string } }) {
           text="Update Model Image"
         >
           <input type="hidden" name="id" value={id} />
-          <input type="hidden" name="imageType" value="modelImage" />
           <input type="hidden" name="url" value={product.modelImage} />
         </ImageInputContainer>
       </div>

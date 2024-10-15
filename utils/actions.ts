@@ -171,8 +171,8 @@ export const updateProductImagesAction = async (
     const data = Object.fromEntries(formData);
     console.log("image data: ", data)
     const productId = formData.get('id') as string;
-    const imageType = formData.get('imageType') as string;
-    console.log("imageType: ", imageType)
+    const image = formData.get('image') as File;
+    console.log("image: ", image)
     const oldImageUrl = formData.get('url') as string;
     console.log("oldImageUrl: ", oldImageUrl)
     return { message: "Product updated successfully." };
