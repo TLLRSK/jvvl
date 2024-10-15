@@ -28,7 +28,7 @@ function LinksDropdown({
           {icon}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-50" align="start" sideOffset={6}>
+      <DropdownMenuContent className="w-50" align="start" sideOffset={16}>
         <DropdownMenuGroup>
           <SignedOut>
             {links.map((link, i) => {

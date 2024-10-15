@@ -25,7 +25,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
   } = product;
   const carouselImages = [...galleryImages, modelImage];
   return (
-    <section>
+    <section className="mt-[68px]">
       <BreadCrumbs name={name} />
       <div className="lg:grid lg:grid-cols-6 xl:grid-cols-2">
         <Carousel className="w-full bg-muted-background lg:col-span-4 xl:col-span-1">

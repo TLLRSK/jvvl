@@ -25,7 +25,7 @@ function NavUser() {
           <UserIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40" align="start" sideOffset={6}>
+      <DropdownMenuContent className="w-40" align="start" sideOffset={16}>
         <SignedOut>
           <DropdownMenuGroup>
             <DropdownMenuItem>
