@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useToast } from "@/hooks/use-toast";
 import { actionFunction } from "@/utils/types";
 import React, { useEffect } from "react";
@@ -10,7 +10,7 @@ const initialState = {
 
 function FormContainer({
   action,
-  className = '',
+  className = "",
   children,
 }: {
   action: actionFunction;
@@ -24,7 +24,11 @@ function FormContainer({
       toast({ description: state.message });
     }
   }, [state]);
-  return <form action={formAction} className={`grid gap-4 ${className}`}>{children}</form>;
+  return (
+    <form action={formAction} className={`grid gap-4 ${className}`}>
+      {children}
+    </form>
+  );
 }
 
 export default FormContainer;
