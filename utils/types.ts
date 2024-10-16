@@ -18,6 +18,19 @@ export type Product = {
   sizes: string[];
 };
 
+export type ProductSchema = {
+  id: string;
+  name: string;
+  description: string;
+  featured: boolean;
+  thumbnailImage: File | null;
+  modelImage: File | null;
+  galleryImages: File[] | null;
+  price: number;
+  attributes: string[];
+  sizes: string[];
+};
+
 export type actionFunction = (
   prevState: any,
   formData: FormData
@@ -44,6 +57,7 @@ export type TextAreaInputProps = {
 export type SingleImageInputProps = {
   name: string;
   label?: string;
+  onChange: (name: string, value: File | null ) => void;
 };
 
 export type ListInputProps = {

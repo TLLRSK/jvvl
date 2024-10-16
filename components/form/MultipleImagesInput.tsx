@@ -17,10 +17,13 @@ function MultipleImagesInput({
   const [images, setImages] = useState<File[]>([]);
   const filesInputRef = useRef<HTMLInputElement | null>(null);
 
-  const updateImages = useCallback((newImages: File[]) => {
-    setImages(newImages);
-    onChange(name, newImages);
-  }, [name, onChange]);
+  const updateImages = useCallback(
+    (newImages: File[]) => {
+      setImages(newImages);
+      onChange(name, newImages);
+    },
+    [name, onChange]
+  );
 
   const handleFilesChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -68,14 +71,14 @@ function MultipleImagesInput({
           accept="image/*"
           onChange={handleFilesChange}
         />
-         <Button
-        type="button"
-        variant="outline"
-        className="w-full"
-        onClick={triggerFileInput}
-      >
-        Add Images
-      </Button>
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={triggerFileInput}
+        >
+          Add Images
+        </Button>
       </div>
     </div>
   );

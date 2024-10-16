@@ -4,24 +4,24 @@ import FormInput from "@/components/form/FormInput";
 import MultipleImagesInput from "@/components/form/MultipleImagesInput";
 import PriceInput from "@/components/form/PriceInput";
 import TextArea from "@/components/form/TextAreaInput";
-import { useEffect, useState } from "react";
 import SingleImageInput from "@/components/form/SingleImageInput";
 import ListInput from "@/components/form/ListInput";
 import CheckboxInput from "@/components/form/CheckboxInput";
-import { Product } from "@/utils/types";
+import { ProductSchema } from "@/utils/types";
+import { useState } from "react";
 
 function CreateProductPage() {
   const defaultDescription =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra dignissim libero, eu tempor risus feugiat id. Phasellus ornare pretium urna. Nam ullamcorper ac nulla non dictum. Suspendisse sed lorem consectetur, tincidunt nunc non, maximus felis. Maecenas auctor arcu ac purus gravida volutpat.";
 
   /* CLIENT FORM */
-  const productModel: Product = {
+  const productModel: ProductSchema = {
     id: "",
     name: "",
     description: "",
     featured: false,
-    thumbnailImage: "",
-    modelImage: "",
+    thumbnailImage: null,
+    modelImage: null,
     galleryImages: [],
     price: 0,
     attributes: [],
@@ -29,7 +29,7 @@ function CreateProductPage() {
   };
   const [formData, setFormData] = useState(productModel);
 
-  const updateFormData = (name: string, value: string | string[] | File | File[]) => {
+  const updateFormData = (name: string, value: string | string[] | File | File[] | null) => {
     setFormData((prevState) => {
       const updatedState = {...prevState, [name]:value};
       return updatedState;
@@ -48,7 +48,7 @@ function CreateProductPage() {
     const { name, value } = e.target;
     updateFormData(name, value)
   };
-  const updateListInput = (name: string, value: string[] | File[]) => {
+  const updateInput = (name: string, value: string[] | File | File[] | null) => {
     updateFormData(name, value)
   };
   
@@ -76,24 +76,24 @@ function CreateProductPage() {
             name="attributes"
             label="attributes"
             placeholder="Write an attribute"
-            onChange={updateListInput}
+            onChange={updateInput}
           />
           <ListInput
             name="sizes"
             label="sizes"
             placeholder="Write a size"
-            onChange={updateListInput}
+            onChange={updateInput}
           />
         </div>
         <div className="flex flex-col gap-6 ml-12">
           <div className="flex gap-6">
-            <SingleImageInput name="thumbnailImage" label="thumbnail image" />
-            <SingleImageInput name="modelImage" label="model image" />
+            <SingleImageInput name="thumbnailImage" label="thumbnail image" onChange={updateInput}/>
+            <SingleImageInput name="modelImage" label="model image" onChange={updateInput}/>
           </div>
           <MultipleImagesInput
             name="galleryImages"
             label="gallery images"
-            onChange={updateListInput}
+            onChange={updateInput}
           />
           <CheckboxInput
             name="featured"
