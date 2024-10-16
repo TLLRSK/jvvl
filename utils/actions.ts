@@ -62,7 +62,6 @@ const createProductObject = async (user: any, formData: FormData) => {
     ...rawData,
     galleryImages,
   };
-
   const validatedFields = validateWithZodSchema(productSchema, formattedData);
   const thumbnailImagePath = await uploadImage(validatedFields.thumbnailImage);
   const modelImagePath = await uploadImage(validatedFields.modelImage);
@@ -83,8 +82,9 @@ const createProductObject = async (user: any, formData: FormData) => {
   return data;
 };
 
+
+
 export const createProductAction = async (
-  prevstate: any,
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();

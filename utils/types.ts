@@ -18,8 +18,7 @@ export type Product = {
   sizes: string[];
 };
 
-export type ProductSchema = {
-  id: string;
+export type FormProduct = {
   name: string;
   description: string;
   featured: boolean;

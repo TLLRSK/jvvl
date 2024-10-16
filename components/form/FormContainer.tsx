@@ -8,22 +8,22 @@ const initialState = {
 };
 
 function FormContainer({
-  onSubmit,
+  action,
   className = '',
   children,
 }: {
-  onSubmit: any;
+  action: any;
   className?: string;
   children: React.ReactNode;
 }) {
-  const [state, formAction] = useFormState(onSubmit, initialState);
+  const [state, formAction] = useFormState(action, initialState);
   const { toast } = useToast();
   useEffect(() => {
     if (state.message) {
       toast({ description: state.message });
     }
   }, [state]);
-  return <form onSubmit={formAction} className={`grid gap-4 ${className}`}>{children}</form>;
+  return <form action={formAction} className={`grid gap-4 ${className}`}>{children}</form>;
 }
 
 export default FormContainer;

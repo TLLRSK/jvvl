@@ -2,7 +2,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 
 function PriceInput({
-  defaultValue = 100,
+  defaultValue = 0,
   onChange 
 }: {
   defaultValue?: number,

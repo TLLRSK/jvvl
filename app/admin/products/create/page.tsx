@@ -7,18 +7,19 @@ import TextArea from "@/components/form/TextAreaInput";
 import SingleImageInput from "@/components/form/SingleImageInput";
 import ListInput from "@/components/form/ListInput";
 import CheckboxInput from "@/components/form/CheckboxInput";
-import { ProductSchema } from "@/utils/types";
+import { FormProduct } from "@/utils/types";
 import { useState } from "react";
+import { createProductAction } from "@/utils/actions";
+import { useToast } from '@/hooks/use-toast';
 
 function CreateProductPage() {
   const defaultDescription =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra dignissim libero, eu tempor risus feugiat id. Phasellus ornare pretium urna. Nam ullamcorper ac nulla non dictum. Suspendisse sed lorem consectetur, tincidunt nunc non, maximus felis. Maecenas auctor arcu ac purus gravida volutpat.";
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra dignissim libero, eu tempor risus feugiat id.";
 
   /* CLIENT FORM */
-  const productModel: ProductSchema = {
-    id: "",
+  const formProduct: FormProduct = {
     name: "",
-    description: "",
+    description: defaultDescription,
     featured: false,
     thumbnailImage: null,
     modelImage: null,
@@ -27,29 +28,68 @@ function CreateProductPage() {
     attributes: [],
     sizes: [],
   };
-  const [formData, setFormData] = useState(productModel);
+  const [formData, setFormData] = useState(formProduct);
+  const [isPending, setIsPending] = useState(false);
+  const {toast} = useToast();
 
-  const updateFormData = (name: string, value: string | string[] | File | File[] | null) => {
+  const updateFormData = (
+    name: string,
+    value: string | string[] | File | File[] | null
+  ) => {
     setFormData((prevState) => {
-      const updatedState = {...prevState, [name]:value};
+      const updatedState = { ...prevState, [name]: value };
       return updatedState;
     });
-  }
+  };
 
+  const handleCreateProduct = async (formDataToSend: FormData) => {
+    try {
+      const {message} = await createProductAction(formDataToSend);
+      toast({description: `message: ${message}`})
+    } catch (error) {
+      toast({description: error instanceof Error ? error.message : `There was an error`})
+    } finally {
+      setIsPending(false);
+    }
+  }
   const submitFormData = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("formData: ", formData);
+    setIsPending(true)
+    const formDataToSend = new FormData();
 
-    return null;
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("price", formData.price.toString());
+    formDataToSend.append("featured", formData.featured.toString());
+  
+    formDataToSend.append("attributes", JSON.stringify(formData.attributes));
+    formDataToSend.append("sizes", JSON.stringify(formData.sizes));
+    
+    if (formData.thumbnailImage) {
+      formDataToSend.append("thumbnailImage", formData.thumbnailImage);
+    }
+    if (formData.modelImage) {
+      formDataToSend.append("modelImage", formData.modelImage);
+    }
+
+    if (formData.galleryImages && formData.galleryImages.length > 0) {
+      formData.galleryImages.forEach((image) => {
+        formDataToSend.append(`galleryImages`, image);
+      });
+    }
+    handleCreateProduct(formDataToSend);
   };
   const changeFormData = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
     const { name, value } = e.target;
-    updateFormData(name, value)
+    updateFormData(name, value);
   };
-  const updateInput = (name: string, value: string[] | File | File[] | null) => {
-    updateFormData(name, value)
+  const updateInput = (
+    name: string,
+    value: string[] | File | File[] | null
+  ) => {
+    updateFormData(name, value);
   };
   
 
@@ -62,7 +102,6 @@ function CreateProductPage() {
             type="text"
             name="name"
             label="product name"
-            defaultValue="new product"
             onChange={changeFormData}
           />
           <PriceInput onChange={changeFormData} />
@@ -87,8 +126,16 @@ function CreateProductPage() {
         </div>
         <div className="flex flex-col gap-6 ml-12">
           <div className="flex gap-6">
-            <SingleImageInput name="thumbnailImage" label="thumbnail image" onChange={updateInput}/>
-            <SingleImageInput name="modelImage" label="model image" onChange={updateInput}/>
+            <SingleImageInput
+              name="thumbnailImage"
+              label="thumbnail image"
+              onChange={updateInput}
+            />
+            <SingleImageInput
+              name="modelImage"
+              label="model image"
+              onChange={updateInput}
+            />
           </div>
           <MultipleImagesInput
             name="galleryImages"
@@ -102,10 +149,14 @@ function CreateProductPage() {
             onChange={changeFormData}
           />
         </div>
-        <SubmitButton
-          text="Create Product"
-          className="col-span-2 w-full py-3 text-lg mt-12"
-        />
+        {isPending ? (
+           <button disabled={isPending} className="col-span-2 w-full py-3 text-lg mt-12">Creating...</button>
+        ) : (
+          <SubmitButton
+           text="Create Product"
+           className="col-span-2 w-full py-3 text-lg mt-12"
+         />
+        )}
       </form>
     </section>
   );
