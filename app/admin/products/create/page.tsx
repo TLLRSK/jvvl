@@ -4,7 +4,7 @@ import FormInput from "@/components/form/FormInput";
 import MultipleImagesInput from "@/components/form/MultipleImagesInput";
 import PriceInput from "@/components/form/PriceInput";
 import TextArea from "@/components/form/TextAreaInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SingleImageInput from "@/components/form/SingleImageInput";
 import ListInput from "@/components/form/ListInput";
 import CheckboxInput from "@/components/form/CheckboxInput";
@@ -29,6 +29,13 @@ function CreateProductPage() {
   };
   const [formData, setFormData] = useState(productModel);
 
+  const updateFormData = (name: string, value: string | string[] | File | File[]) => {
+    setFormData((prevState) => {
+      const updatedState = {...prevState, [name]:value};
+      return updatedState;
+    });
+  }
+
   const submitFormData = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("formData: ", formData);
@@ -39,17 +46,12 @@ function CreateProductPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    updateFormData(name, value)
   };
-  const updateListInput = (name: string, value: string[]) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const updateListInput = (name: string, value: string[] | File[]) => {
+    updateFormData(name, value)
   };
+  
 
   return (
     <section className="col-span-10">
@@ -88,7 +90,11 @@ function CreateProductPage() {
             <SingleImageInput name="thumbnailImage" label="thumbnail image" />
             <SingleImageInput name="modelImage" label="model image" />
           </div>
-          <MultipleImagesInput name="galleryImages" label="gallery images" />
+          <MultipleImagesInput
+            name="galleryImages"
+            label="gallery images"
+            onChange={updateListInput}
+          />
           <CheckboxInput
             name="featured"
             label="featured"
