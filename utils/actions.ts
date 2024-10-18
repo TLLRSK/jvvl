@@ -78,7 +78,6 @@ const createProductObject = async (user: any, formData: FormData) => {
     sizes: validatedFields.sizes as string[],
     clerkId: user.id,
   };
-  console.log("creating product: ", data);
   return data;
 };
 
@@ -90,7 +89,6 @@ export const createProductAction = async (
   const user = await getAuthUser();
   try {
     const data = await createProductObject(user, formData);
-    console.log("data: ", data);
     await db.product.create({
       data: data,
     });
@@ -146,19 +144,29 @@ export const fetchAdminProductDetails = async (productId: string) => {
 };
 
 export const updateProductAction = async (
-  prevState: any,
   formData: FormData
 ) => {
+  for (const pair of formData.entries()) {
+    console.log(pair[0], pair[1]);
+  }
+  const galleryImages = formData.getAll("galleryImages") as Array<string | File>;
+  const rawData = Object.fromEntries(formData);
+  const formattedData = {
+    ...rawData,
+    galleryImages,
+  };
+
+  console.log("rawData: ", rawData)
+  console.log("formattedData: ", formattedData)
   const productId = formData.get('id') as string;
   const user = await getAdminUser();
-  const data = await createProductObject(user, formData);
-
-  await db.product.update({
-    where: {
-      id: productId,
-    },
-    data: data,
-  });
+  
+  // await db.product.update({
+  //   where: {
+  //     id: productId,
+  //   },
+  //   data: data,
+  // });
   revalidatePath(`/admin/products/${productId}/edit`);
   return { message: "Product updated successfully." };
 };
@@ -169,12 +177,9 @@ export const updateProductImagesAction = async (
   await getAuthUser();
   try {
     const data = Object.fromEntries(formData);
-    console.log("image data: ", data)
     const productId = formData.get('id') as string;
     const imageType = formData.get('imageType') as string;
-    console.log("imageType: ", imageType)
     const oldImageUrl = formData.get('url') as string;
-    console.log("oldImageUrl: ", oldImageUrl)
     return { message: "Product updated successfully." };
   } catch (error) {
     return renderError(error);

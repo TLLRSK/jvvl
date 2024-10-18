@@ -1,18 +1,18 @@
 "use client";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { SingleImageInputProps } from "@/utils/types";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
-import AdminProductImage from "../admin/AdminProductImage";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import AdminProductImage from "../admin/AdminProductImage";
+import { Label } from "../ui/label";
+import { UpdateSingleImageInputProps } from "@/utils/types";
 
-function SingleImageInput({ name, label, onChange }: SingleImageInputProps) {
-  const [image, setImage] = useState<File | null>(null);
+export function UpdateSingleImageInput(props: UpdateSingleImageInputProps) {
+  const { image, name, onChange} = props;
+  const [currentImage, setCurrentImage] = useState<File | string>(image);
   const filesInputRef = useRef<HTMLInputElement | null>(null);
-
   
   const updateImage = useCallback((newImage: File | null) => {
-    setImage(newImage);
+    setCurrentImage(newImage);
     onChange(name, newImage);
   }, [name, onChange])
 
@@ -21,22 +21,25 @@ function SingleImageInput({ name, label, onChange }: SingleImageInputProps) {
       updateImage(e.target.files[0]);
     }
   };
+
   const removeImage = () => {
     updateImage(null);
-    if (filesInputRef.current) {
+    if(filesInputRef.current) {
       filesInputRef.current.value = "";
     }
   };
+
   const triggerFileInput = () => {
     filesInputRef.current?.click();
   }
+  
   return (
     <div>
       <Label htmlFor={name} className="capitalize mb-12">
-        {label || name}
+        {name}
       </Label>
       {image ? (
-        <AdminProductImage image={URL.createObjectURL(image)} removeAction={removeImage} />
+        <AdminProductImage image={currentImage} removeAction={removeImage} />
       ) : (
         <span className="block w-40 h-40 border-[1px] border-primary border-dashed" />
       )}
@@ -57,10 +60,11 @@ function SingleImageInput({ name, label, onChange }: SingleImageInputProps) {
           className="w-full"
           onClick={triggerFileInput}
         >
-          Add Image
+          Update Image
         </Button>
       </div>
     </div>
   );
 }
-export default SingleImageInput;
+
+export default UpdateSingleImageInput;

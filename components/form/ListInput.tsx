@@ -6,8 +6,8 @@ import { Label } from "../ui/label";
 import { ListInputProps } from "@/utils/types";
 import DeleteIcon from "../icons/DeleteIcon";
 
-function ListInput({ name, label, placeholder, onChange}: ListInputProps) {
-  const [items, setItems] = useState<string[]>([]);
+function ListInput({ name, label, placeholder, defaultValue, onChange}: ListInputProps) {
+  const [items, setItems] = useState<string[]>(defaultValue || []);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

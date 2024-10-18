@@ -62,6 +62,7 @@ export type SingleImageInputProps = {
 export type ListInputProps = {
   name: string;
   label: string;
+  defaultValue?: string[];
   placeholder?: string;
   onChange: (name: string, value: string[]) => void;
 };
@@ -73,10 +74,8 @@ export type CheckboxInputProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export type ImageInputContainerProps = {
+export type UpdateSingleImageInputProps = {
   image: string;
   name: string;
-  action: actionFunction;
-  text: string,
-  children?: React.ReactNode;
+  onChange: (name: string, value: File | null ) => void;
 }

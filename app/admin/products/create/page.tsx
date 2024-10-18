@@ -11,24 +11,11 @@ import { FormProduct } from "@/utils/types";
 import { useState } from "react";
 import { createProductAction } from "@/utils/actions";
 import { useToast } from '@/hooks/use-toast';
+import { buildFormData, formProductModel } from "@/utils/form";
 
-function CreateProductPage() {
-  const defaultDescription =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra dignissim libero, eu tempor risus feugiat id.";
-
+function CreateProductPage()  {
   /* CLIENT FORM */
-  const formProduct: FormProduct = {
-    name: "",
-    description: defaultDescription,
-    featured: false,
-    thumbnailImage: null,
-    modelImage: null,
-    galleryImages: [],
-    price: 0,
-    attributes: [],
-    sizes: [],
-  };
-  const [formData, setFormData] = useState(formProduct);
+  const [formData, setFormData] = useState<FormProduct>(formProductModel);
   const [isPending, setIsPending] = useState(false);
   const {toast} = useToast();
 
@@ -52,31 +39,11 @@ function CreateProductPage() {
       setIsPending(false);
     }
   }
+  
   const submitFormData = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsPending(true)
-    const formDataToSend = new FormData();
-
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("description", formData.description);
-    formDataToSend.append("price", formData.price.toString());
-    formDataToSend.append("featured", formData.featured.toString());
-  
-    formDataToSend.append("attributes", JSON.stringify(formData.attributes));
-    formDataToSend.append("sizes", JSON.stringify(formData.sizes));
-    
-    if (formData.thumbnailImage) {
-      formDataToSend.append("thumbnailImage", formData.thumbnailImage);
-    }
-    if (formData.modelImage) {
-      formDataToSend.append("modelImage", formData.modelImage);
-    }
-
-    if (formData.galleryImages && formData.galleryImages.length > 0) {
-      formData.galleryImages.forEach((image) => {
-        formDataToSend.append(`galleryImages`, image);
-      });
-    }
+    const formDataToSend = buildFormData(formData)
     handleCreateProduct(formDataToSend);
   };
   const changeFormData = (
@@ -108,7 +75,6 @@ function CreateProductPage() {
           <TextArea
             name="description"
             label="product description"
-            defaultValue={defaultDescription}
             onChange={changeFormData}
           />
           <ListInput
@@ -140,7 +106,7 @@ function CreateProductPage() {
           <MultipleImagesInput
             name="galleryImages"
             label="gallery images"
-            onChange={updateInput}
+            updateInput={updateInput}
           />
           <CheckboxInput
             name="featured"
