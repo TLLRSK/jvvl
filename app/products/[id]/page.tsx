@@ -53,12 +53,16 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
           <CarouselPrevious variant="ghost" className="left-0 ml-2" />
           <CarouselNext variant="ghost" className="right-0 mr-2" />
         </Carousel>
-        <div className="flex flex-col gap-8 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
-          <div className="w-fit mx-auto text-center md:my-auto">
+
+        <div className="flex flex-col gap-10 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
+
+          <div className="w-fit mx-auto text-center mt-4 md:my-auto">
             <h3 className="uppercase font-medium md:text-xl">{name}</h3>
             <p className="font-medium md:text-xl">${price}</p>
           </div>
+          
           <AddToCart productId={id} sizes={sizes} />
+
           <div className="p-3">
             <h3 className="uppercase font-semibold mb-3">product details</h3>
             <p className="mb-3 font-light">{description}</p>

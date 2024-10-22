@@ -7,6 +7,7 @@ import { deleteImage, uploadImage } from "./supabase";
 import { revalidatePath } from "next/cache";
 import { Product } from "@prisma/client";
 import { FormProduct } from "./types";
+import { Cart } from '@prisma/client';
 
 const getAuthUser = async () => {
   const user = await currentUser();
@@ -65,30 +66,41 @@ const validatedData = (formData: FormData) => {
   const galleryFiles = formData.getAll("galleryImages") as File[];
 
   const validatedFields = validateWithZodSchema(productSchema, rawData);
-  const validatedThumbnailFile = validateWithZodSchema(imageSchema, { image: thumbnailFile });
-  const validatedModelFile = validateWithZodSchema(imageSchema, { image: modelFile });
+  const validatedThumbnailFile = validateWithZodSchema(imageSchema, {
+    image: thumbnailFile,
+  });
+  const validatedModelFile = validateWithZodSchema(imageSchema, {
+    image: modelFile,
+  });
   const validatedGalleryFiles = galleryFiles.map((img) => {
     const validated = validateWithZodSchema(imageSchema, { image: img });
     return validated.image;
   });
-  
+
   return {
     ...validatedFields,
     thumbnailImage: validatedThumbnailFile.image,
     modelImage: validatedModelFile.image,
-    galleryImages: validatedGalleryFiles
+    galleryImages: validatedGalleryFiles,
   };
 };
 
 const createProductObject = async (user: User, formData: FormData) => {
-  
   const validatedProductData = validatedData(formData);
+
   const { thumbnailImage, modelImage, galleryImages } = validatedProductData;
-  
-  const thumbnailImagePath = thumbnailImage instanceof File ? await uploadImage(thumbnailImage) : thumbnailImage;
-  const modelImagePath = modelImage instanceof File ? await uploadImage(modelImage) : modelImage;
+
+  const thumbnailImagePath =
+    thumbnailImage instanceof File
+      ? await uploadImage(thumbnailImage) : thumbnailImage;
+
+  const modelImagePath =
+    modelImage instanceof File ? await uploadImage(modelImage) : modelImage;
+
   const galleryImagesPath = await Promise.all(
-    galleryImages.map((file) => file instanceof File ? uploadImage(file) : file)
+    galleryImages.map((file) =>
+      file instanceof File ? uploadImage(file) : file
+    )
   );
 
   const productData = {
@@ -115,7 +127,6 @@ export const createProductAction = async (
       data: productData,
     });
     return { message: "Product created successfully" };
-
   } catch (error) {
     console.log(error);
     return renderError(error);
@@ -132,9 +143,7 @@ export const fetchAdminProducts = async () => {
   return products;
 };
 
-export const deleteProductAction = async (
-  prevState: { productId: string },
-) => {
+export const deleteProductAction = async (prevState: { productId: string }) => {
   await getAdminUser();
   const { productId } = prevState;
   const deleteImages = async (product: Product) => {
@@ -167,15 +176,22 @@ export const fetchAdminProductDetails = async (productId: string) => {
   return product;
 };
 
-const deleteReplacedImages = async (prevState: Product, updatedProduct: FormProduct) => {
-  if (prevState.thumbnailImage !== updatedProduct.thumbnailImage) await deleteImage(prevState.thumbnailImage);
-  if (prevState.modelImage !== updatedProduct.modelImage) await deleteImage(prevState.modelImage);
-  await Promise.all(prevState.galleryImages.map(async (img) => {
-    if (!updatedProduct.galleryImages?.includes(img)) {
-      await deleteImage(img);
-    }
-  }));
-}
+const deleteReplacedImages = async (
+  prevState: Product,
+  updatedProduct: FormProduct
+) => {
+  if (prevState.thumbnailImage !== updatedProduct.thumbnailImage)
+    await deleteImage(prevState.thumbnailImage);
+  if (prevState.modelImage !== updatedProduct.modelImage)
+    await deleteImage(prevState.modelImage);
+  await Promise.all(
+    prevState.galleryImages.map(async (img) => {
+      if (!updatedProduct.galleryImages?.includes(img)) {
+        await deleteImage(img);
+      }
+    })
+  );
+};
 
 export const updateProductAction = async (
   prevState: Product,
@@ -195,20 +211,121 @@ export const updateProductAction = async (
     deleteReplacedImages(prevState, productData);
     revalidatePath(`/admin/products/${productId}/edit`);
     return { message: "Product updated successfully." };
-    
   } catch (error) {
     console.error("Error updating product:", error);
     return { error: "Failed to update product." };
   }
 };
 
-export const addToCartAction = async (prevState: any, formData: FormData) => {
+const includeProductClause = {
+  cartItems: {
+    include: {
+      product: true,
+    },
+  },
+};
+const fetchOrCreateCart = async ({
+  userId,
+  errorOnFailure = false,
+}:{
+  userId: string;
+  errorOnFailure?: boolean;
+}) => {
+  let cart = await db.cart.findFirst({
+    where: { 
+      clerkId: userId 
+    },
+    include: includeProductClause,
+  });
+  if (!cart && errorOnFailure) throw new Error('Cart not found');
+  if (!cart) {
+    cart = await db.cart.create({
+      data: {
+        clerkId: userId,
+      },
+      include: includeProductClause,
+    })
+  }
+  return cart;
+}
+const createCartItem = async ({
+  productId,
+  cartId,
+  size,
+}: {
+  productId: string;
+  cartId: string;
+  size: string,
+}) => {
+  let cartItem = await db.cartItem.findFirst({
+    where: {
+      id: productId,
+    },
+  });
+  if (!cartItem) {
+    cartItem = await db.cartItem.create({
+      data: { productId, cartId, size },
+    });
+  } else {
+    throw new Error("Product is already in your cart.")
+  }
+};
+
+const updateCart = async (cart: Cart) => {
+  const cartItems = await db.cartItem.findMany({
+    where: {
+      cartId: cart.id,
+    },
+    include: {
+      product: true,
+    },
+    orderBy: {
+      createdAt: 'asc',
+    },
+  });
+
+  let numItemsInCart = 0;
+  let cartTotal = 0;
+
+  for (const item of cartItems) {
+    numItemsInCart++;
+    cartTotal += item.product.price ;
+  }
+  const tax = cart.taxRate * cartTotal;
+  const shipping = cartTotal ? cart.shipping : 0;
+  const orderTotal = cartTotal + tax + shipping;
+
+  const currentCart = await db.cart.update({
+    where: {
+      id: cart.id,
+    },
+    data: {
+      numItemsInCart,
+      cartTotal,
+      tax,
+      orderTotal,
+    },
+    include: includeProductClause,
+  })
+  return { cartItems, currentCart}
+
+};
+
+export const addToCartAction = async (
+  formData: FormData
+) => {
   const user = await getAuthUser();
   try {
-    const productId = formData.get('productId') as string;
-    return { message: "Product added to cart"}
+
+    const productId = formData.get("productId") as string;
+    const size = formData.get("size") as string;
+    await fetchSingleProduct(productId);
+    const cart = await fetchOrCreateCart({userId: user.id});
+    await createCartItem({productId, cartId: cart.id, size});
+    await updateCart(cart);
+    return { message: "Product added to cart" };
+
   } catch (error) {
     return renderError(error);
   }
-  redirect('/cart');
 };

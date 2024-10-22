@@ -5,10 +5,18 @@ import { Label } from "@/components/ui/label";
 
 interface SizeInputProps {
   sizes: string[];
+  onChange: (value: string) => void;
 }
 
-function SizeInput({ sizes }: SizeInputProps) {
+function SizeInput({ sizes, onChange }: SizeInputProps) {
+
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
+  const handleChange = (value: string) => {
+    console.log("changing value", value)
+    setSelectedSize(value);
+    onChange(value);
+  }
 
   return (
     <div className="mx-auto flex flex-col gap-2">
@@ -16,7 +24,7 @@ function SizeInput({ sizes }: SizeInputProps) {
         Sizes
       </p>
       <RadioGroup
-        onValueChange={setSelectedSize}
+        onValueChange={handleChange}
         value={selectedSize || undefined}
       >
         <div className="flex flex-wrap gap-4 justify-center">
@@ -29,7 +37,7 @@ function SizeInput({ sizes }: SizeInputProps) {
               />
               <Label
                 htmlFor={`size-${size}`}
-                className={`text-md cursor-pointer hover:underline ${
+                className={`text-md cursor-pointer ${
                 selectedSize === size ? "font-bold opacity-100" : "opacity-60"
                 }`}
               >
