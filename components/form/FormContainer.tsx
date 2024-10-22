@@ -1,19 +1,19 @@
-'use client'
-import { useToast } from "@/hooks/use-toast";
-import React, { useEffect } from "react";
-import { useFormState } from "react-dom";
+'use client';
+
+import { useFormState } from 'react-dom';
+import { useEffect } from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { actionFunction } from '@/utils/types';
 
 const initialState = {
-  message: "",
+  message: '',
 };
 
 function FormContainer({
   action,
-  className = '',
   children,
 }: {
-  action: any;
-  className?: string;
+  action: actionFunction;
   children: React.ReactNode;
 }) {
   const [state, formAction] = useFormState(action, initialState);
@@ -23,7 +23,7 @@ function FormContainer({
       toast({ description: state.message });
     }
   }, [state]);
-  return <form action={formAction} className={`grid gap-4 ${className}`}>{children}</form>;
-}
 
+  return <form action={formAction}>{children}</form>;
+}
 export default FormContainer;

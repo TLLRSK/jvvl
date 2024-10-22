@@ -3,111 +3,17 @@ import { SubmitButton } from "@/components/form/Buttons";
 import FormInput from "@/components/form/FormInput";
 import PriceInput from "@/components/form/PriceInput";
 import TextArea from "@/components/form/TextAreaInput";
-import { useEffect, useState } from "react";
-import SingleImageInput from "@/components/form/SingleImageInput";
 import ListInput from "@/components/form/ListInput";
 import CheckboxInput from "@/components/form/CheckboxInput";
-import { useToast } from "@/hooks/use-toast";
 import UpdateSingleImageInput from "./UpdateSingleImageInput";
-import { updateProductAction } from "@/utils/actions";
 import UpdateMultipleImagesInput from "./UpdateMultipleImagesInput";
+import useForm from "@/hooks/useForm";
+import { Product } from "@/utils/types";
 
-export const UpdateProductForm = (data) => {
-  const [formData, setFormData] = useState({ ...data.product });
-  const {
-    id,
-    name,
-    price,
-    description,
-    attributes,
-    sizes,
-    thumbnailImage,
-    modelImage,
-    galleryImages,
-    featured,
-  } = formData;
+export const UpdateProductForm = (product: Product) => {
 
-  const [isPending, setIsPending] = useState(false);
-  const { toast } = useToast();
+  const { isPending, submitFormData, changeFormData, updateInput } = useForm( product, "update" );
 
-  const updateFormData = (
-    name: string,
-    value: string | string[] | File | File[] | null
-  ) => {
-    setFormData((prevState) => {
-      const updatedState = { ...prevState, [name]: value };
-      return updatedState;
-    });
-  };
-
-  const handleEditProduct = async (formDataToSend: FormData) => {
-    try {
-      const {message} = await updateProductAction(formDataToSend);
-      toast({ description: `message: ${message}` });
-    } catch (error) {
-      toast({
-        description:
-          error instanceof Error ? error.message : `There was an error`,
-      });
-    } finally {
-      setIsPending(false);
-    }
-  };
-
-  const submitFormData = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsPending(true);
-    const formDataToSend = buildFormData(formData);
-    console.log("sending data: ", formDataToSend)
-    handleEditProduct(formDataToSend);
-  };
-
-  const changeFormData = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    const { name, value } = e.target;
-    updateFormData(name, value);
-  };
-
-  const updateInput = (
-    name: string,
-    value: string[] | File | File[] | null
-  ) => {
-    console.log(name, value)
-    updateFormData(name, value);
-  };
-
-  const buildFormData = (formData) => {
-    const formDataToSend = new FormData();
-    console.log("received formData: ", formData)
-    
-    formDataToSend.append("id", formData.id);
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("description", formData.description);
-    formDataToSend.append("price", formData.price.toString());
-    formDataToSend.append("featured", formData.featured.toString());
-    formDataToSend.append("attributes", JSON.stringify(formData.attributes));
-    formDataToSend.append("sizes", JSON.stringify(formData.sizes));
-   
-    if (formData.thumbnailImage instanceof File) {
-      formDataToSend.append("thumbnailImage", formData.thumbnailImage);
-    }
-
-    if (formData.modelImage instanceof File) {
-      formDataToSend.append("modelImage", formData.modelImage);
-    }
-
-    if (formData.galleryImages && formData.galleryImages.length > 0) {
-      formData.galleryImages.forEach((image) => {
-        formDataToSend.append("galleryImages", image)
-      });
-    }
-    for (const [key, value] of formDataToSend.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
-    return formDataToSend;
-  };
   return (
     <section className="col-span-10">
       <h2 className="text-lg font-semibold mb-6">Edit product</h2>
@@ -117,57 +23,55 @@ export const UpdateProductForm = (data) => {
             type="text"
             name="name"
             label="product name"
-            defaultValue={name}
+            defaultValue={product.name}
             onChange={changeFormData}
           />
-          <PriceInput onChange={changeFormData} defaultValue={price} />
+          <PriceInput onChange={changeFormData} defaultValue={product.price} />
           <TextArea
             name="description"
             label="product description"
             onChange={changeFormData}
-            defaultValue={description}
+            defaultValue={product.description}
           />
           <ListInput
             name="attributes"
             label="attributes"
             placeholder="Write an attribute"
-            defaultValue={attributes}
+            defaultValue={product.attributes}
             onChange={updateInput}
           />
           <ListInput
             name="sizes"
             label="sizes"
             placeholder="Write a size"
-            defaultValue={sizes}
+            defaultValue={product.sizes}
             onChange={updateInput}
           />
         </div>
         <div className="flex flex-col gap-6 ml-12">
+
           <div className="flex gap-6">
             <UpdateSingleImageInput
               name="thumbnailImage"
-              image={thumbnailImage}
+              image={product.thumbnailImage}
               onChange={updateInput}
             >
-              {/* <input type="hidden" name="id" value={id} />
-              <input type="hidden" name="imageType" value="thumbnailImage" /> */}
-              {/* <input type="hidden" name="url" value={product.thumbnailImage} /> */}
             </UpdateSingleImageInput>
+
             <UpdateSingleImageInput
-              name="modelImage"
-              image={modelImage}
+              name="productImage"
+              image={product.modelImage}
               onChange={updateInput}
             >
-              {/* <input type="hidden" name="id" value={id} />
-              <input type="hidden" name="imageType" value="modelImage" />
-              <input type="hidden" name="url" value={product.modelImage} /> */}
             </UpdateSingleImageInput>
           </div>
-          <UpdateMultipleImagesInput name="galleryImages" label="gallery images" images={galleryImages} updateInput={updateInput} />
+
+          <UpdateMultipleImagesInput name="galleryImages" label="gallery images" images={product.galleryImages || []} updateInput={updateInput} />
+
           <CheckboxInput
             name="featured"
             label="featured"
-            defaultChecked={featured}
+            defaultChecked={product.featured}
             onChange={changeFormData}
           />
         </div>
@@ -180,7 +84,7 @@ export const UpdateProductForm = (data) => {
           </button>
         ) : (
           <SubmitButton
-            text="Create Product"
+            text="Update Product"
             className="col-span-2 w-full py-3 text-lg mt-12"
           />
         )}

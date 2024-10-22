@@ -14,10 +14,9 @@ function AdminProductImage({
 }) {
   const handleRemoveAction = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (removeAction) {
-      removeAction(index);
-    }
+    removeAction(index);
   };
+
   return (
     <li className="relative w-40 h-40 list-none border-[1px] border-input">
       <Image

@@ -5,9 +5,10 @@ const EditProductPage = async ({ params }: { params: { id: string } }) => {
 
   const { id } = params;
   const product = await fetchAdminProductDetails(id);
+  
   return <>
     {product ? (
-      <UpdateProductForm product={product} />
+      <UpdateProductForm {...product} />
     ) : (
       <span>NO PRODUCT</span>
     )}

@@ -1,13 +1,12 @@
 "use client";
 import React, { ChangeEvent, useState } from "react";
-import FormInput from "./FormInput";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { ListInputProps } from "@/utils/types";
 import DeleteIcon from "../icons/DeleteIcon";
 
 function ListInput({ name, label, placeholder, defaultValue, onChange}: ListInputProps) {
-  const [items, setItems] = useState<string[]>(defaultValue || []);
+  const [items, setItems] = useState<string[]>(defaultValue ?? []);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +71,7 @@ function ListInput({ name, label, placeholder, defaultValue, onChange}: ListInpu
         </Button>
       </div>
 
-      <FormInput type="hidden" onChange={onChange} name={name} value={JSON.stringify(items)} />
+      <input type="hidden" name={name} value={JSON.stringify(items)} />
     </div>
   );
 }

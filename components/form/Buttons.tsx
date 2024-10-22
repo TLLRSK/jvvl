@@ -9,7 +9,6 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 export function SubmitButton({
   text = "submit",
   className = "",
-  disabled,
 }: {
   className?: string;
   text?: string;

@@ -1,22 +1,22 @@
 import { z, ZodSchema } from "zod";
 
 const validateImageFile = () => {
-  const maxUploadSize = 1024 * 1024;
+  const maxUploadSize = 1024 * 1024; // 1MB
   const acceptedFileTypes = ["image/"];
-  return z
-    .instanceof(File, {
-      message: "Please select an image file"
-    })
-    .refine((file) => {
-      return !file || file.size <= maxUploadSize;
-    }, "File size must be less than 1MB")
-    .refine((file) => {
-      return (
-        !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
-      );
-    }, "File must be an image");
-};
 
+  return z.union([
+    z.string().url({ message: "Image must be a valid URL" }),
+    z.instanceof(File, { message: "Please select a valid image file" })
+  ])
+  .refine((fileOrUrl) => {
+    if (typeof fileOrUrl === "string") return true;
+    return fileOrUrl.size <= maxUploadSize;
+  }, "File size must be less than 1MB")
+  .refine((fileOrUrl) => {
+    if (typeof fileOrUrl === "string") return true;
+    return acceptedFileTypes.some((type) => fileOrUrl.type.startsWith(type));
+  }, "File must be an image");
+};
 
 const validateStringArraySchema = () => {
   return z.preprocess((val) => {
@@ -29,6 +29,10 @@ const validateStringArraySchema = () => {
     }
   }, z.array(z.string()).min(1, "At least one item is required"));
 };
+
+export const imageSchema = z.object({
+  image: validateImageFile(),
+});
 
 export const productSchema = z.object({
   name: z
@@ -53,9 +57,6 @@ export const productSchema = z.object({
   ),
   attributes: validateStringArraySchema(),
   sizes: validateStringArraySchema(),
-  thumbnailImage: validateImageFile(),
-  modelImage: validateImageFile(),
-  galleryImages: z.array(validateImageFile()),
   featured: z.coerce.boolean(),
 });
 

@@ -1,21 +1,25 @@
 "use server";
 import db from "@/utils/db";
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser, User } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { productSchema, validateWithZodSchema } from "./schemas";
+import { imageSchema, productSchema, validateWithZodSchema } from "./schemas";
 import { deleteImage, uploadImage } from "./supabase";
 import { revalidatePath } from "next/cache";
 import { Product } from "@prisma/client";
+import { FormProduct } from "./types";
+
 const getAuthUser = async () => {
   const user = await currentUser();
   if (!user) redirect("/");
   return user;
 };
+
 const getAdminUser = async () => {
   const user = await getAuthUser();
   if (user.id !== process.env.ADMIN_USER_ID) redirect("/");
   return user;
 };
+
 export const fetchFeaturedProducts = async () => {
   const products = await db.product.findMany({
     where: {
@@ -24,6 +28,7 @@ export const fetchFeaturedProducts = async () => {
   });
   return products;
 };
+
 export const fetchAllProducts = ({ search = "" }: { search: string }) => {
   return db.product.findMany({
     where: {
@@ -34,6 +39,7 @@ export const fetchAllProducts = ({ search = "" }: { search: string }) => {
     },
   });
 };
+
 export const fetchSingleProduct = async (productId: string) => {
   const product = await db.product.findUnique({
     where: {
@@ -45,9 +51,6 @@ export const fetchSingleProduct = async (productId: string) => {
   }
   return product;
 };
-export const addToCartAction = async (prevState: any, formData: FormData) => {
-  return { message: "product added to the cart " };
-};
 
 const renderError = (error: unknown): { message: string } => {
   return {
@@ -55,44 +58,64 @@ const renderError = (error: unknown): { message: string } => {
   };
 };
 
-const createProductObject = async (user: any, formData: FormData) => {
-  const galleryImages = formData.getAll("galleryImages") as File[];
+const validatedData = (formData: FormData) => {
   const rawData = Object.fromEntries(formData);
-  const formattedData = {
-    ...rawData,
-    galleryImages,
-  };
-  const validatedFields = validateWithZodSchema(productSchema, formattedData);
-  const thumbnailImagePath = await uploadImage(validatedFields.thumbnailImage);
-  const modelImagePath = await uploadImage(validatedFields.modelImage);
-  const galleryImagesPath = await Promise.all(
-    validatedFields.galleryImages.map((image) => uploadImage(image))
-  );
+  const thumbnailFile = formData.get("thumbnailImage") as File;
+  const modelFile = formData.get("modelImage") as File;
+  const galleryFiles = formData.getAll("galleryImages") as File[];
 
-  const data = {
+  const validatedFields = validateWithZodSchema(productSchema, rawData);
+  const validatedThumbnailFile = validateWithZodSchema(imageSchema, { image: thumbnailFile });
+  const validatedModelFile = validateWithZodSchema(imageSchema, { image: modelFile });
+  const validatedGalleryFiles = galleryFiles.map((img) => {
+    const validated = validateWithZodSchema(imageSchema, { image: img });
+    return validated.image;
+  });
+  
+  return {
     ...validatedFields,
-    thumbnailImage: thumbnailImagePath as string,
-    modelImage: modelImagePath as string,
-    galleryImages: galleryImagesPath as string[],
-    attributes: validatedFields.attributes as string[],
-    sizes: validatedFields.sizes as string[],
-    clerkId: user.id,
+    thumbnailImage: validatedThumbnailFile.image,
+    modelImage: validatedModelFile.image,
+    galleryImages: validatedGalleryFiles
   };
-  return data;
 };
 
+const createProductObject = async (user: User, formData: FormData) => {
+  
+  const validatedProductData = validatedData(formData);
+  const { thumbnailImage, modelImage, galleryImages } = validatedProductData;
+  
+  const thumbnailImagePath = thumbnailImage instanceof File ? await uploadImage(thumbnailImage) : thumbnailImage;
+  const modelImagePath = modelImage instanceof File ? await uploadImage(modelImage) : modelImage;
+  const galleryImagesPath = await Promise.all(
+    galleryImages.map((file) => file instanceof File ? uploadImage(file) : file)
+  );
 
+  const productData = {
+    ...validatedProductData,
+    thumbnailImage: thumbnailImagePath,
+    modelImage: modelImagePath,
+    galleryImages: galleryImagesPath,
+    attributes: validatedProductData.attributes as string[],
+    sizes: validatedProductData.sizes as string[],
+    clerkId: user.id,
+  };
+
+  return productData;
+};
 
 export const createProductAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
   try {
-    const data = await createProductObject(user, formData);
+    const productData = await createProductObject(user, formData);
+
     await db.product.create({
-      data: data,
+      data: productData,
     });
     return { message: "Product created successfully" };
+
   } catch (error) {
     console.log(error);
     return renderError(error);
@@ -109,15 +132,16 @@ export const fetchAdminProducts = async () => {
   return products;
 };
 
-export const deleteProductAction = async (prevState: { productId: string }) => {
+export const deleteProductAction = async (
+  prevState: { productId: string },
+) => {
+  await getAdminUser();
   const { productId } = prevState;
   const deleteImages = async (product: Product) => {
     await deleteImage(product.thumbnailImage);
     await deleteImage(product.modelImage);
     await Promise.all(product.galleryImages.map((image) => deleteImage(image)));
   };
-  await getAdminUser();
-
   try {
     const product = await db.product.delete({
       where: {
@@ -143,45 +167,48 @@ export const fetchAdminProductDetails = async (productId: string) => {
   return product;
 };
 
-export const updateProductAction = async (
-  formData: FormData
-) => {
-  for (const pair of formData.entries()) {
-    console.log(pair[0], pair[1]);
-  }
-  const galleryImages = formData.getAll("galleryImages") as Array<string | File>;
-  const rawData = Object.fromEntries(formData);
-  const formattedData = {
-    ...rawData,
-    galleryImages,
-  };
+const deleteReplacedImages = async (prevState: Product, updatedProduct: FormProduct) => {
+  if (prevState.thumbnailImage !== updatedProduct.thumbnailImage) await deleteImage(prevState.thumbnailImage);
+  if (prevState.modelImage !== updatedProduct.modelImage) await deleteImage(prevState.modelImage);
+  await Promise.all(prevState.galleryImages.map(async (img) => {
+    if (!updatedProduct.galleryImages?.includes(img)) {
+      await deleteImage(img);
+    }
+  }));
+}
 
-  console.log("rawData: ", rawData)
-  console.log("formattedData: ", formattedData)
-  const productId = formData.get('id') as string;
-  const user = await getAdminUser();
-  
-  // await db.product.update({
-  //   where: {
-  //     id: productId,
-  //   },
-  //   data: data,
-  // });
-  revalidatePath(`/admin/products/${productId}/edit`);
-  return { message: "Product updated successfully." };
-};
-export const updateProductImagesAction = async (
-  prevState: any,
+export const updateProductAction = async (
+  prevState: Product,
   formData: FormData
 ) => {
-  await getAuthUser();
+  const user = await getAuthUser();
+  const productId = prevState.id;
+  const productData = await createProductObject(user, formData);
+
   try {
-    const data = Object.fromEntries(formData);
-    const productId = formData.get('id') as string;
-    const imageType = formData.get('imageType') as string;
-    const oldImageUrl = formData.get('url') as string;
+    await db.product.update({
+      where: {
+        id: productId,
+      },
+      data: productData,
+    });
+    deleteReplacedImages(prevState, productData);
+    revalidatePath(`/admin/products/${productId}/edit`);
     return { message: "Product updated successfully." };
+    
+  } catch (error) {
+    console.error("Error updating product:", error);
+    return { error: "Failed to update product." };
+  }
+};
+
+export const addToCartAction = async (prevState: any, formData: FormData) => {
+  const user = await getAuthUser();
+  try {
+    const productId = formData.get('productId') as string;
+    return { message: "Product added to cart"}
   } catch (error) {
     return renderError(error);
   }
+  redirect('/cart');
 };

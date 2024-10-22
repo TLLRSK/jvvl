@@ -7,58 +7,13 @@ import TextArea from "@/components/form/TextAreaInput";
 import SingleImageInput from "@/components/form/SingleImageInput";
 import ListInput from "@/components/form/ListInput";
 import CheckboxInput from "@/components/form/CheckboxInput";
+import useForm from "@/hooks/useForm";
+import { formProductModel } from "@/utils/form";
 import { FormProduct } from "@/utils/types";
-import { useState } from "react";
-import { createProductAction } from "@/utils/actions";
-import { useToast } from '@/hooks/use-toast';
-import { buildFormData, formProductModel } from "@/utils/form";
 
 function CreateProductPage()  {
-  /* CLIENT FORM */
-  const [formData, setFormData] = useState<FormProduct>(formProductModel);
-  const [isPending, setIsPending] = useState(false);
-  const {toast} = useToast();
-
-  const updateFormData = (
-    name: string,
-    value: string | string[] | File | File[] | null
-  ) => {
-    setFormData((prevState) => {
-      const updatedState = { ...prevState, [name]: value };
-      return updatedState;
-    });
-  };
-
-  const handleCreateProduct = async (formDataToSend: FormData) => {
-    try {
-      const {message} = await createProductAction(formDataToSend);
-      toast({description: `message: ${message}`})
-    } catch (error) {
-      toast({description: error instanceof Error ? error.message : `There was an error`})
-    } finally {
-      setIsPending(false);
-    }
-  }
-  
-  const submitFormData = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsPending(true)
-    const formDataToSend = buildFormData(formData)
-    handleCreateProduct(formDataToSend);
-  };
-  const changeFormData = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    const { name, value } = e.target;
-    updateFormData(name, value);
-  };
-  const updateInput = (
-    name: string,
-    value: string[] | File | File[] | null
-  ) => {
-    updateFormData(name, value);
-  };
-  
+  const product: FormProduct = formProductModel;
+  const { submitFormData, changeFormData, updateInput, isPending } = useForm( product, "create" );
 
   return (
     <section className="col-span-10">

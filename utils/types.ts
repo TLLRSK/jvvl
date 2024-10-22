@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 export type NavLink = {
   href: string;
   label: string;
@@ -16,18 +14,24 @@ export type Product = {
   price: number;
   attributes: string[];
   sizes: string[];
+  createdAt: Date;
+  updatedAt: Date;
+  clerkId: string;
 };
 
 export type FormProduct = {
+  id?: string
   name: string;
   description: string;
   featured: boolean;
-  thumbnailImage: File | null;
-  modelImage: File | null;
-  galleryImages: File[] | null;
+  thumbnailImage: File | string | null;
+  modelImage: File | string | null;
+  galleryImages: Array<File | string> | null;
   price: number;
   attributes: string[];
   sizes: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export type actionFunction = (
@@ -75,7 +79,13 @@ export type CheckboxInputProps = {
 };
 
 export type UpdateSingleImageInputProps = {
-  image: string;
+  image: File | string | null;
   name: string;
   onChange: (name: string, value: File | null ) => void;
+}
+export type UpdateMultipleImageInputProps = {
+  name: string;
+  label: string;
+  images: Array<string | File>;
+  updateInput: (name: string, value: Array<string | File>) => void;
 }

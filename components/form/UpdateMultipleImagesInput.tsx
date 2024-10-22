@@ -4,18 +4,15 @@ import { Label } from "../ui/label";
 import AdminProductImage from "../admin/AdminProductImage";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { UpdateMultipleImageInputProps } from "@/utils/types";
 
 function UpdateMultipleImagesInput({
   name,
   label,
   images,
   updateInput,
-}: {
-  name: string;
-  label: string;
-  images: string[];
-  updateInput: (name: string, value: Array<string | File>) => void;
-}) {
+}: UpdateMultipleImageInputProps
+) {
   const [galleryImages, setGalleryImages] = useState<Array<string | File>>(images);
   const filesInputRef = useRef<HTMLInputElement | null>(null);
 

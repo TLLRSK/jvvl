@@ -8,7 +8,7 @@ import { UpdateSingleImageInputProps } from "@/utils/types";
 
 export function UpdateSingleImageInput(props: UpdateSingleImageInputProps) {
   const { image, name, onChange} = props;
-  const [currentImage, setCurrentImage] = useState<File | string>(image);
+  const [currentImage, setCurrentImage] = useState<string | File | null>(image);
   const filesInputRef = useRef<HTMLInputElement | null>(null);
   
   const updateImage = useCallback((newImage: File | null) => {
@@ -38,7 +38,8 @@ export function UpdateSingleImageInput(props: UpdateSingleImageInputProps) {
       <Label htmlFor={name} className="capitalize mb-12">
         {name}
       </Label>
-      {image ? (
+      
+      {currentImage ? (
         <AdminProductImage image={currentImage} removeAction={removeImage} />
       ) : (
         <span className="block w-40 h-40 border-[1px] border-primary border-dashed" />
