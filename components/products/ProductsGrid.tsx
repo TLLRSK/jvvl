@@ -3,7 +3,6 @@ import React from "react";
 import ProductCard from "./ProductCard";
 
 function ProductsGrid({ products }:{ products: Product[] }) {
-  console.log("products: ", products)
   return (
     <ul className="
       grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mb-24

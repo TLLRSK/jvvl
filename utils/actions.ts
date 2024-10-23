@@ -1,15 +1,15 @@
 "use server";
 import db from "@/utils/db";
-import { currentUser, User } from "@clerk/nextjs/server";
+import { auth, currentUser, User } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { imageSchema, productSchema, validateWithZodSchema } from "./schemas";
 import { deleteImage, uploadImage } from "./supabase";
 import { revalidatePath } from "next/cache";
 import { Product } from "@prisma/client";
 import { FormProduct } from "./types";
-import { Cart } from '@prisma/client';
+import { Cart } from "@prisma/client";
 
-const getAuthUser = async () => {
+export const getAuthUser = async () => {
   const user = await currentUser();
   if (!user) redirect("/");
   return user;
@@ -92,7 +92,8 @@ const createProductObject = async (user: User, formData: FormData) => {
 
   const thumbnailImagePath =
     thumbnailImage instanceof File
-      ? await uploadImage(thumbnailImage) : thumbnailImage;
+      ? await uploadImage(thumbnailImage)
+      : thumbnailImage;
 
   const modelImagePath =
     modelImage instanceof File ? await uploadImage(modelImage) : modelImage;
@@ -224,30 +225,45 @@ const includeProductClause = {
     },
   },
 };
-const fetchOrCreateCart = async ({
+
+export const fetchOrCreateCart = async ({
   userId,
   errorOnFailure = false,
-}:{
+}: {
   userId: string;
   errorOnFailure?: boolean;
 }) => {
   let cart = await db.cart.findFirst({
-    where: { 
-      clerkId: userId 
+    where: {
+      clerkId: userId,
     },
     include: includeProductClause,
   });
-  if (!cart && errorOnFailure) throw new Error('Cart not found');
+  if (!cart && errorOnFailure) throw new Error("Cart not found");
   if (!cart) {
     cart = await db.cart.create({
       data: {
         clerkId: userId,
       },
       include: includeProductClause,
-    })
+    });
   }
   return cart;
-}
+};
+
+export const fetchCartItems = async () => {
+  const { userId } = await auth();
+  const cart = await db.cart.findFirst({
+    where: {
+      clerkId: userId ?? "",
+    },
+    select: {
+      numItemsInCart: true,
+    },
+  });
+  return cart?.numItemsInCart || 0;
+};
+
 const createCartItem = async ({
   productId,
   cartId,
@@ -255,7 +271,7 @@ const createCartItem = async ({
 }: {
   productId: string;
   cartId: string;
-  size: string,
+  size: string;
 }) => {
   let cartItem = await db.cartItem.findFirst({
     where: {
@@ -267,7 +283,7 @@ const createCartItem = async ({
       data: { productId, cartId, size },
     });
   } else {
-    throw new Error("Product is already in your cart.")
+    throw new Error("Product is already in your cart.");
   }
 };
 
@@ -280,7 +296,7 @@ const updateCart = async (cart: Cart) => {
       product: true,
     },
     orderBy: {
-      createdAt: 'asc',
+      createdAt: "asc",
     },
   });
 
@@ -289,7 +305,7 @@ const updateCart = async (cart: Cart) => {
 
   for (const item of cartItems) {
     numItemsInCart++;
-    cartTotal += item.product.price ;
+    cartTotal += item.product.price;
   }
   const tax = cart.taxRate * cartTotal;
   const shipping = cartTotal ? cart.shipping : 0;
@@ -306,25 +322,45 @@ const updateCart = async (cart: Cart) => {
       orderTotal,
     },
     include: includeProductClause,
-  })
-  return { cartItems, currentCart}
-
+  });
+  return { cartItems, currentCart };
 };
 
-export const addToCartAction = async (
+export const addToCartAction = async (formData: FormData) => {
+  const user = await getAuthUser();
+  try {
+    const productId = formData.get("productId") as string;
+    const size = formData.get("size") as string;
+    const product = await fetchSingleProduct(productId);
+    const cart = await fetchOrCreateCart({ userId: user.id });
+    await createCartItem({ productId, cartId: cart.id, size });
+    await updateCart(cart);
+    revalidatePath(`/products/${product.id}`);
+    return { message: "Product added to cart" };
+  } catch (error) {
+    return renderError(error);
+  }
+};
+
+export const removeCartItemAction = async (
+  prevState: any,
   formData: FormData
 ) => {
   const user = await getAuthUser();
+  const cartItemId = (await formData.get("id")) as string;
   try {
-
-    const productId = formData.get("productId") as string;
-    const size = formData.get("size") as string;
-    await fetchSingleProduct(productId);
-    const cart = await fetchOrCreateCart({userId: user.id});
-    await createCartItem({productId, cartId: cart.id, size});
+    const cart = await fetchOrCreateCart({
+      userId: user.id,
+      errorOnFailure: true,
+    });
+    await db.cartItem.delete({
+      where: {
+        id: cartItemId,
+        cartId: cart.id,
+      },
+    });
     await updateCart(cart);
-    return { message: "Product added to cart" };
-
+    return { message: "Cart item removed succesfully" };
   } catch (error) {
     return renderError(error);
   }

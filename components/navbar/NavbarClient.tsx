@@ -23,7 +23,7 @@ const NavbarClient = ({ children }: { children: React.ReactNode }) => {
   return (
     <nav
       className={`
-    grid grid-cols-2 items-center justify-center px-4 py-4 fixed top-0 right-0 left-0 z-30 w-full 
+    grid grid-cols-2 items-center justify-center px-4 pt-4 pb-2 fixed top-0 right-0 left-0 z-30 w-full border-b-[1px] border-primary 
     ${
       scrolled
         ? "bg-background [&>*]:text-foreground"

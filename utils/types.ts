@@ -89,3 +89,25 @@ export type UpdateMultipleImageInputProps = {
   images: Array<string | File>;
   updateInput: (name: string, value: Array<string | File>) => void;
 }
+
+export type CartProps = {
+  cartItems: CartItemProps[];
+  cartTotal: string;
+  id: string;
+  numItemsInCart: string;
+  orderTotal: string;
+  shipping: string;
+}
+
+export type CartItemProps = {
+  id: string,
+  product: CartItemProduct;
+  size: string;
+}
+
+export type CartItemProduct = {
+  id: string;
+  image: string;
+  name: string;
+  price: number;
+}
