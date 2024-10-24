@@ -6,7 +6,7 @@ import FormContainer from "../form/FormContainer";
 import { removeCartItemAction } from "@/utils/actions";
 import { CartItemProps, Product } from "@/utils/types";
 
-function CartItem(item: any) {
+function CartItem(item: CartItemProps) {
   const { id, size, product } = item;
   const { name, thumbnailImage, price } = product as Product;
   
