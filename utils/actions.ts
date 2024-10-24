@@ -287,7 +287,7 @@ const createCartItem = async ({
   }
 };
 
-const updateCart = async (cart: Cart) => {
+export const updateCart = async (cart: Cart) => {
   const cartItems = await db.cartItem.findMany({
     where: {
       cartId: cart.id,
@@ -347,7 +347,9 @@ export const removeCartItemAction = async (
   formData: FormData
 ) => {
   const user = await getAuthUser();
-  const cartItemId = (await formData.get("id")) as string;
+  const cartItemId = await formData.get("id") as string;
+  const currentPath = await formData.get("currentPath") as string;
+
   try {
     const cart = await fetchOrCreateCart({
       userId: user.id,
@@ -359,9 +361,15 @@ export const removeCartItemAction = async (
         cartId: cart.id,
       },
     });
+    revalidatePath(currentPath || '/');
     await updateCart(cart);
     return { message: "Cart item removed succesfully" };
   } catch (error) {
     return renderError(error);
   }
+};
+
+export const createOrderAction = async (prevState: any,
+  formData: FormData) => {
+  return {message: "order created"}
 };

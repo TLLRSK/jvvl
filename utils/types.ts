@@ -91,7 +91,7 @@ export type UpdateMultipleImageInputProps = {
 }
 
 export type CartProps = {
-  cartItems: CartItemProps[];
+  cartItems: Product[];
   cartTotal: string;
   id: string;
   numItemsInCart: string;
@@ -101,7 +101,7 @@ export type CartProps = {
 
 export type CartItemProps = {
   id: string,
-  product: CartItemProduct;
+  product: Product;
   size: string;
 }
 

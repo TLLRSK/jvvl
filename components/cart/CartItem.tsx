@@ -2,12 +2,14 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import DeleteIcon from "../icons/DeleteIcon";
-import { CartItemProps } from "@/utils/types";
 import FormContainer from "../form/FormContainer";
 import { removeCartItemAction } from "@/utils/actions";
-import { SubmitButton } from "../form/Buttons";
+import { CartItemProps, Product } from "@/utils/types";
 
-function CartItem(item: CartItemProps) {
+function CartItem(item: any) {
+  const { id, size, product } = item;
+  const { name, thumbnailImage, price } = product as Product;
+  
   return (
     <li
       key={item.id}
@@ -15,20 +17,21 @@ function CartItem(item: CartItemProps) {
     >
       <div className="w-40 h-40 relative">
         <Image
-          src={item.product.image}
-          alt={item.product.name}
+          src={thumbnailImage}
+          alt={name}
           fill
           className="object-cover aspect-square"
         />
       </div>
 
       <div className="flex flex-col">
-        <p className="text-base">{item.product.name}</p>
-        <p className="text-sm font-semibold">$ {item.product.price}</p>
+        <p className="text-base">{name}</p>
+        <p className="text-sm font-semibold">$ {price}</p>
+        <p>Size: {size}</p>
 
         <div className="mt-auto ml-auto">
           <FormContainer action={removeCartItemAction}>
-            <input type="hidden" name="id" value={item.id} />
+            <input type="hidden" name="id" value={id} />
             <Button
               type="submit"
               variant="ghost"

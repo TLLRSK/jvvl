@@ -1,7 +1,8 @@
 import { CartProps } from "@/utils/types";
+import { Cart } from "@prisma/client";
 import React from "react";
 
-function CartTotals(cart: CartProps) {
+function CartTotals(cart: Cart) {
   const { cartTotal, shipping, orderTotal} = cart;
   
   if (!cart) {
@@ -22,7 +23,7 @@ const Row = ({
   isLast = false,
 }: {
   label: string;
-  value: string;
+  value: number;
   isLast?: boolean;
 }) => {
   return (

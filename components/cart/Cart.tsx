@@ -1,40 +1,65 @@
-"use client";
-import { CartProps } from "@/utils/types";
 import { SubmitButton } from "../form/Buttons";
 import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
+import {
+  createOrderAction,
+  fetchOrCreateCart,
+  updateCart,
+} from "@/utils/actions";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import FormContainer from "../form/FormContainer";
+import { headers } from "next/headers";
 
-function Cart({ cart, isOpen }: { cart: CartProps | null; isOpen: boolean }) {
+async function Cart() {
+  const { userId } = auth();
+  if (!userId) redirect("/");
+  const previousCart = await fetchOrCreateCart({ userId });
+  const { currentCart, cartItems } = await updateCart(previousCart);
+  const currentPath = headers().get("referer") || "/";
+
+  if (cartItems.length === 0) {
+    return (
+      <section className={cartClasses}>
+        <h2 className="font-serif text-lg">Cart</h2>
+
+        <article className="flex-1 flex flex-col">
+          <p>Your cart is currently empty.</p>
+        </article>
+      </section>
+    );
+  }
+
   return (
-    <section className={`absolute flex flex-col bg-background min-h-[calc(100dvh-61px)] px-4 py-3 top-[61px] right-0 w-full border-primary md:w-2/4 md:border-l-[1px] lg:w-1/3 xl:w-1/4 ${
-      isOpen 
-        ? "translate-x-0"
-        : "translate-x-full"
-    }`}>
+    <section className={cartClasses}>
       <h2 className="font-serif text-lg">Cart</h2>
 
-      { cart ? (
-        <article className="flex-1 flex flex-col">
+      <article className="flex-1 flex flex-col">
         <ul className="grid gap-4">
-          {cart.cartItems.map((item) => {
+          {cartItems.map((item) => {
             return <CartItem key={item.id} {...item} />;
           })}
         </ul>
 
-        <CartTotals {...cart} />
+        <CartTotals {...currentCart} />
 
-        <form onSubmit={() => console.log("hola")} className="p-6 mt-2">
+        <FormContainer action={createOrderAction}>
+          <input
+            type="hidden"
+            name="currentPath"
+            id="currentPath"
+            value={currentPath}
+          />
           <SubmitButton
             text="place order"
             className="uppercase text-xl w-full"
           />
-        </form>
+        </FormContainer>
       </article>
-      ) : (
-        <p>Your cart is currently empty.</p>
-      )}
     </section>
   );
 }
+
+const cartClasses = "min-h-[calc(100dvh-61px)] flex-1 flex flex-col bg-background px-4 py-3 border-primary md:border-l-[1px]";
 
 export default Cart;
