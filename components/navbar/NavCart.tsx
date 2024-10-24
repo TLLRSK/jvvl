@@ -30,7 +30,7 @@ async function NavCart() {
         group-has-[#cartToggler:not(:checked)]:group-has-[#overlay:checked]:translate-x-0
         group-has-[#cartToggler:checked]:group-has-[#overlay:not(:checked)]:translate-x-0
         ">
-        <Cart />
+        <Cart/>
       </div>
 
       <label

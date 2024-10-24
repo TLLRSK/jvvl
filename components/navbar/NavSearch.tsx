@@ -54,7 +54,7 @@ function NavSearch() {
       <DropdownMenuContent
         className="w-[100vw] md:w-[calc(33vw)] sm:mr-[19px] p-4 border-b-secondary"
         align="start"
-        sideOffset={16}
+        sideOffset={10}
       >
         <Input
           type="search"

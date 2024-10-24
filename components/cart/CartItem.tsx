@@ -5,10 +5,12 @@ import DeleteIcon from "../icons/DeleteIcon";
 import FormContainer from "../form/FormContainer";
 import { removeCartItemAction } from "@/utils/actions";
 import { CartItemProps, Product } from "@/utils/types";
+import { headers } from "next/headers";
 
 function CartItem(item: CartItemProps) {
   const { id, size, product } = item;
   const { name, thumbnailImage, price } = product as Product;
+  const pathname = headers().get("referer") || "/";
   
   return (
     <li
@@ -32,6 +34,7 @@ function CartItem(item: CartItemProps) {
         <div className="mt-auto ml-auto">
           <FormContainer action={removeCartItemAction}>
             <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="pathname" value={pathname} />
             <Button
               type="submit"
               variant="ghost"

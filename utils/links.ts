@@ -1,9 +1,16 @@
 import { NavLink } from "./types";
 
-export const links: NavLink[] = [
+export const signedOutLinks: NavLink[] = [
   { href: "/", label: "home" },
   { href: "/about", label: "about" },
   { href: "/products", label: "products" },
+  { href: "/admin/sales", label: "dashboard" },
+];
+export const signedInLinks: NavLink[] = [
+  { href: "/", label: "home" },
+  { href: "/about", label: "about" },
+  { href: "/products", label: "products" },
+  { href: "/favorites", label: "favorites" },
   { href: "/admin/sales", label: "dashboard" },
 ];
 

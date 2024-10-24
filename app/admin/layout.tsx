@@ -5,7 +5,7 @@ import React from "react";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="mt-[68px] min-h-[calc(100dvh-68px)]">
+    <section className="mt-[61px] min-h-[calc(100dvh-68px)]">
       <SectionTitle text="dashboard" />
       <Container className="grid lg:grid-cols-12 gap-12 py-16">
         <div className="mx-auto lg:col-span-2">

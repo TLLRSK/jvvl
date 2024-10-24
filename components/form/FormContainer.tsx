@@ -24,6 +24,6 @@ function FormContainer({
     }
   }, [state]);
 
-  return <form action={formAction}>{children}</form>;
+  return <form action={formAction} className='flex'>{children}</form>;
 }
 export default FormContainer;

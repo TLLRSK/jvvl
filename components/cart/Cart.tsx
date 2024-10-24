@@ -16,6 +16,7 @@ async function Cart() {
   if (!userId) redirect("/");
   const previousCart = await fetchOrCreateCart({ userId });
   const { currentCart, cartItems } = await updateCart(previousCart);
+  console
   const currentPath = headers().get("referer") || "/";
 
   if (cartItems.length === 0) {

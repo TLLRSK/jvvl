@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider debug={true}>
+    <ClerkProvider>
       <html lang="en">
       <body
         className={`${orienta.variable} ${comme.variable} font-sans antialiased`}

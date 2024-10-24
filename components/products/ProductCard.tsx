@@ -1,17 +1,15 @@
 import { Product } from "@/utils/types";
 import React from "react";
-import FavIcon from "../icons/FavIcon";
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteToggleButton from "./FavoriteToggleButton";
 
 function ProductCard({ product }: { product: Product }) {
   const { id, name, thumbnailImage, modelImage, price } = product;
 
   return (
     <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted">
-      <button className="ml-auto p-2 hover:[&>*]:opacity-100 mb-6">
-        <FavIcon className="text-foreground w-4 h-4 opacity-50" />
-      </button>
+      <FavoriteToggleButton productId={id} />
       <Link
         href={`/products/${id}`}
         className="relative h-[60vw] md:h-[33vw] lg:h-[33vw] xl:h-[25vw] flex flex-col "

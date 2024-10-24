@@ -25,7 +25,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
   } = product;
   const carouselImages = [...galleryImages, modelImage];
   return (
-    <section className="mt-[68px]">
+    <section className="mt-[61px]">
       <BreadCrumbs name={name} />
       <div className="lg:grid lg:grid-cols-6 xl:grid-cols-2">
         <Carousel className="w-full bg-muted-background lg:col-span-4 xl:col-span-1">
@@ -55,12 +55,11 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
         </Carousel>
 
         <div className="flex flex-col gap-10 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
-
           <div className="w-fit mx-auto text-center mt-4 md:my-auto">
             <h3 className="uppercase font-medium md:text-xl">{name}</h3>
             <p className="font-medium md:text-xl">${price}</p>
           </div>
-          
+
           <AddToCart productId={id} sizes={sizes} />
 
           <div className="p-3">
