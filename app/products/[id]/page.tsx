@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { fetchSingleProduct } from "@/utils/actions";
+import { formatCurrency } from "@/utils/format";
 import Image from "next/image";
 import React from "react";
 
@@ -57,7 +58,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
         <div className="flex flex-col gap-10 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
           <div className="w-fit mx-auto text-center mt-4 md:my-auto">
             <h3 className="uppercase font-medium md:text-xl">{name}</h3>
-            <p className="font-medium md:text-xl">${price}</p>
+            <p className="font-medium md:text-xl">{formatCurrency(price)}</p>
           </div>
 
           <AddToCart productId={id} sizes={sizes} />

@@ -11,6 +11,7 @@ import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { signedInLinks, signedOutLinks } from "@/utils/links";
+import { Fragment } from "react";
 
 function LinksDropdown({
   icon,
@@ -26,6 +27,7 @@ function LinksDropdown({
           {icon}
         </Button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent className="w-50" align="start" sideOffset={10}>
         <DropdownMenuGroup>
           <SignedOut>
@@ -40,22 +42,24 @@ function LinksDropdown({
               );
             })}
           </SignedOut>
+
           <SignedIn>
             {signedInLinks.map((link, i) => {
               if (!isAdmin && link.label === "dashboard") return null;
               return (
-                <>
+                <Fragment key={i}>
                   { link.label === "dashboard" ? <DropdownMenuSeparator /> : null}
                   <DropdownMenuItem key={i}>
                     <Link href={link.href} className="uppercase w-full text-lg">
                       {link.label}
                     </Link>
                   </DropdownMenuItem>
-                </>
+                </Fragment>
               );
             })}
           </SignedIn>
         </DropdownMenuGroup>
+        
       </DropdownMenuContent>
     </DropdownMenu>
   );

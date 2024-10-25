@@ -20,7 +20,7 @@ export type Product = {
 };
 
 export type FormProduct = {
-  id?: string
+  id?: string;
   name: string;
   description: string;
   featured: boolean;
@@ -60,7 +60,7 @@ export type TextAreaInputProps = {
 export type SingleImageInputProps = {
   name: string;
   label?: string;
-  onChange: (name: string, value: File | null ) => void;
+  onChange: (name: string, value: File | null) => void;
 };
 
 export type ListInputProps = {
@@ -81,14 +81,14 @@ export type CheckboxInputProps = {
 export type UpdateSingleImageInputProps = {
   image: File | string | null;
   name: string;
-  onChange: (name: string, value: File | null ) => void;
-}
+  onChange: (name: string, value: File | null) => void;
+};
 export type UpdateMultipleImageInputProps = {
   name: string;
   label: string;
   images: Array<string | File>;
   updateInput: (name: string, value: Array<string | File>) => void;
-}
+};
 
 export type CartProps = {
   cartItems: Product[];
@@ -97,17 +97,14 @@ export type CartProps = {
   numItemsInCart: string;
   orderTotal: string;
   shipping: string;
-}
-
-export type CartItemProps = {
-  id: string,
-  product: Product;
-  size: string;
-}
+};
 
 export type CartItemProduct = {
   id: string;
-  image: string;
-  name: string;
-  price: number;
-}
+  productId: string;
+  cartId: string;
+  size: string;
+  createdAt: Date;
+  updatedAt: Date;
+  product: Product;
+};

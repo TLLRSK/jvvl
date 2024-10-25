@@ -1,5 +1,4 @@
 import { SubmitButton } from "../form/Buttons";
-import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
 import {
   createOrderAction,
@@ -9,6 +8,7 @@ import {
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import FormContainer from "../form/FormContainer";
+import CartItemList from "./CartItemList";
 
 async function Cart() {
   const { userId } = auth();
@@ -33,11 +33,7 @@ async function Cart() {
       <h2 className="font-serif text-lg">Cart</h2>
 
       <article className="flex-1 flex flex-col">
-        <ul className="grid gap-4">
-          {cartItems.map((item) => {
-            return <CartItem key={item.id} {...item} />;
-          })}
-        </ul>
+        <CartItemList cartItems={cartItems} />
 
         <CartTotals {...currentCart} />
 

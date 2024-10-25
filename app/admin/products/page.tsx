@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { fetchAdminProducts } from "@/utils/actions";
+import { formatCurrency } from "@/utils/format";
 import Link from "next/link";
 import React from "react";
 
@@ -44,7 +45,7 @@ async function AdminProductsPage() {
                     {name}
                   </Link>
                 </TableCell>
-                <TableCell>${price}</TableCell>
+                <TableCell>{formatCurrency(price)}</TableCell>
                 <TableCell>
                   {sizes.map((size, i) => {
                     return <p key={i}>{size}</p>;

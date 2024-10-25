@@ -1,5 +1,4 @@
 import React from "react";
-import FavIcon from "../icons/FavIcon";
 import { auth } from "@clerk/nextjs/server";
 import { CardSignInButton } from "../form/Buttons";
 import { fetchFavoriteId } from "@/utils/actions";

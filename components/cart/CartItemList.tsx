@@ -1,11 +1,11 @@
+import { CartItemProduct } from "@/utils/types";
 import React from "react";
 import CartItem from "./CartItem";
 
-function CartItemList(cartItems: any) {
-    console.log("cart items: ", cartItems)
+function CartItemList({ cartItems }: {cartItems: CartItemProduct[]}) {
   return (
     <ul className="grid gap-4">
-      {cartItems.map((item: any) => {
+      {cartItems.map((item: CartItemProduct) => {
         return <CartItem key={item.id} {...item} />;
       })}
     </ul>

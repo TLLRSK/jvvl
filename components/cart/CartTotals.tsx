@@ -1,4 +1,4 @@
-import { CartProps } from "@/utils/types";
+import { formatCurrency } from "@/utils/format";
 import { Cart } from "@prisma/client";
 import React from "react";
 
@@ -35,7 +35,7 @@ const Row = ({
       }
     >
       <h3 className="capitalize">{label}</h3>
-      <p>$ {value}</p>
+      <p>{formatCurrency(value)}</p>
     </div>
   );
 };

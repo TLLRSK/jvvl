@@ -4,10 +4,11 @@ import { Button } from "../ui/button";
 import DeleteIcon from "../icons/DeleteIcon";
 import FormContainer from "../form/FormContainer";
 import { removeCartItemAction } from "@/utils/actions";
-import { CartItemProps, Product } from "@/utils/types";
+import { CartItemProduct, Product } from "@/utils/types";
 import { headers } from "next/headers";
+import { formatCurrency } from "@/utils/format";
 
-function CartItem(item: CartItemProps) {
+function CartItem(item: CartItemProduct) {
   const { id, size, product } = item;
   const { name, thumbnailImage, price } = product as Product;
   const headerList = headers();
@@ -29,7 +30,7 @@ function CartItem(item: CartItemProps) {
 
       <div className="flex flex-col">
         <p className="text-base">{name}</p>
-        <p className="text-sm font-semibold">$ {price}</p>
+        <p className="text-sm font-semibold">{formatCurrency(price)}</p>
         <p>Size: {size}</p>
 
         <div className="mt-auto ml-auto">

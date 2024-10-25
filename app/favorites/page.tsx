@@ -7,7 +7,7 @@ async function FavoritesPage() {
   if (favorites.length === 0) {
     return (
       <section className="min-h-[calc(100dvh-64px)] mt-[61px] flex items-center justify-center">
-        <h2>You don't have any favorite product.</h2>
+        <h2>You don&apos;t have any favorite product.</h2>
       </section>
     );
   }
