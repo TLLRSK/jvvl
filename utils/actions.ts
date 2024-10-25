@@ -203,15 +203,7 @@ export const updateProductAction = async (
   const productData = await createProductObject(user, formData);
 
   try {
-<<<<<<< HEAD
-    const data = Object.fromEntries(formData);
-    console.log("image data: ", data)
-    const productId = formData.get('id') as string;
-    const image = formData.get('image') as File;
-    console.log("image: ", image)
-    const oldImageUrl = formData.get('url') as string;
-    console.log("oldImageUrl: ", oldImageUrl)
-=======
+
     await db.product.update({
       where: {
         id: productId,
@@ -220,7 +212,7 @@ export const updateProductAction = async (
     });
     deleteReplacedImages(prevState, productData);
     revalidatePath(`/admin/products/${productId}/edit`);
->>>>>>> dev
+
     return { message: "Product updated successfully." };
   } catch (error) {
     console.error("Error updating product:", error);
