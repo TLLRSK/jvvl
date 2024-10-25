@@ -8,16 +8,15 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { NavLink } from "@/utils/types";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
+import { signedInLinks, signedOutLinks } from "@/utils/links";
+import { Fragment } from "react";
 
 function LinksDropdown({
   icon,
-  links,
 }: {
   icon: React.ReactNode;
-  links: NavLink[];
 }) {
   const { userId } = auth();
   const isAdmin = userId === process.env.ADMIN_USER_ID;
@@ -28,10 +27,11 @@ function LinksDropdown({
           {icon}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-50" align="start" sideOffset={6}>
+
+      <DropdownMenuContent className="w-50" align="start" sideOffset={10}>
         <DropdownMenuGroup>
           <SignedOut>
-            {links.map((link, i) => {
+            {signedOutLinks.map((link, i) => {
               if (link.label === "dashboard") return null;
               return (
                 <DropdownMenuItem key={i}>
@@ -42,22 +42,24 @@ function LinksDropdown({
               );
             })}
           </SignedOut>
+
           <SignedIn>
-            {links.map((link, i) => {
+            {signedInLinks.map((link, i) => {
               if (!isAdmin && link.label === "dashboard") return null;
               return (
-                <>
+                <Fragment key={i}>
                   { link.label === "dashboard" ? <DropdownMenuSeparator /> : null}
                   <DropdownMenuItem key={i}>
                     <Link href={link.href} className="uppercase w-full text-lg">
                       {link.label}
                     </Link>
                   </DropdownMenuItem>
-                </>
+                </Fragment>
               );
             })}
           </SignedIn>
         </DropdownMenuGroup>
+        
       </DropdownMenuContent>
     </DropdownMenu>
   );

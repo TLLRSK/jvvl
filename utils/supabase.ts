@@ -9,11 +9,18 @@ export const supabase = createClient(
 
 export const uploadImage = async (image: File) => {
   const timestamp = Date.now();
-  const newName = `${timestamp}-${image.name}`;
-  const { data } = await supabase.storage
+  const sanitizedFileName = image.name.replace(/\s+/g, '-');
+  const newName = `${timestamp}-${sanitizedFileName}`;
+  const { data, error } = await supabase.storage
     .from(bucket)
     .upload(newName, image, { cacheControl: "3600" });
-  if (!data) throw new Error("Image upload failed");
+
+  if (error) {
+    console.error("Supabase upload error:", error.message);
+    throw new Error(`Image upload failed: ${error.message}`);
+  }
+
+  if (!data) throw new Error("No data returned from image upload");
   return supabase.storage.from(bucket).getPublicUrl(newName).data.publicUrl;
 };
 

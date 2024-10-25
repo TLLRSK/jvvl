@@ -1,26 +1,48 @@
 "use client";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useCallback, useRef, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import AdminProductImage from "../admin/AdminProductImage";
+import { Button } from "../ui/button";
 
-function MultipleImagesInput({ name, label }: { name: string; label: string }) {
+function MultipleImagesInput({
+  name,
+  label,
+  updateInput,
+}: {
+  name: string;
+  label: string;
+  updateInput: (name: string, value: string[] | File[]) => void;
+}) {
   const [images, setImages] = useState<File[]>([]);
   const filesInputRef = useRef<HTMLInputElement | null>(null);
 
+  const updateImages = useCallback(
+    (newImages: File[]) => {
+      setImages(newImages);
+      updateInput(name, newImages);
+    },
+    [name, updateInput]
+  );
+
   const handleFilesChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    if (e.target.files && e.target.files.length > 0) {
       const newFiles = Array.from(e.target.files);
-      setImages((prevImages) => [...prevImages, ...newFiles]);
-      console.log(filesInputRef?.current?.value)
+      const updatedImages = [...images, ...newFiles];
+      updateImages(updatedImages);
     }
   };
-  const removeImages = (index: number) => {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+
+  const removeImage = (index: number) => {
+    const updatedImages = images.filter((_, i) => i !== index);
+    updateImages(updatedImages);
     if (filesInputRef.current) {
-      console.log(filesInputRef.current.value)
+      filesInputRef.current.value = "";
     }
+  };
+
+  const triggerFileInput = () => {
+    filesInputRef.current?.click();
   };
 
   return (
@@ -35,7 +57,7 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
               key={index}
               index={index}
               image={image}
-              removeAction={removeImages}
+              removeAction={removeImage}
             />
           );
         })}
@@ -48,9 +70,18 @@ function MultipleImagesInput({ name, label }: { name: string; label: string }) {
           type="file"
           ref={filesInputRef}
           multiple
+          className="hidden"
           accept="image/*"
           onChange={handleFilesChange}
         />
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={triggerFileInput}
+        >
+          Add Images
+        </Button>
       </div>
     </div>
   );

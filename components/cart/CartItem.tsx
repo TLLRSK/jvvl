@@ -1,0 +1,55 @@
+import Image from "next/image";
+import React from "react";
+import { Button } from "../ui/button";
+import DeleteIcon from "../icons/DeleteIcon";
+import FormContainer from "../form/FormContainer";
+import { removeCartItemAction } from "@/utils/actions";
+import { CartItemProduct, Product } from "@/utils/types";
+import { headers } from "next/headers";
+import { formatCurrency } from "@/utils/format";
+
+function CartItem(item: CartItemProduct) {
+  const { id, size, product } = item;
+  const { name, thumbnailImage, price } = product as Product;
+  const headerList = headers();
+  const pathname = headerList.get("x-current-path");
+  
+  return (
+    <li
+      key={item.id}
+      className="grid grid-cols-2 pb-2 gap-4 border-b-[1px] border-muted"
+    >
+      <div className="w-40 h-40 relative">
+        <Image
+          src={thumbnailImage}
+          alt={name}
+          fill
+          className="object-cover aspect-square"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <p className="text-base">{name}</p>
+        <p className="text-sm font-semibold">{formatCurrency(price)}</p>
+        <p>Size: {size}</p>
+
+        <div className="mt-auto ml-auto">
+          <FormContainer action={removeCartItemAction}>
+            <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="pathname" value={pathname || "/"} />
+            <Button
+              type="submit"
+              variant="ghost"
+              size="icon"
+              className="bg-none opacity-60 hover:opacity-100"
+            >
+              <DeleteIcon />
+            </Button>
+          </FormContainer>
+        </div>
+      </div>
+    </li>
+  );
+}
+
+export default CartItem;

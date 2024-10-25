@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { fetchSingleProduct } from "@/utils/actions";
+import { formatCurrency } from "@/utils/format";
 import Image from "next/image";
 import React from "react";
 
@@ -25,7 +26,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
   } = product;
   const carouselImages = [...galleryImages, modelImage];
   return (
-    <section>
+    <section className="mt-[61px]">
       <BreadCrumbs name={name} />
       <div className="lg:grid lg:grid-cols-6 xl:grid-cols-2">
         <Carousel className="w-full bg-muted-background lg:col-span-4 xl:col-span-1">
@@ -53,12 +54,15 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
           <CarouselPrevious variant="ghost" className="left-0 ml-2" />
           <CarouselNext variant="ghost" className="right-0 mr-2" />
         </Carousel>
-        <div className="flex flex-col gap-8 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
-          <div className="w-fit mx-auto text-center md:my-auto">
+
+        <div className="flex flex-col gap-10 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
+          <div className="w-fit mx-auto text-center mt-4 md:my-auto">
             <h3 className="uppercase font-medium md:text-xl">{name}</h3>
-            <p className="font-medium md:text-xl">${price}</p>
+            <p className="font-medium md:text-xl">{formatCurrency(price)}</p>
           </div>
+
           <AddToCart productId={id} sizes={sizes} />
+
           <div className="p-3">
             <h3 className="uppercase font-semibold mb-3">product details</h3>
             <p className="mb-3 font-light">{description}</p>

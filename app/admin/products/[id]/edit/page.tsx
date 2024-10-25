@@ -1,23 +1,11 @@
-import { SubmitButton } from "@/components/form/Buttons";
-import FormContainer from "@/components/form/FormContainer";
-import FormInput from "@/components/form/FormInput";
-import MultipleImagesInput from "@/components/form/MultipleImagesInput";
-import PriceInput from "@/components/form/PriceInput";
-import TextArea from "@/components/form/TextAreaInput";
-import {
-  updateProductAction,
-  fetchAdminProductDetails,
-  updateProductImagesAction,
-} from "@/utils/actions";
-import React from "react";
-import SingleImageInput from "@/components/form/SingleImageInput";
-import ListInput from "@/components/form/ListInput";
-import CheckboxInput from "@/components/form/CheckboxInput";
-import ImageInputContainer from "@/components/form/ImageInputContainer";
+import { fetchAdminProductDetails } from "@/utils/actions";
+import UpdateProductForm from "@/components/form/UpdateProductForm";
 
-async function EditProductPage({ params }: { params: { id: string } }) {
+const EditProductPage = async ({ params }: { params: { id: string } }) => {
+
   const { id } = params;
   const product = await fetchAdminProductDetails(id);
+<<<<<<< HEAD
   const {
     name,
     price,
@@ -91,6 +79,17 @@ async function EditProductPage({ params }: { params: { id: string } }) {
       </FormContainer>
     </section>
   );
+=======
+  
+  return <>
+    {product ? (
+      <UpdateProductForm {...product} />
+    ) : (
+      <span>NO PRODUCT</span>
+    )}
+  </>
+
+>>>>>>> dev
 }
 
 export default EditProductPage;

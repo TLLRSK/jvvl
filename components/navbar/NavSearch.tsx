@@ -12,11 +12,14 @@ import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 function NavSearch() {
+
   const searchParams = useSearchParams();
   const { replace } = useRouter();
+
   const [search, setSearch] = useState(
     searchParams.get("search")?.toString() || ""
   );
+
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams);
     if (value) {
@@ -26,14 +29,18 @@ function NavSearch() {
     }
     replace(`/products?${params.toString()}`);
   }, 500);
+
   const params = searchParams.get("search");
+
   useEffect(() => {
     if (!searchParams.get("search")) {
       setSearch("");
     }
   }, [params]);
+
   return (
     <DropdownMenu>
+
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
@@ -43,10 +50,11 @@ function NavSearch() {
           <SearchIcon />
         </Button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent
-        className="w-[100vw] md:w-[calc(33vw)] sm:mr-[19px] p-3 border-b-secondary"
+        className="w-[100vw] md:w-[calc(33vw)] sm:mr-[19px] p-4 border-b-secondary"
         align="start"
-        sideOffset={6}
+        sideOffset={10}
       >
         <Input
           type="search"
@@ -58,6 +66,7 @@ function NavSearch() {
           value={search}
         />
       </DropdownMenuContent>
+      
     </DropdownMenu>
   );
 }
