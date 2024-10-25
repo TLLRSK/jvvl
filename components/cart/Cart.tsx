@@ -9,15 +9,12 @@ import {
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import FormContainer from "../form/FormContainer";
-import { headers } from "next/headers";
 
 async function Cart() {
   const { userId } = auth();
   if (!userId) redirect("/");
   const previousCart = await fetchOrCreateCart({ userId });
   const { currentCart, cartItems } = await updateCart(previousCart);
-  console
-  const currentPath = headers().get("referer") || "/";
 
   if (cartItems.length === 0) {
     return (
@@ -45,12 +42,6 @@ async function Cart() {
         <CartTotals {...currentCart} />
 
         <FormContainer action={createOrderAction}>
-          <input
-            type="hidden"
-            name="currentPath"
-            id="currentPath"
-            value={currentPath}
-          />
           <SubmitButton
             text="place order"
             className="uppercase text-xl w-full"

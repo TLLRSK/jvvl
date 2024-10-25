@@ -10,7 +10,8 @@ import { headers } from "next/headers";
 function CartItem(item: CartItemProps) {
   const { id, size, product } = item;
   const { name, thumbnailImage, price } = product as Product;
-  const pathname = headers().get("referer") || "/";
+  const headerList = headers();
+  const pathname = headerList.get("x-current-path");
   
   return (
     <li
@@ -34,7 +35,7 @@ function CartItem(item: CartItemProps) {
         <div className="mt-auto ml-auto">
           <FormContainer action={removeCartItemAction}>
             <input type="hidden" name="id" value={id} />
-            <input type="hidden" name="pathname" value={pathname} />
+            <input type="hidden" name="pathname" value={pathname || "/"} />
             <Button
               type="submit"
               variant="ghost"
