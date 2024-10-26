@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 const isPublicRoute = createRouteMatcher(["/", "/products(.*)", "/about"]);
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware((auth, req: NextRequest) => {
   
   const isAdminUser = auth().userId === process.env.ADMIN_USER_ID;
 

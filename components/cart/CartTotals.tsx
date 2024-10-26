@@ -9,7 +9,7 @@ function CartTotals(cart: Cart) {
     return <span>Loading</span>
   }
   return (
-    <div className="grid gap-2 mt-auto">
+    <div className="grid gap-2">
       <Row label="cart total" value={cartTotal} />
       <Row label="shipping" value={shipping} />
       <Row label="order total" value={orderTotal} isLast />

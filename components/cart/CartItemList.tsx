@@ -4,8 +4,13 @@ import CartItem from "./CartItem";
 
 function CartItemList({ cartItems }: {cartItems: CartItemProduct[]}) {
   return (
-    <ul className="grid gap-4">
-      {cartItems.map((item: CartItemProduct) => {
+    <ul className="
+      flex flex-col relative 
+      md:border-r-[1px] md:border-l-[1px]
+      [&>li:nth-last-child(1)]:border-b-[1px] [&>li:nth-child(1)]:border-t-0
+      [&>li:nth-child(1)]:top-[98px] lg:[&>li:nth-child(1)]:top-auto
+    ">
+      {cartItems?.map((item: CartItemProduct) => {
         return <CartItem key={item.id} {...item} />;
       })}
     </ul>

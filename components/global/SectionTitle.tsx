@@ -2,13 +2,11 @@ import React from "react";
 import Container from "./Container";
 
 function SectionTitle({ text }: { text: string }) {
-  const splittedText = text.split("");
+  
   return (
     <div className="text-xl border-b-[1px] border-muted uppercase">
-      <Container className="flex justify-between px-12 py-4">
-        {splittedText.map((char, i) => {
-          return <p key={i} className="font-serif">{char}</p>;
-        })}
+      <Container className="px-12 py-4">
+        <h2 className="text-sm text-center text-primary">{text}</h2>
       </Container>
     </div>
   );

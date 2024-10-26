@@ -6,6 +6,7 @@ import NavSearch from "./NavSearch";
 import NavCart from "./NavCart";
 import NavLinks from "./NavLinks";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import NavCartDropdown from "./NavCartTest";
 
 function Navbar() {
   return (
