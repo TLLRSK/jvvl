@@ -31,7 +31,7 @@ async function Cart() {
 
         <div className="flex relative border-muted lg:border-r-[1px] lg:border-b-[1px]">
           <div className="w-full flex flex-col p-3 h-[calc(100dvh-198px)]  
-            lg:h-fit lg:p-6 lg:sticky lg:top-[102px] lg:bottom-auto
+            lg:h-fit lg:p-6 lg:sticky lg:top-[114px] lg:bottom-auto
           "
           >
             <CartTotals {...currentCart} />

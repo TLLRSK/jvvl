@@ -52,9 +52,9 @@ function NavSearch() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-[100vw] md:w-[calc(33vw)] sm:mr-[19px] p-4 border-b-secondary"
+        className="w-[100vw] md:w-[calc(50vw)] lg:w-[calc(33vw)] md:mr-[17px] p-4 border-b-secondary"
         align="start"
-        sideOffset={10}
+        sideOffset={9}
       >
         <Input
           type="search"

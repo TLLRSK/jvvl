@@ -17,7 +17,7 @@ function CartItem(item: CartItemProduct) {
   return (
     <li
       key={item.id}
-      className="bg-background grid grid-cols-2 border-t-[1px] border-muted top-[96px] md:top-[96px] lg:top-auto sticky lg:inherit"
+      className="bg-background grid grid-cols-2 border-t-[1px] border-muted top-[113px] lg:top-auto sticky lg:inherit"
     >
       <div className="w-4/4 aspect-square relative border-r-[1px]">
         <Image

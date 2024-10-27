@@ -10,10 +10,11 @@ import { Button } from "../ui/button";
 import SignOutLink from "./SignOutLink";
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import Link from "next/link";
-import UserIcon from "../icons/UserIcon";
 import { userLinks } from "@/utils/links";
+import NavUserAvatar from "./NavUserAvatar";
 
 function NavUser() {
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -22,10 +23,11 @@ function NavUser() {
           size="icon"
           className="flex gap-4 max-w-[100px]"
         >
-          <UserIcon />
+          <NavUserAvatar />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40" align="start" sideOffset={10}>
+      <DropdownMenuContent className="w-40 md:mr-[17px]" align="start" sideOffset={9}>
+
         <SignedOut>
           <DropdownMenuGroup>
             <DropdownMenuItem>
@@ -45,6 +47,7 @@ function NavUser() {
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </SignedOut>
+
         <SignedIn>
           <DropdownMenuGroup>
             {userLinks.map((link, index) => {
@@ -65,6 +68,7 @@ function NavUser() {
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </SignedIn>
+
       </DropdownMenuContent>
     </DropdownMenu>
   );
