@@ -13,7 +13,6 @@ function SizeInput({ sizes, onChange }: SizeInputProps) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const handleChange = (value: string) => {
-    console.log("changing value", value)
     setSelectedSize(value);
     onChange(value);
   }
@@ -37,8 +36,8 @@ function SizeInput({ sizes, onChange }: SizeInputProps) {
               />
               <Label
                 htmlFor={`size-${size}`}
-                className={`text-md cursor-pointer ${
-                selectedSize === size ? "font-bold opacity-100" : "opacity-60"
+                className={`px-2 py-1 text-md rounded-sm cursor-pointer hover:bg-accent ${
+                selectedSize === size ? "font-bold opacity-100 bg-accent" : "opacity-60"
                 }`}
               >
                 {size}

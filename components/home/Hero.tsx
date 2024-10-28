@@ -1,33 +1,52 @@
-import React from 'react'
-import Image from 'next/image'
-import Container from '../global/Container'
-import CtaButton from './CtaButton'
+"use client";
+import { useEffect, useState } from "react";
+
+const title = ["j", "v", "v", "l"];
 
 function Hero() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 128;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrolled]);
+
   return (
-    <section className='h-[100dvh] pt-[61px] relative border-b-[1px] border-muted'>
-      <Container className='h-full flex flex-col'>
-        <div className='absolute inset-0 -z-10'>
-          <Image
-            src="/images/hero-image.webp"
-            alt="Hero background"
-            fill
-            quality={100}
-            priority
-            className='opacity-50 object-cover bg-blend-darken'
-          />
-          <div className='absolute inset-0 bg-gradient-to-b from-background/50 to-background/40' />
+    <section className="h-[calc(100dvh-16px)] pt-12 flex flex-col relative ">
+        <h2 className="grid grid-cols-4 text-primary text-center font-serif font-semibold uppercase absolute top-12 md:top-6 inset-0">
+          {title.map((letter, i) => {
+            return <span className={`transition-shrink leading-[75%] text-[43.6vw] ${scrolled ? "-translate-y-2/4" : "translate-y-0" }`} key={i}>{letter}</span>
+          })}
+        </h2>
+
+      <div
+        className="absolute inset-0 grid grid-cols-2 md:grid-cols-4
+        [&>div]:p-2 [&>div]:border-b-[1px] [&>div]:border-r-[1px] [&>div]:flex [&>div]:items-end [&>div]:justify-center
+        [&>div]:uppercase [&>div]:uppercase:border-muted [&>div:nth-child(2n)]:border-r-0
+        md:[&>div:nth-child(2n)]:border-r-[1px] md:[&>div:nth-child(4n)]:border-r-0"
+      >
+        <div>
+          <p>luxurious</p>
         </div>
-        <div className='flex-1 flex flex-col'>
-          <div className='text-primary text-center my-auto'>
-            <h2 className='text-[20vw] md:text-[12vw] leading-[80%] font-serif font-semibold uppercase'>gewlyn</h2>
-            <p className='text-lg md:text-2xl md:mt-4 uppercase'>luxury & golden silence</p>
-          </div>
-          <CtaButton text='Discover more'/>
+        <div>
+          <p>unique</p>
         </div>
-      </Container>
+        <div>
+          <p>hand tailored</p>
+        </div>
+        <div>
+          <p>jewelry</p>
+        </div>
+      </div>
     </section>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

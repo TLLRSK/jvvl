@@ -7,8 +7,10 @@ function CtaButton({ text }: { text: string }) {
     <Link href="/products/" className="w-fit mx-auto mb-12">
       <Button
         variant='ghost'
-        className="h-fit bg-background hover:bg-foreground rounded-3xl px-6 py-3 text-primary hover:text-primary-foreground text-sm border-[1px] border-primary uppercase"
-      >
+        className="
+          h-fit bg-background rounded-3xl px-6 py-3 text-primary text-sm border-[1px] border-primary uppercase
+          hover:bg-foreground  hover:text-primary-foreground
+        ">
         {text}
       </Button>
     </Link>

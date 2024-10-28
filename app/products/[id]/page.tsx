@@ -29,7 +29,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
     <section className="mt-[61px]">
       <BreadCrumbs name={name} />
       <div className="lg:grid lg:grid-cols-6 xl:grid-cols-2">
-        <Carousel className="w-full bg-muted-background lg:col-span-4 xl:col-span-1">
+        <Carousel className="w-full lg:col-span-4 xl:col-span-1">
           <CarouselContent className="min-h-[100vw] h-[66dvh] lg:min-h-0 lg:h-[calc(100dvh-106px)]">
             {carouselImages.map((image, index) => (
               <CarouselItem
@@ -55,7 +55,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
           <CarouselNext variant="ghost" className="right-0 mr-2" />
         </Carousel>
 
-        <div className="flex flex-col gap-6 md:px-4 xl:p-8 md:col-span-2 xl:col-span-1">
+        <div className="flex flex-col gap-6 md:px-4 md:border-l-[1px] border-border xl:p-8 md:col-span-2 xl:col-span-1">
           <div className="w-fit mx-auto text-center mt-4 lg:my-auto">
             <h3 className="uppercase font-medium md:text-xl">{name}</h3>
             <p className="font-medium md:text-xl">{formatCurrency(price)}</p>

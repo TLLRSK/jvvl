@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { addToCartAction } from "@/utils/actions";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@clerk/nextjs";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 function AddToCart({
   productId,
@@ -14,7 +15,6 @@ function AddToCart({
   productId: string;
   sizes: string[];
 }) {
-  
   const { userId } = useAuth();
   const [size, setSize] = useState<string>("");
   const [isPending, setIsPending] = useState(false);
@@ -45,27 +45,31 @@ function AddToCart({
 
   return (
     <div className="mx-auto">
-
-      {!userId 
-      ? (
+      {!userId ? (
         <ProductSignInButton />
       ) : (
-        <form onSubmit={handleAddToCart}>
+        <form onSubmit={handleAddToCart} className="grid">
           <SizeInput sizes={sizes} onChange={changeSize} />
 
           <input type="hidden" name="productId" value={productId} />
 
-          {!size || isPending 
-            ? (
-              <Button variant="default" className="uppercase mt-8" disabled>
-                {!size ? "Choose a size" : "Adding to cart..."}
-              </Button>
-            ) : (
-              <SubmitButton
-                text="add to cart"
-                variant="default"
-                className="uppercase mt-8"
-              />
+          {!size || isPending ? (
+            <Button variant="default" className="uppercase mt-8" disabled>
+              {!size ? (
+                "Choose a size"
+              ) : (
+                <>
+                  <ReloadIcon className='mr-2 h-4 w-4 animate-spin'/>
+                  Adding...
+                </>
+              )}
+            </Button>
+          ) : (
+            <SubmitButton
+              text="add to cart"
+              variant="default"
+              className="uppercase mt-8 w-fit"
+            />
           )}
         </form>
       )}

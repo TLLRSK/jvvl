@@ -25,32 +25,33 @@ function LinksDropdown({ icon }: { icon: React.ReactNode }) {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-50 md:mr-[17px]" align="start" sideOffset={9}>
+      <DropdownMenuContent
+        className="w-[50vw] md:w-[calc(25vw-3px)] md:mr-[17px]"
+        align="start"
+        sideOffset={9}
+      >
         <DropdownMenuGroup>
           <SignedOut>
-            {signedOutLinks.map((link, i) => {
+            {signedOutLinks.map((link, index) => {
               if (link.label === "dashboard") return null;
               return (
-                <DropdownMenuItem key={i}>
-                  <NavLink {...link} i={i} />
+                <DropdownMenuItem key={index}>
+                  <NavLink {...link}/>
                 </DropdownMenuItem>
               );
             })}
           </SignedOut>
 
           <SignedIn>
-            {signedInLinks.map((link, i) => {
+            {signedInLinks.map((link, index) => {
               if (!isAdmin && link.label === "dashboard") return null;
               return (
-                <Fragment key={i}>
+                <Fragment key={index}>
                   {link.label === "dashboard" ? (
-                    <DropdownMenuSeparator />
+                    <DropdownMenuSeparator className="my-3"/>
                   ) : null}
-                  <DropdownMenuItem key={i}>
-                    <Link href={link.href} className="flex items-center gap-2 uppercase w-full text-lg">
-                      <span className="text-sm">{i}.</span>
-                      {link.label}
-                    </Link>
+                  <DropdownMenuItem key={index}>
+                    <NavLink {...link} />
                   </DropdownMenuItem>
                 </Fragment>
               );

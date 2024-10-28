@@ -10,7 +10,7 @@ function AboutPage() {
       <Container>
         <article className="flex flex-col py-3 md:py-4">
           <h2 className="font-serif leading-[80%] text-3xl md:text-[16vw] text-center py-3 uppercase">
-            gewlyn
+            jvvl
           </h2>
           <div className="grid gap-4 md:gap-6 lg:gap-12 p-3 md:grid-cols-2 lg:grid-cols-4">
             <div>

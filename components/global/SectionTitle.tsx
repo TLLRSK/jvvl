@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "./Container";
 
-function SectionTitle({ text }: { text: string }) {
+function SectionTitle({ text = "" }: { text?: string }) {
   
   return (
     <div className="text-xl border-b-[1px] border-muted uppercase">

@@ -3,14 +3,13 @@ import Link from "next/link";
 import React from "react";
 
 
-function NavLink(link: NavLinkProps, i: number) {
+function NavLink(link: NavLinkProps) {
   return (
     <Link
       href={link.href}
-      className="flex items-center gap-2 uppercase w-full text-lg"
+      className="flex items-center gap-2 uppercase w-full"
     >
-      <span className="text-sm">{i}.</span>
-      {link.label}
+      <p className="text-xl">{link.label}</p>
     </Link>
   );
 }

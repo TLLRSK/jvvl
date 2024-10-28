@@ -7,7 +7,7 @@ async function NavUserAvatar() {
   const profileImage = user?.imageUrl;
 
   return profileImage ? (
-    <img src={profileImage} className="w-6 h-6 rounded-full border-primary border-[1px] object-cover" />
+    <UserIcon className="text-secondary bg-foreground rounded-full" />
   ) : (
     <UserIcon />
   );
