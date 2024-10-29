@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 
 const title = ["j", "v", "v", "l"];
-const toolsArray = ["nextjs", "tailwind css", "supabase", "clerk"];
+const toolsArray = ["nextjs", "tailwind css", "prisma", "shadcn", "supabase", "clerk"];
 
 function AboutPage() {
   return (
