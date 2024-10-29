@@ -8,7 +8,7 @@ function ProductCard({ product }: { product: Product }) {
   const { id, name, thumbnailImage, modelImage, price } = product;
 
   return (
-    <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted">
+    <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted md:hover:bg-accent">
       <FavoriteToggleButton productId={id} />
       <Link
         href={`/products/${id}`}
@@ -32,8 +32,8 @@ function ProductCard({ product }: { product: Product }) {
 
         <div
           className="
-            absolute top-0 -right-[1px] -bottom-8 -left-[1px] bg-background drop-shadow-md z-20
-            hidden md:group-hover:flex flex-col"
+            absolute top-0 -right-[1px] -bottom-8 -left-[1px] drop-shadow-md z-20
+            hidden flex-col md:group-hover:flex md:group-hover:bg-accent"
         >
           <div className="relative h-full">
             <Image
@@ -45,7 +45,7 @@ function ProductCard({ product }: { product: Product }) {
               priority
             />
           </div>
-          <div className="w-full bg-background mt-auto p-3 py-2 z-10">
+          <div className="w-full mt-auto p-3 py-2 z-10">
             <p className="text-md font-semibold">$ {price}</p>
             <h3 className="capitalize">{name}</h3>
           </div>

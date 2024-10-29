@@ -7,17 +7,13 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { signedInLinks, signedOutLinks } from "@/utils/links";
 import { Fragment } from "react";
+import NavLink from "./NavLink";
 
-function LinksDropdown({
-  icon,
-}: {
-  icon: React.ReactNode;
-}) {
+function LinksDropdown({ icon }: { icon: React.ReactNode }) {
   const { userId } = auth();
   const isAdmin = userId === process.env.ADMIN_USER_ID;
   return (
@@ -28,38 +24,39 @@ function LinksDropdown({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-50" align="start" sideOffset={10}>
+      <DropdownMenuContent
+        className="w-[calc(50vw+1px)] md:w-[calc(25vw-3px)] md:mr-[17px]"
+        align="start"
+        sideOffset={9}
+      >
         <DropdownMenuGroup>
           <SignedOut>
-            {signedOutLinks.map((link, i) => {
+            {signedOutLinks.map((link, index) => {
               if (link.label === "dashboard") return null;
               return (
-                <DropdownMenuItem key={i}>
-                  <Link href={link.href} className="uppercase w-full text-lg">
-                    {link.label}
-                  </Link>
+                <DropdownMenuItem key={index}>
+                  <NavLink {...link}/>
                 </DropdownMenuItem>
               );
             })}
           </SignedOut>
 
           <SignedIn>
-            {signedInLinks.map((link, i) => {
+            {signedInLinks.map((link, index) => {
               if (!isAdmin && link.label === "dashboard") return null;
               return (
-                <Fragment key={i}>
-                  { link.label === "dashboard" ? <DropdownMenuSeparator /> : null}
-                  <DropdownMenuItem key={i}>
-                    <Link href={link.href} className="uppercase w-full text-lg">
-                      {link.label}
-                    </Link>
+                <Fragment key={index}>
+                  {link.label === "dashboard" ? (
+                    <DropdownMenuSeparator className="my-3"/>
+                  ) : null}
+                  <DropdownMenuItem key={index}>
+                    <NavLink {...link} />
                   </DropdownMenuItem>
                 </Fragment>
               );
             })}
           </SignedIn>
         </DropdownMenuGroup>
-        
       </DropdownMenuContent>
     </DropdownMenu>
   );

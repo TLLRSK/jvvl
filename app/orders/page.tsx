@@ -16,7 +16,7 @@ import React from "react";
 async function OrdersPage() {
   const orders = await fetchUserOrders();
   return (
-    <section className="mt-[61px] min-h-[calc(100dvh-68px)]">
+    <section className="min-h-[calc(100dvh-68px)]">
       <SectionTitle text="Your Orders" />
       <Container>
         <Table>
@@ -25,18 +25,16 @@ async function OrdersPage() {
             <TableRow>
               <TableHead>Products</TableHead>
               <TableHead>Order Total</TableHead>
-              <TableHead>Shipping</TableHead>
               <TableHead>Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {orders.map((order) => {
-              const { products, orderTotal, shipping, createdAt } = order;
+              const { products, orderTotal, createdAt } = order;
               return (
                 <TableRow key={order.id}>
                   <TableCell>{products}</TableCell>
                   <TableCell>{formatCurrency(orderTotal)}</TableCell>
-                  <TableCell>{formatCurrency(shipping)}</TableCell>
                   <TableCell>{formatDate(createdAt)}</TableCell>
                 </TableRow>
               );

@@ -9,7 +9,7 @@ async function FeaturedProducts() {
   if(products.length === 0) return <EmptyList />
   return (
     <section>
-        <SectionTitle text='featured' />
+        <SectionTitle />
         <ProductsGrid products={products}/>
     </section>
   )

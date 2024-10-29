@@ -9,12 +9,12 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 function Navbar() {
   return (
-    <>
-      <Link href="/" className="h-fit w-fit">
-        <h1 className="font-serif font-bold text-xl uppercase">G</h1>
+    <nav className="grid grid-cols-2 px-3 pt-4 pb-2 bg-background fixed top-0 right-0 left-0 z-30 w-full border-b-[1px] border-muted transition-colors">
+      <Link href="/" className="h-fit w-fit hover:bg-accent px-3 py-1 rounded-sm">
+        <h1 className="font-serif font-bold text-xl uppercase">j</h1>
       </Link>
 
-      <div className="flex justify-end gap-3">
+      <div className="flex justify-end gap-2 ml-auto">
         <SignedIn>
           <NavCart />
           <NavUser />
@@ -27,7 +27,7 @@ function Navbar() {
           <NavLinks />
         </SignedOut>
       </div>
-    </>
+    </nav>
   );
 }
 

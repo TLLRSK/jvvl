@@ -38,7 +38,7 @@ function ListInput({ name, label, placeholder, defaultValue, onChange}: ListInpu
           return (
             <li
               key={index}
-              className="flex align-center justify-between border-input border-[1px] rounded-sm text-sm relative px-3 py-2 mb-3"
+              className="flex align-center justify-between border-input border-[1px] border-dashed rounded-sm text-sm relative px-3 py-2 mb-3"
             >
               <p className="text-md">{item}</p>
               <button
@@ -64,6 +64,7 @@ function ListInput({ name, label, placeholder, defaultValue, onChange}: ListInpu
         />
         <Button
           type="button"
+          variant="outline"
           onClick={addItem}
           className="capitalize"
         >

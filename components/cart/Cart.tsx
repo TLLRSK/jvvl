@@ -18,36 +18,35 @@ async function Cart() {
 
   if (cartItems.length === 0) {
     return (
-      <section className={cartClasses}>
-        <h2 className="font-serif text-lg">Cart</h2>
-
-        <article className="flex-1 flex flex-col">
-          <p>Your cart is currently empty.</p>
-        </article>
-      </section>
+      <article>
+        <p className="mt-12 text-center">Your cart is currently empty.</p>
+      </article>
     );
   }
 
   return (
-    <section className={cartClasses}>
-      <h2 className="font-serif text-lg">Cart</h2>
-
-      <article className="flex-1 flex flex-col">
+    <article className="flex-1 flex flex-col">
+      <div className="flex-1 grid lg:grid-cols-2 gap-6 lg:gap-0 lg:mb-24">
         <CartItemList cartItems={cartItems} />
 
-        <CartTotals {...currentCart} />
+        <div className="flex relative border-muted lg:border-r-[1px] lg:border-b-[1px]">
+          <div className="w-full flex flex-col p-3 h-[calc(100dvh-198px)]  
+            lg:h-fit lg:p-6 lg:sticky lg:top-[114px] lg:bottom-auto
+          "
+          >
+            <CartTotals {...currentCart} />
 
-        <FormContainer action={createOrderAction}>
-          <SubmitButton
-            text="place order"
-            className="uppercase text-xl w-full"
-          />
-        </FormContainer>
-      </article>
-    </section>
+            <FormContainer action={createOrderAction}>
+              <SubmitButton
+                text="place order"
+                className="uppercase text-xl w-full mt-6 lg:mt-16"
+              />
+            </FormContainer>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }
-
-const cartClasses = "min-h-[calc(100dvh-61px)] flex-1 flex flex-col bg-background px-4 py-3 border-primary md:border-l-[1px]";
 
 export default Cart;

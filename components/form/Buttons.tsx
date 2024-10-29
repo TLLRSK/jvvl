@@ -17,9 +17,19 @@ export function SubmitButton({
   text?: string;
   variant?: string;
 }) {
+  const { pending } = useFormStatus();
   return (
-    <Button type="submit" className={`mx-auto capitalize h-fit ${className}`}>
-      {text}
+    <Button type="submit" className={`mx-auto capitalize h-fit ${className}`} disabled={pending}>
+      {pending ?
+      (
+        <>
+        <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+        Processing order...
+        </>
+      ) : (
+        text
+      )  
+      }
     </Button>
   );
 }
