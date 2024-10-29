@@ -29,11 +29,7 @@ export async function GET() {
           id: item.product.id,
           name: item.product.name,
           price: item.product.price,
-<<<<<<< HEAD
-          image: item.product.thumbnailImage,
-=======
           thumbnailImage: item.product.thumbnailImage,
->>>>>>> dev
         },
       })),
     };
