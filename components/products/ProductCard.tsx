@@ -8,7 +8,7 @@ function ProductCard({ product }: { product: Product }) {
   const { id, name, thumbnailImage, modelImage, price } = product;
 
   return (
-    <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted hover:bg-accent">
+    <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted md:hover:bg-accent">
       <FavoriteToggleButton productId={id} />
       <Link
         href={`/products/${id}`}

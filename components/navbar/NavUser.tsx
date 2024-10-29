@@ -26,7 +26,7 @@ function NavUser() {
           <NavUserAvatar />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40 md:mr-[17px]" align="start" sideOffset={9}>
+      <DropdownMenuContent className="w-[calc(50vw+1px)] md:w-[calc(25vw-3px)] md:mr-[17px]" align="start" sideOffset={9}>
 
         <SignedOut>
           <DropdownMenuGroup>

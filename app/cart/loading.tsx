@@ -1,4 +1,3 @@
-import Container from "@/components/global/Container";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -10,8 +9,6 @@ function LoadingCart() {
       </div>
       <div className="w-full grid md:grid-cols-2 mx-auto max-w-screen-2xl md:px-8">
           <div className="grid">
-            <LoadingProduct />
-            <LoadingProduct />
             <LoadingProduct />
             <LoadingProduct />
           </div>
@@ -28,7 +25,7 @@ function LoadingCart() {
               <Skeleton className="h-4 w-1/4" />
               <Skeleton className="h-4 w-1/4" />
             </div>
-            <div className="flex justify-between p-4 mt-12">
+            <div className="flex justify-between p-4 mt-6 md:mt-12">
               <Skeleton className="h-8 w-full" />
             </div>
           </div>

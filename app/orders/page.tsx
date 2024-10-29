@@ -25,18 +25,16 @@ async function OrdersPage() {
             <TableRow>
               <TableHead>Products</TableHead>
               <TableHead>Order Total</TableHead>
-              <TableHead>Shipping</TableHead>
               <TableHead>Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {orders.map((order) => {
-              const { products, orderTotal, shipping, createdAt } = order;
+              const { products, orderTotal, createdAt } = order;
               return (
                 <TableRow key={order.id}>
                   <TableCell>{products}</TableCell>
                   <TableCell>{formatCurrency(orderTotal)}</TableCell>
-                  <TableCell>{formatCurrency(shipping)}</TableCell>
                   <TableCell>{formatDate(createdAt)}</TableCell>
                 </TableRow>
               );

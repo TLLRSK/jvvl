@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import Link from "next/link";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { signedInLinks, signedOutLinks } from "@/utils/links";
@@ -26,7 +25,7 @@ function LinksDropdown({ icon }: { icon: React.ReactNode }) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-[50vw] md:w-[calc(25vw-3px)] md:mr-[17px]"
+        className="w-[calc(50vw+1px)] md:w-[calc(25vw-3px)] md:mr-[17px]"
         align="start"
         sideOffset={9}
       >
