@@ -1,12 +1,12 @@
-import { NavLink } from "./types";
+import { NavLinkProps } from "./types";
 
-export const signedOutLinks: NavLink[] = [
+export const signedOutLinks: NavLinkProps[] = [
   { href: "/", label: "home" },
   { href: "/about", label: "about" },
   { href: "/products", label: "products" },
   { href: "/admin/sales", label: "dashboard" },
 ];
-export const signedInLinks: NavLink[] = [
+export const signedInLinks: NavLinkProps[] = [
   { href: "/", label: "home" },
   { href: "/about", label: "about" },
   { href: "/products", label: "products" },
@@ -14,11 +14,11 @@ export const signedInLinks: NavLink[] = [
   { href: "/admin/sales", label: "dashboard" },
 ];
 
-export const userLinks: NavLink[] = [
+export const userLinks: NavLinkProps[] = [
   { href: "/orders", label: "my orders"},
 ]
 
-export const dashboardLinks: NavLink[] = [
+export const dashboardLinks: NavLinkProps[] = [
   { href: '/admin/sales', label: 'sales' },
   { href: '/admin/products', label: 'my products' },
   { href: '/admin/products/create', label: 'create product' },

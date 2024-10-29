@@ -1,4 +1,3 @@
-import Cart from "../cart/Cart";
 import CartIcon from "../icons/CartIcon";
 import { fetchCartItems } from "@/utils/actions";
 import { Button } from "../ui/button";

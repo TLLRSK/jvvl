@@ -6,7 +6,7 @@ function CartPage() {
   return (
     <section className="min-h-[calc(100dvh-142px)] relative">
       <h2 className="
-        bg-background px-3 py-4 text-center uppercase text-sm border-muted border-b-[1px]
+        bg-background px-3 py-3 text-center uppercase text-sm border-muted border-b-[1px]
         sticky top-[61px] z-20
       ">
         your cart

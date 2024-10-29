@@ -8,6 +8,7 @@ import { removeCartItemAction } from "@/utils/actions";
 import { CartItemProduct } from "@/utils/types";
 import { formatCurrency } from "@/utils/format";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 function CartItem(item: CartItemProduct) {
   const { id, size, product } = item;
@@ -19,14 +20,14 @@ function CartItem(item: CartItemProduct) {
       key={item.id}
       className="bg-background grid grid-cols-2 border-t-[1px] border-muted"
     >
-      <div className="w-4/4 aspect-square relative border-r-[1px]">
+      <Link href={`/products/${id}`} className="w-4/4 aspect-square relative border-r-[1px]">
         <Image
           src={thumbnailImage}
           alt={name}
           fill
           className="object-cover aspect-square"
         />
-      </div>
+      </Link>
 
       <div className="flex flex-col p-3">
         <p className="text-base">{name}</p>
