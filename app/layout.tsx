@@ -20,8 +20,8 @@ const comme = Comme({
 });
 
 export const metadata: Metadata = {
-  title: "Gewlyn",
-  description: "First quality original jewelry",
+  title: "Jvvl",
+  description: "First quality original hand tailored jewelry",
 };
 
 export default function RootLayout({
