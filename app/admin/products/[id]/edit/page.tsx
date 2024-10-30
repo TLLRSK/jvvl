@@ -1,9 +1,8 @@
 import { fetchAdminProductDetails } from "@/utils/actions";
 import UpdateProductForm from "@/components/form/UpdateProductForm";
 
-const EditProductPage = async (props: { params: Promise<{ id: string }> }) => {
-  const params = await props.params;
-  const { id } = await params;
+const EditProductPage = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
   const product = await fetchAdminProductDetails(id);
 
   return (

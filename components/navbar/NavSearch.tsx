@@ -45,6 +45,7 @@ function NavSearch() {
         <Button
           variant="ghost"
           size="icon"
+          aria-label="search"
           className="flex gap-4 max-w-[100px]"
         >
           <SearchIcon />

@@ -36,12 +36,12 @@ async function Cart() {
           >
             <CartTotals {...currentCart} />
 
-            <form action={createOrderAction}>
+            <FormContainer action={createOrderAction}>
               <SubmitButton
                 text="place order"
                 className="uppercase text-xl w-full mt-6 lg:mt-16"
               />
-            </form>
+            </FormContainer>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ function AdminSidebar() {
         const isActivePage = link.href === pathname;
         const variant = isActivePage ? "default" : "outline";
         return (
-          <Button variant={variant} key={i}>
+          <Button variant={variant} key={i} aria-label={link.label}>
             <Link href={link.href} className="text-left capitalize text-lg">
               {link.label}
             </Link>

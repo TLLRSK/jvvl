@@ -2,8 +2,7 @@ import BreadCrumbs from "@/components/products/BreadCrumbs";
 import ProductsContainer from "@/components/products/ProductsContainer";
 import React from "react";
 
-async function ProductsPage(props: { searchParams: Promise<{ search?: string }> }) {
-  const searchParams = await props.searchParams;
+function ProductsPage({ searchParams }: { searchParams: { search?: string } }) {
   const search = searchParams.search || "";
 
   return (

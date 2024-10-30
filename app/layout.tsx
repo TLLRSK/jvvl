@@ -6,18 +6,6 @@ import Providers from "./providers";
 import { ClerkProvider } from '@clerk/nextjs';
 import Navbar from "@/components/navbar/Navbar";
 
-const orienta = Orienta({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-orienta',
-  display: 'swap',
-});
-
-const comme = Comme({
-  subsets: ['latin'],
-  variable: '--font-comme',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: "Jvvl",
@@ -32,9 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-      <body className={`${orienta.variable} ${comme.variable} 
-        font-sans antialiased [&>section]:mt-[61px]
-      `}>
+      <body className="font-sans antialiased [&>section]:mt-[61px]">
         <Providers>
           <Navbar />
           {children}

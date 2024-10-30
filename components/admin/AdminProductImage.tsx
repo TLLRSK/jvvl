@@ -27,6 +27,7 @@ function AdminProductImage({
       />
       <button
         onClick={(e) => handleRemoveAction(e)}
+        aria-label="remove image"
         className="absolute top-2 right-2 min-w-3 min-h-3 p-0 rounded-full text-lg font-semibold opacity-60 hover:opacity-100"
       >
         <DeleteIcon />

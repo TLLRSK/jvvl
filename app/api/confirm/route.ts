@@ -6,8 +6,8 @@ import { type NextRequest } from 'next/server';
 import db from '@/utils/db';
 
 export const GET = async (req: NextRequest) => {
-  const { searchParams } = await new URL(req.url);
-  const session_id = await searchParams.get('session_id') as string;
+  const { searchParams } = new URL(req.url);
+  const session_id = searchParams.get('session_id') as string;
 
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id);

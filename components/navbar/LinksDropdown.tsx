@@ -19,7 +19,7 @@ function LinksDropdown({ icon }: { icon: React.ReactNode }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="flex">
+        <Button variant="ghost" size="icon" aria-label="show links" className="flex">
           {icon}
         </Button>
       </DropdownMenuTrigger>

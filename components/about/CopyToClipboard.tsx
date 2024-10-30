@@ -30,7 +30,7 @@ function CopyToClipboard({ text }: { text: string }) {
         hi@jvvl.com
       </button>
       <div
-        className={`absolute top-8 -left-2/4 -right-2/4 bg-accent text-center rounded-sm oveflow-hidden transition-all
+        className={`absolute -top-12 -left-2/4 -right-2/4 bg-accent text-center rounded-sm oveflow-hidden transition-all
             ${isCopied ? "scale-1 opacity-100" : "scale-[.4] opacity-0"}
         `}
       >

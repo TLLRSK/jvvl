@@ -11,9 +11,12 @@ import useForm from "@/hooks/useForm";
 import { formProductModel } from "@/utils/form";
 import { FormProduct } from "@/utils/types";
 
-function CreateProductPage()  {
+function CreateProductPage() {
   const product: FormProduct = formProductModel;
-  const { submitFormData, changeFormData, updateInput, isPending } = useForm( product, "create" );
+  const { submitFormData, changeFormData, updateInput, isPending } = useForm(
+    product,
+    "create"
+  );
 
   return (
     <section className="col-span-10">
@@ -71,12 +74,19 @@ function CreateProductPage()  {
           />
         </div>
         {isPending ? (
-           <button disabled={isPending} className="col-span-2 w-full py-3 text-lg mt-12">Creating...</button>
+          <button
+            disabled={isPending}
+            aria-label="create product disabled"
+            className="col-span-2 w-full py-3 text-lg mt-12"
+          >
+            Creating...
+          </button>
         ) : (
           <SubmitButton
-           text="Create Product"
-           className="col-span-2 w-full py-3 text-lg mt-12"
-         />
+            aria-label="create product"
+            text="Create Product"
+            className="col-span-2 w-full py-3 text-lg mt-12"
+          />
         )}
       </form>
     </section>

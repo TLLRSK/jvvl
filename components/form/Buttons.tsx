@@ -19,17 +19,20 @@ export function SubmitButton({
 }) {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" className={`mx-auto capitalize h-fit ${className}`} disabled={pending}>
-      {pending ?
-      (
+    <Button
+      type="submit"
+      disabled={pending}
+      aria-label="submit form"
+      className={`mx-auto capitalize h-fit ${className}`}
+    >
+      {pending ? (
         <>
-        <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
-        Processing order...
+          <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+          Processing order...
         </>
       ) : (
         text
-      )  
-      }
+      )}
     </Button>
   );
 }
@@ -54,6 +57,7 @@ export function IconButton({ actionType }: { actionType: ActionType }) {
       type="submit"
       size="icon"
       variant="link"
+      aria-label={`${{ actionType }} item`}
       className="p-2 cursor-pointer opacity-80 hover:opacity-100"
     >
       {pending ? <ReloadIcon className=" animate-spin" /> : renderIcon()}
@@ -64,7 +68,10 @@ export function IconButton({ actionType }: { actionType: ActionType }) {
 export const CardSignInButton = () => {
   return (
     <SignInButton mode="modal">
-      <button className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100">
+      <button
+        aria-label="sign in"
+        className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100"
+      >
         <FavIcon className="text-foreground w-4 h-4" />
       </button>
     </SignInButton>
@@ -75,7 +82,7 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
   const { pending } = useFormStatus();
 
   return (
-    <button className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100">
+    <button aria-label="toggle fav" className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100">
       {pending ? (
         <ReloadIcon className="animate-spin w-4 h-4" />
       ) : isFavorite ? (
@@ -93,6 +100,7 @@ export const ProductSignInButton = () => {
       <Button
         variant="default"
         type="button"
+        aria-label="sign in"
         className="mt-8 uppercase"
         asChild
       >

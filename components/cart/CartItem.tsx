@@ -42,6 +42,7 @@ function CartItem(item: CartItemProduct) {
               type="submit"
               variant="ghost"
               size="icon"
+              aria-label="delete cart item"
               className="bg-none opacity-60 hover:opacity-100"
             >
               <DeleteIcon />

@@ -21,6 +21,7 @@ function NavUser() {
         <Button
           variant="ghost"
           size="icon"
+          aria-label="user"
           className="flex gap-4 max-w-[100px]"
         >
           <NavUserAvatar />
@@ -31,19 +32,23 @@ function NavUser() {
         <SignedOut>
           <DropdownMenuGroup>
             <DropdownMenuItem>
+
               <SignInButton mode="modal">
                 <button className="w-full text-lg text-left uppercase">
                   Login
                 </button>
               </SignInButton>
+
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="my-3" />
             <DropdownMenuItem>
+
               <SignUpButton mode="modal">
                 <button className="w-full text-lg text-left uppercase">
                   Register
                 </button>
               </SignUpButton>
+
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </SignedOut>
@@ -62,10 +67,12 @@ function NavUser() {
                 </DropdownMenuItem>
               );
             })}
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="my-3" />
+
             <DropdownMenuItem>
               <SignOutLink />
             </DropdownMenuItem>
+
           </DropdownMenuGroup>
         </SignedIn>
 

@@ -41,8 +41,10 @@ function ListInput({ name, label, placeholder, defaultValue, onChange}: ListInpu
               className="flex align-center justify-between border-input border-[1px] border-dashed rounded-sm text-sm relative px-3 py-2 mb-3"
             >
               <p className="text-md">{item}</p>
+
               <button
                 onClick={() => removeItem(index)}
+                aria-label="remove item"
                 className="min-w-3 min-h-3 p-0 rounded-full text-lg font-semibold opacity-80 hover:opacity-100"
               >
                 <DeleteIcon />
@@ -60,12 +62,14 @@ function ListInput({ name, label, placeholder, defaultValue, onChange}: ListInpu
           onChange={handleInputChange}
           required={false}
           placeholder={placeholder}
+          aria-label=""
           className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
         />
         <Button
           type="button"
           variant="outline"
           onClick={addItem}
+          aria-label="add item"
           className="capitalize"
         >
           Add it

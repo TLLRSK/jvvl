@@ -6,7 +6,7 @@ import Link from "next/link";
 async function NavCart() {
   const numItemsInCart = await fetchCartItems();
   return (
-    <Button variant="ghost" size="icon">
+    <Button variant="ghost" size="icon" aria-label="cart">
       <Link href="/cart" className="relative">
         <CartIcon />
 
@@ -15,6 +15,7 @@ async function NavCart() {
             {numItemsInCart || 0}
           </span>
         </div>
+
       </Link>
     </Button>
   );
