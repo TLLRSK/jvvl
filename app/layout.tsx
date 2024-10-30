@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Orienta, Comme } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/global/Footer";
 import Providers from "./providers";
