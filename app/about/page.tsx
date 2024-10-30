@@ -16,10 +16,7 @@ function AboutPage() {
         <h2 className="grid grid-cols-2 text-primary text-center font-serif font-semibold uppercase md:grid-cols-4 border-b-[1px] border-border">
           {title.map((letter, i) => {
             return (
-              <span
-                className="aspect-square text-[24vw] content-center"
-                key={i}
-              >
+              <span className="aspect-square text-[24vw] content-center" key={i}>
                 {letter}
               </span>
             );

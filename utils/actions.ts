@@ -30,8 +30,8 @@ export const fetchFeaturedProducts = async () => {
   return products;
 };
 
-export const fetchAllProducts = ({ search = "" }: { search: string }) => {
-  return db.product.findMany({
+export const fetchAllProducts = async ({ search = "" }: { search: string }) => {
+  return await db.product.findMany({
     where: {
       OR: [{ name: { contains: search, mode: "insensitive" } }],
     },
@@ -429,7 +429,7 @@ export const removeCartItemAction = async (
   }
 };
 
-export const createOrderAction = async (prevState: any, formData: FormData) => {
+export const createOrderAction = async () => {
   const user = await getAuthUser();
   let orderId: null | string = null;
   let cartId: null | string = null;

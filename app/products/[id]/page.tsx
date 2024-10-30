@@ -12,7 +12,8 @@ import { formatCurrency } from "@/utils/format";
 import Image from "next/image";
 import React from "react";
 
-async function SingleProductPage({ params }: { params: { id: string } }) {
+async function SingleProductPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const product = await fetchSingleProduct(params.id);
   const {
     id,
