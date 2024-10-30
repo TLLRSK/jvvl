@@ -18,10 +18,13 @@ function FormContainer({
 }) {
   const [state, formAction] = useFormState(action, initialState);
   const { toast } = useToast();
-  useEffect(() => {
+  const showToast = () => {
     if (state?.message) {
       toast({ description: state?.message });
     }
+  }
+  useEffect(() => {
+    showToast()
   }, [state]);
 
   return <form action={formAction} className='flex'>{children}</form>;

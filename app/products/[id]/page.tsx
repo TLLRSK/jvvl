@@ -60,6 +60,10 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
                   alt={`${name} - Image ${index + 1}`}
                   fill
                   priority
+                  sizes="(max-width: 360px) 360,
+                  (min-width: 360px) 100vw,
+                  (min-width: 1024px) 66vw
+                  "
                   className={`object-contain ${
                     index === carouselImages.length - 1 ? "object-cover" : ""
                   }`}

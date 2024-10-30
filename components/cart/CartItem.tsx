@@ -24,6 +24,7 @@ function CartItem(item: CartItemProduct) {
         <Image
           src={thumbnailImage}
           alt={name}
+          sizes="(max-width: 1024px) 50%, (min-width: 1024px) 25vw"
           fill
           className="object-cover aspect-square"
         />

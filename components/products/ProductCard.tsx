@@ -19,9 +19,8 @@ function ProductCard({ product }: { product: Product }) {
             src={thumbnailImage}
             alt={name}
             className="-z-10"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 50vw, (min-width: 768px) 33vw, (max-width: 1024px) 25vw"
             fill
-            priority
           />
         </div>
 
@@ -42,7 +41,6 @@ function ProductCard({ product }: { product: Product }) {
               className="-z-10 object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
-              priority
             />
           </div>
           <div className="w-full mt-auto p-3 py-2 z-10">

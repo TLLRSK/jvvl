@@ -5,13 +5,16 @@ const title = ["j", "v", "v", "l"];
 
 function Hero() {
   const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = () => {
+    const isScrolled = window.scrollY > 128;
+    if (isScrolled !== scrolled) {
+      setScrolled(isScrolled);
+    }
+  };
+  
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 128;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -22,7 +25,7 @@ function Hero() {
     <section className="h-[calc(100dvh-16px)] pt-12 flex flex-col relative ">
         <h2 className="grid grid-cols-4 text-primary text-center font-serif font-semibold uppercase absolute top-12 md:top-6 inset-0">
           {title.map((letter, i) => {
-            return <span className={`transition-shrink leading-[75%] text-[43.6vw] ${scrolled ? "-translate-y-2/4" : "translate-y-0" }`} key={i}>{letter}</span>
+            return <span className={`transition-translate leading-[75%] text-[43.6vw] ${scrolled ? "-translate-y-2/4" : "translate-y-0" }`} key={i}>{letter}</span>
           })}
         </h2>
 

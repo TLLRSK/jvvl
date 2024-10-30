@@ -22,6 +22,7 @@ function AdminProductImage({
       <Image
         src={typeof(image) === "string" ? image : URL.createObjectURL(image)}
         alt="image"
+        sizes="(min-width: 360px) 160"
         fill
         className="aspect-square object-cover"
       />
