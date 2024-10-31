@@ -1,53 +1,24 @@
 import { Product } from "@/utils/types";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import FavoriteToggleButton from "./FavoriteToggleButton";
+import HoverContent from "./HoverContent";
+import DefaultContent from "./DefaultContent";
 
 function ProductCard({ product }: { product: Product }) {
-  const { id, name, thumbnailImage, modelImage, price } = product;
+  const { id } = product;
 
   return (
     <li className="group flex flex-col border-b-[1px] border-r-[1px] border-muted md:hover:bg-accent">
       <FavoriteToggleButton productId={id} />
+
       <Link
         href={`/products/${id}`}
         className="relative h-[60vw] md:h-[33vw] lg:h-[33vw] xl:h-[25vw] flex flex-col "
       >
-        <div className="relative flex m-auto h-[60%] w-[75%] md:w-[100%] md:h-[100%] lg:w-[75%] lg:h-[75%] xl:w-[80%] xl:h-[80%]">
-          <Image
-            src={thumbnailImage}
-            alt={name}
-            className="-z-10"
-            sizes="(max-width: 768px) 50vw, (min-width: 768px) 33vw, (max-width: 1024px) 25vw"
-            fill
-          />
-        </div>
+        <DefaultContent product={product} />
 
-        <div className="w-full mt-auto p-3 py-2 z-10 md:hidden">
-          <p className="text-md font-semibold">$ {price}</p>
-          <h3 className="capitalize">{name}</h3>
-        </div>
-
-        <div
-          className="
-            absolute top-0 -right-[1px] -bottom-8 -left-[1px] drop-shadow-md z-20
-            hidden flex-col md:group-hover:flex md:group-hover:bg-accent"
-        >
-          <div className="relative h-full">
-            <Image
-              src={modelImage}
-              alt={name}
-              className="-z-10 object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              fill
-            />
-          </div>
-          <div className="w-full mt-auto p-3 py-2 z-10">
-            <p className="text-md font-semibold">$ {price}</p>
-            <h3 className="capitalize">{name}</h3>
-          </div>
-        </div>
+        <HoverContent product={product} />
       </Link>
     </li>
   );
