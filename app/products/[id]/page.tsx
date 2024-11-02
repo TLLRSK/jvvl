@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 async function SingleProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id:paramsId } = await params;
+  const { id: paramsId } = await params;
   const product = await fetchSingleProduct(paramsId);
   const {
     id,

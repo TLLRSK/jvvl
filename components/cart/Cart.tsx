@@ -39,7 +39,7 @@ async function Cart() {
             <FormContainer action={createOrderAction}>
               <SubmitButton
                 text="place order"
-                className="uppercase text-xl w-full mt-6 lg:mt-16"
+                className="uppercase text-xl w-full mt-6"
               />
             </FormContainer>
           </div>

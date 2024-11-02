@@ -4,10 +4,11 @@ import { auth, currentUser, User } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { imageSchema, productSchema, validateWithZodSchema } from "./schemas";
 import { deleteImage, uploadImage } from "./supabase";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_cache } from "next/cache";
 import { Product } from "@prisma/client";
 import { FormProduct } from "./types";
 import { Cart } from "@prisma/client";
+import { cache } from "react";
 
 export const getAuthUser = async () => {
   const user = await currentUser();
@@ -21,25 +22,30 @@ const getAdminUser = async () => {
   return user;
 };
 
-export const fetchFeaturedProducts = async () => {
-  const products = await db.product.findMany({
-    where: {
-      featured: true,
-    },
-  });
-  return products;
-};
+export const fetchFeaturedProducts = unstable_cache(
+  async () => {
+    const products = await db.product.findMany({
+      where: {
+        featured: true,
+      },
+    });
+    return products;
+  },
+  ['products'],
+  { revalidate: 3600, tags: ['products']}
+);
 
-export const fetchAllProducts = async ({ search = "" }: { search?: string }) => {
-  return db.product.findMany({
-    where: {
-      OR: [{ name: { contains: search, mode: "insensitive" } }],
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-};
+export const fetchAllProducts = cache(async ({ search = "" }: { search?: string }) => {
+    const products = await db.product.findMany({
+      where: {
+        OR: [{ name: { contains: search, mode: "insensitive" } }],
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  return products;
+});
 
 export const fetchSingleProduct = async (productId: string) => {
   const product = await db.product.findUnique({
