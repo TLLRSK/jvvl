@@ -20,7 +20,7 @@ function Navbar() {
         <h1 className="font-serif font-bold text-xl uppercase">j</h1>
       </Link>
 
-      <div className="flex justify-end gap-2 ml-auto">
+      <div className="flex justify-end gap-1 ml-auto">
         <SignedIn>
           <NavCart />
           <NavUser />

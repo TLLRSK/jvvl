@@ -31,23 +31,25 @@ export const fetchFeaturedProducts = unstable_cache(
     });
     return products;
   },
-  ['products'],
-  { revalidate: 3600, tags: ['products']}
+  ['featured-products'],
+  {
+    revalidate: 3600, 
+    tags: ['featured-products']
+  }
 );
 
-export const fetchAllProducts = cache(async ({ search = "" }: { search?: string }) => {
-    const products = await db.product.findMany({
-      where: {
-        OR: [{ name: { contains: search, mode: "insensitive" } }],
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-  return products;
-});
+export const fetchAllProducts = async ({ search = "" }: { search?: string }) => {
+  return db.product.findMany({
+    where: {
+      OR: [{ name: { contains: search, mode: "insensitive" } }],
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
 
-export const fetchSingleProduct = async (productId: string) => {
+export const fetchSingleProduct = cache(async (productId: string) => {
   const product = await db.product.findUnique({
     where: {
       id: productId,
@@ -57,7 +59,7 @@ export const fetchSingleProduct = async (productId: string) => {
     redirect("/products");
   }
   return product;
-};
+});
 
 const renderError = (error: unknown): { message: string } => {
   return {
