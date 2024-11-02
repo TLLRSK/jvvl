@@ -9,14 +9,14 @@ import { SignInButton } from "@clerk/nextjs";
 import FavIcon from "../icons/FavIcon";
 import FilledFavIcon from "../icons/FilledFavIcon";
 
-export function SubmitButton({
+export const SubmitButton = ({
   text = "submit",
   className = "",
 }: {
   className?: string;
   text?: string;
   variant?: string;
-}) {
+}) => {
   const { pending } = useFormStatus();
   return (
     <Button
@@ -39,7 +39,7 @@ export function SubmitButton({
 
 type ActionType = "edit" | "delete";
 
-export function IconButton({ actionType }: { actionType: ActionType }) {
+export const  IconButton = ({ actionType }: { actionType: ActionType }) => {
   const { pending } = useFormStatus();
   const renderIcon = () => {
     switch (actionType) {
@@ -65,6 +65,29 @@ export function IconButton({ actionType }: { actionType: ActionType }) {
   );
 }
 
+export const AddToCartButton = ({
+  size,
+  isPending,
+}: {
+  size: string;
+  isPending: boolean;
+}) => {
+  return (
+    <Button variant="default" className="w-fit mx-auto text-lg uppercase" disabled={!size || isPending}>
+      {!size ? (
+        "Choose a size"
+      ) : isPending ? (
+          <>
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Adding...
+          </>
+      ) : (
+        "Add to cart"
+      )}
+    </Button>
+  );
+};
+
 export const CardSignInButton = () => {
   return (
     <SignInButton mode="modal">
@@ -82,7 +105,10 @@ export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
   const { pending } = useFormStatus();
 
   return (
-    <button aria-label="toggle fav" className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100">
+    <button
+      aria-label="toggle fav"
+      className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100"
+    >
       {pending ? (
         <ReloadIcon className="animate-spin w-4 h-4" />
       ) : isFavorite ? (
@@ -98,13 +124,12 @@ export const ProductSignInButton = () => {
   return (
     <SignInButton mode="modal">
       <Button
-        variant="default"
+        variant="outline"
         type="button"
         aria-label="sign in"
-        className="mt-8 uppercase"
-        asChild
+        className="mt-12 text-lg text-foreground uppercase"
       >
-        Log in & get your cart
+        Sign in
       </Button>
     </SignInButton>
   );

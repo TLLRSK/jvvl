@@ -17,6 +17,7 @@ async function SalesPage() {
   return (
     <Table>
       <TableCaption>Total orders</TableCaption>
+      
       <TableHeader>
         <TableRow>
           <TableHead>Email</TableHead>
@@ -26,6 +27,7 @@ async function SalesPage() {
           <TableHead>Date</TableHead>
         </TableRow>
       </TableHeader>
+
       <TableBody>
         {orders.map((order) => {
           return (

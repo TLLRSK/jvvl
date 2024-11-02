@@ -15,6 +15,7 @@ import React from "react";
 
 async function OrdersPage() {
   const orders = await fetchUserOrders();
+  
   return (
     <section className="min-h-[calc(100dvh-68px)]">
       <SectionTitle text="Your Orders" />

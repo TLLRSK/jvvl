@@ -10,7 +10,7 @@ function DefaultContent({ product }: { product: Product }) {
         <Image
           src={thumbnailImage}
           alt={name}
-          className="-z-10"
+          className="-z-10 aspect-square"
           sizes="(max-width: 768px) 50vw, (min-width: 768px) 33vw, (max-width: 1024px) 25vw"
           fill
         />

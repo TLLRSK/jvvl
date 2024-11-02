@@ -15,7 +15,7 @@ function HoverContent({ product }: { product: Product }) {
         <Image
           src={modelImage}
           alt={name}
-          className="-z-10 object-cover"
+          className="-z-10 object-cover aspect-square"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
         />

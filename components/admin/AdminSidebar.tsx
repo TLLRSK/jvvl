@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 
 function AdminSidebar() {
   const pathname = usePathname();
+  
   return (
     <aside className="flex lg:flex-col gap-4">
       {dashboardLinks.map((link, i) => {

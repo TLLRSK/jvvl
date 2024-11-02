@@ -11,7 +11,6 @@ export const GET = async (req: NextRequest) => {
 
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id);
-    // console.log(session);
 
     const orderId = session.metadata?.orderId;
     const cartId = session.metadata?.cartId;

@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "@/components/global/Footer";
 import Providers from "./providers";
 import { ClerkProvider } from '@clerk/nextjs';
 import Navbar from "@/components/navbar/Navbar";
-
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Jvvl",
@@ -17,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider dynamic>
       <html lang="en">
       <body className="font-sans antialiased [&>section]:mt-[61px]">
         <Providers>

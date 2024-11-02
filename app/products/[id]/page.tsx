@@ -1,31 +1,25 @@
 import AddToCart from "@/components/single_product/AddToCart";
 import BreadCrumbs from "@/components/single_product/BreadCrumbs";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import ProductCarousel from "@/components/single_product/ProductCarousel";
 import { fetchAllProducts, fetchSingleProduct } from "@/utils/actions";
 import { formatCurrency } from "@/utils/format";
-import Image from "next/image";
-import React from "react";
 
 export const generateStaticParams = async () => {
   const allProducts = await fetchAllProducts({search: ""});
   return allProducts.map((id) => id);
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const product = await fetchSingleProduct(params.id);
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id: paramsId } = await params;
+  const product = await fetchSingleProduct(paramsId);
   return {
     title: product.name,
   };
 }
 
-async function SingleProductPage({ params }: { params: { id: string } }) {
-  const product = await fetchSingleProduct(params.id);
+async function SingleProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id:paramsId } = await params;
+  const product = await fetchSingleProduct(paramsId);
   const {
     id,
     name,
@@ -36,6 +30,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
     attributes,
     sizes,
   } = product;
+
   const carouselImages = [...galleryImages, modelImage];
   return (
     <section className="mt-[61px]">
@@ -43,38 +38,7 @@ async function SingleProductPage({ params }: { params: { id: string } }) {
 
       <div className="lg:grid lg:grid-cols-6 xl:grid-cols-2">
 
-        <Carousel className="w-full lg:col-span-4 xl:col-span-1">
-          <CarouselContent className="min-h-[100vw] h-[66dvh] lg:min-h-0 lg:h-[calc(100dvh-106px)]">
-            {carouselImages.map((image, index) => (
-
-              <CarouselItem
-                key={index}
-                className={`relative w-full my-auto ${
-                  index === carouselImages.length - 1
-                    ? "h-full"
-                    : "aspect-square xl:h-3/4"
-                }`}
-              >
-                <Image
-                  src={image}
-                  alt={`${name} - Image ${index + 1}`}
-                  fill
-                  priority
-                  sizes="(max-width: 360px) 360,
-                  (min-width: 360px) 100vw,
-                  (min-width: 1024px) 66vw
-                  "
-                  className={`object-contain ${
-                    index === carouselImages.length - 1 ? "object-cover" : ""
-                  }`}
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-
-          <CarouselPrevious variant="ghost" className="left-0 ml-2" />
-          <CarouselNext variant="ghost" className="right-0 mr-2" />
-        </Carousel>
+        <ProductCarousel carouselImages={carouselImages} name={name}/>
 
         <div className="flex flex-col gap-6 md:px-4 md:border-l-[1px] border-border xl:p-8 md:col-span-2 xl:col-span-1">
           <div className="w-fit mx-auto text-center mt-4 lg:my-auto">

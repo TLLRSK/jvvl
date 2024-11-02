@@ -11,7 +11,7 @@ import FormContainer from "../form/FormContainer";
 import CartItemList from "./CartItemList";
 
 async function Cart() {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) redirect("/");
   const previousCart = await fetchOrCreateCart({ userId });
   const { currentCart, cartItems } = await updateCart(previousCart);

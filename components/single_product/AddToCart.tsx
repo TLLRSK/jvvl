@@ -1,12 +1,10 @@
 "use client";
 import React, { FormEvent, useState } from "react";
-import { ProductSignInButton, SubmitButton } from "../form/Buttons";
+import { AddToCartButton, ProductSignInButton } from "../form/Buttons";
 import SizeInput from "../form/SizeInput";
-import { Button } from "../ui/button";
 import { addToCartAction } from "@/utils/actions";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@clerk/nextjs";
-import { ReloadIcon } from "@radix-ui/react-icons";
 
 function AddToCart({
   productId,
@@ -44,33 +42,16 @@ function AddToCart({
   };
 
   return (
-    <div className="mx-auto">
+    <div className="mx-auto ">
       {!userId ? (
         <ProductSignInButton />
       ) : (
-        <form onSubmit={handleAddToCart} className="grid">
+        <form onSubmit={handleAddToCart} className="grid gap-6">
           <SizeInput sizes={sizes} onChange={changeSize} />
 
           <input type="hidden" name="productId" value={productId} />
 
-          {!size || isPending ? (
-            <Button variant="default" className="uppercase mt-8" disabled>
-              {!size ? (
-                "Choose a size"
-              ) : (
-                <>
-                  <ReloadIcon className='mr-2 h-4 w-4 animate-spin'/>
-                  Adding...
-                </>
-              )}
-            </Button>
-          ) : (
-            <SubmitButton
-              text="add to cart"
-              variant="default"
-              className="uppercase mt-8 w-fit"
-            />
-          )}
+          <AddToCartButton size={size} isPending={isPending} />
         </form>
       )}
     </div>

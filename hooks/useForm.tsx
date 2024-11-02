@@ -42,7 +42,6 @@ const useForm = (product: FormProduct, action: string) => {
 
   const handleEditProduct = async (formDataToSend: FormData) => {
     const prevState = product as Product;
-    console.log("prevState: ", prevState)
     
     try {
       const {message} = await updateProductAction(prevState, formDataToSend);

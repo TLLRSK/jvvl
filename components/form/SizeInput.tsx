@@ -37,7 +37,7 @@ function SizeInput({ sizes, onChange }: SizeInputProps) {
               <Label
                 htmlFor={`size-${size}`}
                 className={`px-2 py-1 text-md rounded-sm cursor-pointer hover:bg-accent ${
-                selectedSize === size ? "font-bold opacity-100 bg-accent" : "opacity-60"
+                selectedSize === size ? "font-bold bg-accent" : "bg-transparent"
                 }`}
               >
                 {size}

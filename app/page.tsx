@@ -4,7 +4,7 @@ import React from 'react'
 
 function HomePage() {
   return (
-    <main className='overflow-x-hidden'>
+    <main className='overflow-x-hidden relative'>
       <Hero />
       <FeaturedProducts />
     </main>

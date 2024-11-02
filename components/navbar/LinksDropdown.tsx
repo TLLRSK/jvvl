@@ -13,8 +13,8 @@ import { signedInLinks, signedOutLinks } from "@/utils/links";
 import { Fragment } from "react";
 import NavLink from "./NavLink";
 
-function LinksDropdown({ icon }: { icon: React.ReactNode }) {
-  const { userId } = auth();
+async function LinksDropdown({ icon }: { icon: React.ReactNode }) {
+  const { userId } = await auth();
   const isAdmin = userId === process.env.ADMIN_USER_ID;
   return (
     <DropdownMenu>
