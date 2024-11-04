@@ -181,7 +181,7 @@ export const deleteProductAction = async (prevState: { productId: string }) => {
   }
 };
 
-export const fetchAdminProductDetails = async (productId: string) => {
+export const fetchAdminProductDetails = cache(async (productId: string) => {
   await getAdminUser();
   const product = await db.product.findUnique({
     where: {
@@ -190,7 +190,7 @@ export const fetchAdminProductDetails = async (productId: string) => {
   });
   if (!product) redirect("/admin/products");
   return product;
-};
+});
 
 const deleteReplacedImages = async (
   prevState: Product,
@@ -287,7 +287,7 @@ export const toggleFavoriteAction = async (prevState: {
   }
 };
 
-export const fetchUserFavorites = async () => {
+export const fetchUserFavorites = cache(async () => {
   const user = await getAuthUser();
   const favorites = await db.favorite.findMany({
     where: {
@@ -298,7 +298,7 @@ export const fetchUserFavorites = async () => {
     },
   });
   return favorites;
-};
+});
 
 export const fetchOrCreateCart = async ({
   userId,
@@ -325,7 +325,7 @@ export const fetchOrCreateCart = async ({
   return cart;
 };
 
-export const fetchCartItems = async () => {
+export const fetchCartItems = cache(async () => {
   const { userId } = await auth();
   const cart = await db.cart.findFirst({
     where: {
@@ -336,7 +336,7 @@ export const fetchCartItems = async () => {
     },
   });
   return cart?.numItemsInCart || 0;
-};
+});
 
 const createCartItem = async ({
   productId,
@@ -479,7 +479,7 @@ export const createOrderAction = async () => {
   redirect(`/checkout?orderId=${orderId}&cartId=${cartId}`);
 };
 
-export const fetchUserOrders = async () => {
+export const fetchUserOrders = cache(async () => {
   const user = await getAuthUser();
 
   const orders = await db.order.findMany({
@@ -492,9 +492,9 @@ export const fetchUserOrders = async () => {
     },
   });
   return orders;
-};
+});
 
-export const fetchAdminOrders = async () => {
+export const fetchAdminOrders = cache(async () => {
   await getAdminUser();
   const orders = await db.order.findMany({
     where: {
@@ -505,4 +505,4 @@ export const fetchAdminOrders = async () => {
     },
   });
   return orders;
-};
+});
