@@ -125,6 +125,7 @@ const createProductObject = async (user: User, formData: FormData) => {
     galleryImages: galleryImagesPath,
     attributes: validatedProductData.attributes as string[],
     sizes: validatedProductData.sizes as string[],
+    featured: validatedProductData.featured as boolean,
     clerkId: user.id,
   };
 
