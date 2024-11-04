@@ -4,7 +4,7 @@ const title = ["j", "v", "v", "l"];
 
 function Hero() {
   return (
-    <section className="h-[calc(100dvh)] pt-[61px] flex flex-col">
+    <section className="h-[100dvh] flex flex-col">
       <h2 className="flex-1 grid grid-cols-2 md:grid-cols-4 text-primary font-serif font-semibold uppercase">
         {title.map((letter, i) => {
           return (

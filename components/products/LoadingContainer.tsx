@@ -3,7 +3,11 @@ import { Skeleton } from "../ui/skeleton";
 
 function LoadingProducts() {
   return (
-    <div className="h-[calc(100dvh-61px)] grid grid-cols-2 md:grid-cols-4 mt-[61px]">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <LoadingProduct />
+      <LoadingProduct />
+      <LoadingProduct />
+      <LoadingProduct />
       <LoadingProduct />
       <LoadingProduct />
       <LoadingProduct />
@@ -14,7 +18,7 @@ function LoadingProducts() {
 
 function LoadingProduct() {
   return (
-    <Card>
+    <Card className="h-fit">
       <CardContent className="p-4 grid gap-2">
         <Skeleton className="w-full aspect-square" />
         <Skeleton className="h-3 w-1/3" />

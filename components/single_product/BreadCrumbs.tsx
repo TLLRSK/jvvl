@@ -9,7 +9,7 @@ import {
 
 function BreadCrumbs({ name }: { name: string }) {
   return (
-    <Breadcrumb className='px-3 py-2 border-b-[1px] border-muted'>
+    <Breadcrumb className='px-3 py-6 border-b-[1px] border-muted'>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href='/' className='capitalize text-lg'>

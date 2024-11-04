@@ -16,7 +16,7 @@ async function ProductsPage({ searchParams }: { searchParams: Promise<{ search?:
   const search = params || "";
 
   return (
-    <main className="overflow-x-hidden mt-[61px]">
+    <main className="overflow-x-hidden mt-[57px]">
       <BreadCrumbs />
       <DynamicProductsContainer search={search} />
     </main>

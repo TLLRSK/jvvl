@@ -5,8 +5,7 @@ import CartItem from "./CartItem";
 function CartItemList({ cartItems }: {cartItems: CartItemProduct[]}) {
   return (
     <ul className="
-      flex flex-col relative 
-      md:border-r-[1px] md:border-l-[1px]
+      flex flex-col relative md:border-r-[1px]
       [&>li:nth-last-child(1)]:border-b-[1px] [&>li:nth-child(1)]:border-t-0
       [&>li:nth-child(1)]:top-[114px] lg:[&>li:nth-child(1)]:top-auto
     ">

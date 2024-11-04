@@ -3,11 +3,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 function LoadingCart() {
   return (
-    <div className="h-[calc(100dvh-61px)] flex flex-col mt-[61px]">
-      <div className="p-3 border-b-[1px]">
-        <Skeleton className="h-6 w-1/4 mx-auto" />
+    <div className="h-[calc(100dvh-57px)] flex flex-col mt-[57px]">
+      <div className="p-6 border-b-[1px]">
+        <Skeleton className="h-6 w-8 mx-auto" />
       </div>
-      <div className="w-full grid md:grid-cols-2 mx-auto max-w-screen-2xl md:px-8">
+
+      <div className="w-full grid md:grid-cols-2">
           <div className="grid">
             <LoadingProduct />
             <LoadingProduct />
@@ -32,7 +33,7 @@ function LoadingCart() {
         </div>
     </div>
   );
-}
+};
 
 function LoadingProduct() {
   return (
@@ -47,5 +48,6 @@ function LoadingProduct() {
       </CardContent>
     </Card>
   );
-}
+};
+
 export default LoadingCart;

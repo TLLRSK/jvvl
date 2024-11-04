@@ -13,7 +13,7 @@ async function FavoritesPage() {
   }
  
   return (
-    <section className="overflow-x-hidden min-h-[calc(100dvh-61px)]">
+    <section className="overflow-x-hidden min-h-[calc(100dvh-57px)]">
       <SectionTitle text="Favorites" />
       <ProductsGrid products={favorites.map((fav) => fav.product)} />
     </section>

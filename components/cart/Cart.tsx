@@ -29,7 +29,7 @@ async function Cart() {
       <div className="flex-1 grid lg:grid-cols-2 gap-6 lg:gap-0 lg:mb-24">
         <CartItemList cartItems={cartItems} />
 
-        <div className="flex relative border-muted lg:border-r-[1px] lg:border-b-[1px]">
+        <div className="flex relative border-muted lg:border-b-[1px]">
           <div className="w-full flex flex-col p-3 h-[calc(100dvh-198px)]  
             lg:h-fit lg:p-6 lg:sticky lg:top-[114px] lg:bottom-auto
           "
