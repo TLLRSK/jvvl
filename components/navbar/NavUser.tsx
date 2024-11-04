@@ -26,7 +26,7 @@ function NavUser() {
           user
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[calc(50vw+1px)] md:w-[calc(25vw-3px)]" align="center" sideOffset={9}>
+      <DropdownMenuContent className="w-[calc(50vw+1px)] md:w-[calc(25vw-3px)]" align="end" sideOffset={9}>
 
         <SignedOut>
           <DropdownMenuGroup>
