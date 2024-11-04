@@ -13,22 +13,22 @@ import { signedInLinks, signedOutLinks } from "@/utils/links";
 import { Fragment } from "react";
 import NavLink from "./NavLink";
 
-async function LinksDropdown({ icon }: { icon: React.ReactNode }) {
+async function LinksDropdown() {
   const { userId } = await auth();
   const isAdmin = userId === process.env.ADMIN_USER_ID;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="show links" className="flex">
-          {icon}
+        <Button
+          variant="ghost"
+          size="sm"
+          aria-label="user"
+          className="flex gap-4 max-w-[100px] text-sm uppercase"
+        >
+          menu
         </Button>
       </DropdownMenuTrigger>
-
-      <DropdownMenuContent
-        className="w-[calc(50vw+1px)] md:w-[calc(25vw-3px)] md:mr-[17px]"
-        align="start"
-        sideOffset={9}
-      >
+      <DropdownMenuContent className="w-[calc(50vw+1px)] md:w-[calc(25vw-3px)] md:mr-[17px]" align="start" sideOffset={9}>
         <DropdownMenuGroup>
           <SignedOut>
             {signedOutLinks.map((link, index) => {

@@ -1,5 +1,4 @@
 "use client";
-import SearchIcon from "../icons/SearchIcon";
 import { Input } from "../ui/input";
 import {
   DropdownMenu,
@@ -44,17 +43,17 @@ function NavSearch() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
+          size="sm"
           aria-label="search"
-          className="flex gap-4 max-w-[100px]"
+          className="flex gap-4 max-w-[100px] text-sm uppercase"
         >
-          <SearchIcon />
+          search
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
         className="w-[100vw] md:w-[calc(50vw)] lg:w-[calc(33vw)] md:mr-[17px] p-4"
-        align="start"
+        align="center"
         sideOffset={9}
       >
         <Input
