@@ -1,12 +1,7 @@
 import AddToCart from "@/components/single_product/AddToCart";
 import ProductCarousel from "@/components/single_product/ProductCarousel";
-import { fetchAllProducts, fetchSingleProduct } from "@/utils/actions";
+import { fetchSingleProduct } from "@/utils/actions";
 import { formatCurrency } from "@/utils/format";
-
-export const generateStaticParams = async () => {
-  const allProducts = await fetchAllProducts({search: ""});
-  return allProducts.map((id) => id);
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id: paramsId } = await params;
