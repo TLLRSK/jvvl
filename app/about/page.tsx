@@ -8,7 +8,7 @@ function AboutPage() {
     <section>
       <SectionTitle text={"about"} />
 
-      <article className="min-h-[calc(100dvh-61px-44px-82px)] flex flex-col relative">
+      <article className="min-h-[calc(100dvh-61px-44px)] flex flex-col relative">
         <h2 className="flex-1 grid grid-cols-4 content-center text-primary font-serif font-semibold uppercase py-12 border-b-[1px]">
           {title.map((letter, i) => {
             return (
