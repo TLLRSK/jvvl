@@ -22,21 +22,28 @@ const getAdminUser = async () => {
   return user;
 };
 
-export const fetchFeaturedProducts = unstable_cache(
-  async () => {
-    const products = await db.product.findMany({
-      where: {
-        featured: true,
-      },
-    });
-    return products;
-  },
-  ['featured-products'],
-  {
-    revalidate: 3600, 
-    tags: ['featured-products']
-  }
-);
+const FEATURED_PRODUCTS_CACHE_KEY = 'featured-products-cache';
+const CACHE_REVALIDATE_TIME = 3600;
+
+export const fetchFeaturedProducts = async () => {
+  const getCachedFeaturedProducts = unstable_cache(
+    async () => {
+      return await db.product.findMany({
+        where: {
+          featured: true,
+        },
+      });
+    },
+    [FEATURED_PRODUCTS_CACHE_KEY],
+    {
+      revalidate: CACHE_REVALIDATE_TIME,
+      tags: [FEATURED_PRODUCTS_CACHE_KEY],
+    }
+  );
+
+  return getCachedFeaturedProducts();
+};
+
 
 export const fetchAllProducts = async ({ search = "" }: { search?: string }) => {
   return db.product.findMany({
@@ -72,7 +79,6 @@ const validatedData = (formData: FormData) => {
   const thumbnailFile = formData.get("thumbnailImage") as File;
   const modelFile = formData.get("modelImage") as File;
   const galleryFiles = formData.getAll("galleryImages") as File[];
-
   const validatedFields = validateWithZodSchema(productSchema, rawData);
   const validatedThumbnailFile = validateWithZodSchema(imageSchema, {
     image: thumbnailFile,
@@ -206,12 +212,12 @@ export const updateProductAction = async (
   prevState: Product,
   formData: FormData
 ) => {
+  
   const user = await getAuthUser();
   const productId = prevState.id;
   const productData = await createProductObject(user, formData);
 
   try {
-
     await db.product.update({
       where: {
         id: productId,

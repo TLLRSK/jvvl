@@ -4,7 +4,6 @@ import { FormProduct, Product } from "@/utils/types";
 import { useState } from "react";
 
 const useForm = (product: FormProduct, action: string) => {
-
   const [formData, setFormData] = useState<FormProduct>(product);
   const [isPending, setIsPending] = useState(false);
   const { toast } = useToast();
@@ -13,13 +12,13 @@ const useForm = (product: FormProduct, action: string) => {
     e.preventDefault();
     setIsPending(true);
     const formDataToSend = buildFormData(formData);
-    
-    switch(action) {
+
+    switch (action) {
       case "create":
         handleCreateProduct(formDataToSend);
         break;
       case "update":
-        handleEditProduct(formDataToSend)
+        handleEditProduct(formDataToSend);
         break;
       default:
         break;
@@ -29,7 +28,7 @@ const useForm = (product: FormProduct, action: string) => {
   const handleCreateProduct = async (formDataToSend: FormData) => {
     try {
       const { message } = await createProductAction(formDataToSend);
-      toast({ description: `message: ${message}` });
+      toast({ description: `${message}` });
     } catch (error) {
       toast({
         description:
@@ -42,10 +41,10 @@ const useForm = (product: FormProduct, action: string) => {
 
   const handleEditProduct = async (formDataToSend: FormData) => {
     const prevState = product as Product;
-    
+
     try {
-      const {message} = await updateProductAction(prevState, formDataToSend);
-      toast({ description: `message: ${message}` });
+      const { message } = await updateProductAction(prevState, formDataToSend);
+      toast({ description: `${message}` });
     } catch (error) {
       toast({
         description:
@@ -56,10 +55,7 @@ const useForm = (product: FormProduct, action: string) => {
     }
   };
 
-  const updateFormData = (
-    name: string,
-    value: string | File | Array<string | File> | null
-  ) => {
+  const updateFormData = (name: string, value: any) => {
     setFormData((prevState) => {
       const updatedState = { ...prevState, [name]: value };
       return updatedState;
@@ -69,13 +65,18 @@ const useForm = (product: FormProduct, action: string) => {
   const changeFormData = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
-    const { name, value } = e.target;
-    updateFormData(name, value);
+    const { name, type, value } = e.target;
+
+    if (type === "checkbox" && "checked" in e.target) {
+      updateFormData(name, e.target.checked);
+    } else {
+      updateFormData(name, value);
+    }
   };
 
   const updateInput = (
     name: string,
-    value: File | Array<string | File> | null,
+    value: File | Array<string | File> | null
   ) => {
     updateFormData(name, value);
   };

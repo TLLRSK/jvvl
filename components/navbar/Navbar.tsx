@@ -11,7 +11,7 @@ function Navbar() {
   return (
     <nav
       className="w-full grid grid-cols-2 px-3 pt-4 pb-2 bg-background fixed top-0 right-0 
-      left-0 border-b-[1px] border-muted transition-colors z-10
+      left-0 border-b-[1px] border-muted transition-colors z-30
     ">
       <Link
         href="/"

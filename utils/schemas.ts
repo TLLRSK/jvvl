@@ -57,7 +57,10 @@ export const productSchema = z.object({
   ),
   attributes: validateStringArraySchema(),
   sizes: validateStringArraySchema(),
-  featured: z.coerce.boolean(),
+  featured: z.preprocess(
+    (val) => val === "true" ? true : val === "false" ? false : val,
+    z.boolean()
+  ),
 });
 
 export type ProductSchemaType = z.infer<typeof productSchema>;

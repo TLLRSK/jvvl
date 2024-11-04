@@ -1,5 +1,4 @@
 import AddToCart from "@/components/single_product/AddToCart";
-import BreadCrumbs from "@/components/single_product/BreadCrumbs";
 import ProductCarousel from "@/components/single_product/ProductCarousel";
 import { fetchAllProducts, fetchSingleProduct } from "@/utils/actions";
 import { formatCurrency } from "@/utils/format";
@@ -33,11 +32,7 @@ async function SingleProductPage({ params }: { params: Promise<{ id: string }> }
 
   const carouselImages = [...galleryImages, modelImage];
   return (
-    <section className="mt-[61px]">
-      <BreadCrumbs name={name} />
-
-      <div className="lg:grid lg:grid-cols-6 xl:grid-cols-2">
-
+    <section className="h-[calc(100dvh-61px)] mt-[61px] lg:grid lg:grid-cols-6 xl:grid-cols-2">
         <ProductCarousel carouselImages={carouselImages} name={name}/>
 
         <div className="flex flex-col gap-6 md:px-4 md:border-l-[1px] border-border xl:p-8 md:col-span-2 xl:col-span-1">
@@ -62,7 +57,7 @@ async function SingleProductPage({ params }: { params: Promise<{ id: string }> }
             </ul>
           </div>
         </div>
-      </div>
+      
     </section>
   );
 }

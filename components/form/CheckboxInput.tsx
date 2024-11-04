@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { CheckboxInputProps } from "@/utils/types";
 
