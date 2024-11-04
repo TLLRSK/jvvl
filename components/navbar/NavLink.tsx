@@ -1,15 +1,20 @@
+
+"use client";
 import { NavLinkProps } from "@/utils/types";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 
 function NavLink(link: NavLinkProps) {
+  const pathname = usePathname();
+  console.log("pathname: ", pathname)
   return (
     <Link
       href={link.href}
-      className="flex items-center gap-2 uppercase w-full"
+      className={`flex items-center gap-2 uppercase w-full ${pathname === link.href ? "font-semibold" : "font-regular"}`}
     >
-      <p className="text-xl">{link.label}</p>
+      <p className="text-xl"> {pathname === link.href ? `> ${link.label}` : link.label}</p>
     </Link>
   );
 }
