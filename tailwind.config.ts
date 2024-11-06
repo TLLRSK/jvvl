@@ -65,6 +65,19 @@ const config: Config = {
         "custom-border": '0 0 0 1px hsl(var(--primary))',
         "custom-inner": 'inset 0 0 0 2px hsl(var(--primary))',
       },
+      transitionProperty: {
+        'hero-grid': 'max-height, opacity',
+        'translate-y': 'transform',
+      },
+      transitionTimingFunction: {
+        'custom-bezier': 'cubic-bezier(.21,1.06,.93,1)',
+      },
+      transitionDuration: {
+        '1000': '1000ms',
+      },
+      transitionDelay: {
+        '1500': '1500ms',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

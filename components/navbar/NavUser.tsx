@@ -32,7 +32,7 @@ function NavUser() {
           <DropdownMenuGroup>
             <DropdownMenuItem>
               <SignInButton mode="modal">
-                <button className="w-full text-lg text-left uppercase">
+                <button className="w-full text-sm text-left uppercase">
                   Login
                 </button>
               </SignInButton>
@@ -42,7 +42,7 @@ function NavUser() {
             <DropdownMenuItem>
 
               <SignUpButton mode="modal">
-                <button className="w-full text-lg text-left uppercase">
+                <button className="w-full text-sm text-left uppercase">
                   Register
                 </button>
               </SignUpButton>
@@ -58,7 +58,7 @@ function NavUser() {
                 <DropdownMenuItem key={index}>
                   <Link
                     href={link.href}
-                    className="w-full text-lg text-left uppercase"
+                    className="w-full text-sm text-left uppercase"
                   >
                     {link.label}
                   </Link>

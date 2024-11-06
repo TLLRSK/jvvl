@@ -11,7 +11,7 @@ function SignOutLink() {
   };
   return (
     <SignOutButton>
-      <Link href="/" className="w-full text-lg text-left uppercase" onClick={handleLogout}>
+      <Link href="/" className="w-full text-sm text-left uppercase" onClick={handleLogout}>
         Logout
       </Link>
     </SignOutButton>
