@@ -32,11 +32,11 @@ function Hero() {
     return isInitialLoad ? "max-h-0 opacity-0" : "max-h-[100dvh] opacity-100";
   };
 
-  const spanAnimationClasses = (i: number) => {
-    if (isInitialLoad && isLoading && i <= currentIndex) {
+  const spanAnimationClasses = () => {
+    if (isInitialLoad && isLoading) {
       return "translate-y-0";
     }
-    return isInitialLoad ? "translate-y-full" : "translate-y-0";
+    return isInitialLoad ? "translate-y-[111%]" : "translate-y-0";
   };
 
   return (
@@ -52,9 +52,7 @@ function Hero() {
             >
               <span
                 className={`h-fit leading-[75%] text-[75vw] md:text-[25vw]
-                 transition-translate-y ease-custom-bezier duration-1000 delay-1500 ${spanAnimationClasses(
-                   i
-                 )}`}
+                 transition-translate-y ease-custom-bezier duration-1000 delay-2000 ${spanAnimationClasses()}`}
               >
                 {letter}
               </span>

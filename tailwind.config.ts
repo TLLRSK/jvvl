@@ -76,6 +76,7 @@ const config: Config = {
         '1000': '1000ms',
       },
       transitionDelay: {
+        '2000': '2000ms',
         '1500': '1500ms',
       },
     },

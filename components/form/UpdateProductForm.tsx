@@ -7,7 +7,7 @@ import ListInput from "@/components/form/ListInput";
 import CheckboxInput from "@/components/form/CheckboxInput";
 import UpdateSingleImageInput from "./UpdateSingleImageInput";
 import UpdateMultipleImagesInput from "./UpdateMultipleImagesInput";
-import useForm from "@/hooks/useForm";
+import useForm from "@/hooks/use-form";
 import { Product } from "@/utils/types";
 
 export const UpdateProductForm = (product: Product) => {

@@ -7,7 +7,7 @@ import TextArea from "@/components/form/TextAreaInput";
 import SingleImageInput from "@/components/form/SingleImageInput";
 import ListInput from "@/components/form/ListInput";
 import CheckboxInput from "@/components/form/CheckboxInput";
-import useForm from "@/hooks/useForm";
+import useForm from "@/hooks/use-form";
 import { formProductModel } from "@/utils/form";
 import { FormProduct } from "@/utils/types";
 
