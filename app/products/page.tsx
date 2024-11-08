@@ -1,8 +1,7 @@
-
 import BreadCrumbs from "@/components/products/BreadCrumbs";
 import LoadingProducts from "@/components/products/LoadingContainer";
 import dynamic from "next/dynamic";
-import React from "react";
+
 
 const DynamicProductsContainer = dynamic(
   () => import("@/components/products/ProductsContainer"),
@@ -12,7 +11,7 @@ const DynamicProductsContainer = dynamic(
 );
 
 async function ProductsPage({ searchParams }: { searchParams: Promise<{ search?: string }> }) {
-  const { search:params } = await searchParams;
+  const { search: params } = await searchParams;
   const search = params || "";
 
   return (

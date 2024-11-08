@@ -1,25 +1,25 @@
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import Link from 'next/link';
 
 function BreadCrumbs() {
   return (
     <Breadcrumb className='px-3 py-6 border-b-[1px] border-muted'>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/' className='capitalize text-lg'>
+          <Link href='/' className='capitalize text-lg'>
             home
-          </BreadcrumbLink>
+          </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href='/products' className='capitalize text-lg'>
+          <Link href='/products' className='capitalize text-lg'>
             products
-          </BreadcrumbLink>
+          </Link>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

@@ -22,27 +22,17 @@ const getAdminUser = async () => {
   return user;
 };
 
-const FEATURED_PRODUCTS_CACHE_KEY = "featured-products-cache";
-const CACHE_REVALIDATE_TIME = 3600;
-
-export const fetchFeaturedProducts = async () => {
-  const getCachedFeaturedProducts = unstable_cache(
-    async () => {
-      return await db.product.findMany({
-        where: {
-          featured: true,
-        },
-      });
-    },
-    [FEATURED_PRODUCTS_CACHE_KEY],
-    {
-      revalidate: CACHE_REVALIDATE_TIME,
-      tags: [FEATURED_PRODUCTS_CACHE_KEY],
-    }
-  );
-
-  return getCachedFeaturedProducts();
-};
+export const fetchFeaturedProducts = unstable_cache(
+  async () => {
+    return await db.product.findMany({
+      where: {
+        featured: true,
+      },
+    });
+  },
+  ["featured-products-cache"],
+  { revalidate: 360 }
+);
 
 export const fetchAllProducts = unstable_cache(
   async ({ search = "" }: { search?: string }) => {
@@ -56,7 +46,7 @@ export const fetchAllProducts = unstable_cache(
     });
     return products;
   },
-  ["search"],  
+  ["search", "products"],
   { revalidate: 3600 }
 );
 
