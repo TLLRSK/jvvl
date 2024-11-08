@@ -8,7 +8,7 @@ export async function generateStaticParams({ search = "" }: { search: string }) 
 
 async function ProductsContainer({ search }: { search: string }) {
   const products = await fetchAllProducts({ search });
-  
-  return <ProductsGrid products={products} />
+  return <ProductsGrid products={products} />;
 }
+
 export default ProductsContainer;

@@ -22,7 +22,7 @@ const getAdminUser = async () => {
   return user;
 };
 
-const FEATURED_PRODUCTS_CACHE_KEY = 'featured-products-cache';
+const FEATURED_PRODUCTS_CACHE_KEY = "featured-products-cache";
 const CACHE_REVALIDATE_TIME = 3600;
 
 export const fetchFeaturedProducts = async () => {
@@ -44,17 +44,21 @@ export const fetchFeaturedProducts = async () => {
   return getCachedFeaturedProducts();
 };
 
-
-export const fetchAllProducts = async ({ search = "" }: { search?: string }) => {
-  return db.product.findMany({
-    where: {
-      OR: [{ name: { contains: search, mode: "insensitive" } }],
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-};
+export const fetchAllProducts = unstable_cache(
+  async ({ search = "" }: { search?: string }) => {
+    const products = await db.product.findMany({
+      where: {
+        OR: [{ name: { contains: search, mode: "insensitive" } }],
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return products;
+  },
+  ["search"],  
+  { revalidate: 3600 }
+);
 
 export const fetchSingleProduct = cache(async (productId: string) => {
   const product = await db.product.findUnique({
@@ -213,7 +217,6 @@ export const updateProductAction = async (
   prevState: Product,
   formData: FormData
 ) => {
-  
   const user = await getAuthUser();
   const productId = prevState.id;
   const productData = await createProductObject(user, formData);
@@ -470,7 +473,7 @@ export const createOrderAction = async () => {
         shipping: cart.shipping,
         orderTotal: cart.orderTotal,
         email: user.emailAddresses[0].emailAddress,
-      }
+      },
     });
     orderId = order.id;
   } catch (error) {
