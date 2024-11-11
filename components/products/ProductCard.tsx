@@ -4,7 +4,7 @@ import Link from "next/link";
 import FavoriteToggleButton from "./FavoriteToggleButton";
 import HoverContent from "./HoverContent";
 import DefaultContent from "./DefaultContent";
-import FavIcon from "../icons/FavIcon";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 function ProductCard({ product }: { product: Product }) {
   const { id } = product;
@@ -29,9 +29,9 @@ function ProductCard({ product }: { product: Product }) {
 }
 const LoadingFavorite = () => {
   return (
-    <div className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100">
-      <FavIcon className="w-4 h-4" />
-    </div>
+    <button className="ml-auto p-2 mb-6 opacity-50 hover:opacity-100">
+      <ReloadIcon className="animate-spin w-4 h-4" />
+    </button>
   );
 };
 

@@ -245,6 +245,7 @@ const includeProductClause = {
 
 export const fetchFavoriteId = async ({ productId }: { productId: string }) => {
   const user = await getAuthUser();
+  
   const favorite = await db.favorite.findFirst({
     where: {
       productId,
@@ -262,6 +263,7 @@ export const toggleFavoriteAction = async (prevState: {
   favoriteId: string | null;
   pathname: string;
 }) => {
+
   const user = await getAuthUser();
   const { productId, favoriteId, pathname } = prevState;
 
@@ -282,12 +284,13 @@ export const toggleFavoriteAction = async (prevState: {
     }
     revalidatePath(pathname);
     return { message: favoriteId ? "Removed from Favs" : "Added to Favs" };
+
   } catch (error) {
     return renderError(error);
   }
 };
 
-export const fetchUserFavorites =async () => {
+export const fetchUserFavorites = cache(async () => {
   const user = await getAuthUser();
   const favorites = await db.favorite.findMany({
     where: {
@@ -298,7 +301,7 @@ export const fetchUserFavorites =async () => {
     },
   });
   return favorites;
-};
+});
 
 export const fetchOrCreateCart = async ({
   userId,

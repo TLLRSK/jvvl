@@ -6,14 +6,8 @@ import {
   LoadingProvider,
   useLoading,
 } from "./LoadingContext";
-import FavoritesProvider, {
-  FavoritesContextType,
-  useFavorites,
-} from "./FavoritesContext";
-
 interface GlobalContextType {
   loading: LoadingContextType;
-  favorites: FavoritesContextType;
 }
 
 const initialContext: GlobalContextType = {
@@ -22,10 +16,6 @@ const initialContext: GlobalContextType = {
     isLoading: false,
     setIsInitialLoad: () => {},
     setIsLoading: () => {},
-  },
-  favorites: {
-    favorites: [],
-    setFavorites: () => {},
   },
 };
 
@@ -41,11 +31,9 @@ export const useGlobal = () => {
 
 const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    // <FavoritesProvider>
       <LoadingProvider>
         <GlobalContextWrapper>{children}</GlobalContextWrapper>
       </LoadingProvider>
-    // </FavoritesProvider>
   );
 };
 
@@ -55,13 +43,10 @@ export const GlobalContextWrapper = ({
   children: React.ReactNode;
 }) => {
   const loading = useLoading();
-  // const favorites = useFavorites();
 
   const value: GlobalContextType = {
     loading,
-    // favorites,
   };
-  console.log("value: ", value);
 
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
