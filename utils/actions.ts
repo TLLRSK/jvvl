@@ -24,14 +24,18 @@ const getAdminUser = async () => {
 
 export const fetchFeaturedProducts = unstable_cache(
   async () => {
-    return await db.product.findMany({
+    const products = await db.product.findMany({
       where: {
         featured: true,
       },
     });
+    return products;
   },
-  ["featured-products-cache"],
-  { revalidate: 360 }
+  ["featured-products"],
+  {
+    revalidate: 3600,
+    tags: ["featured-products"],
+  }
 );
 
 export const fetchAllProducts = unstable_cache(
@@ -46,8 +50,11 @@ export const fetchAllProducts = unstable_cache(
     });
     return products;
   },
-  ["search", "products"],
-  { revalidate: 3600 }
+  ["products"],
+  {
+    revalidate: 3600,
+    tags: ["products"],
+  }
 );
 
 export const fetchSingleProduct = cache(async (productId: string) => {
@@ -175,7 +182,7 @@ export const deleteProductAction = async (prevState: { productId: string }) => {
   }
 };
 
-export const fetchAdminProductDetails = cache(async (productId: string) => {
+export const fetchAdminProductDetails = async (productId: string) => {
   await getAdminUser();
   const product = await db.product.findUnique({
     where: {
@@ -184,7 +191,7 @@ export const fetchAdminProductDetails = cache(async (productId: string) => {
   });
   if (!product) redirect("/admin/products");
   return product;
-});
+};
 
 const deleteReplacedImages = async (
   prevState: Product,
@@ -280,7 +287,7 @@ export const toggleFavoriteAction = async (prevState: {
   }
 };
 
-export const fetchUserFavorites = cache(async () => {
+export const fetchUserFavorites =async () => {
   const user = await getAuthUser();
   const favorites = await db.favorite.findMany({
     where: {
@@ -291,7 +298,7 @@ export const fetchUserFavorites = cache(async () => {
     },
   });
   return favorites;
-});
+};
 
 export const fetchOrCreateCart = async ({
   userId,
@@ -318,7 +325,7 @@ export const fetchOrCreateCart = async ({
   return cart;
 };
 
-export const fetchCartItems = cache(async () => {
+export const fetchCartItems = async () => {
   const { userId } = await auth();
   const cart = await db.cart.findFirst({
     where: {
@@ -329,7 +336,7 @@ export const fetchCartItems = cache(async () => {
     },
   });
   return cart?.numItemsInCart || 0;
-});
+};
 
 const createCartItem = async ({
   productId,
@@ -472,7 +479,7 @@ export const createOrderAction = async () => {
   redirect(`/checkout?orderId=${orderId}&cartId=${cartId}`);
 };
 
-export const fetchUserOrders = cache(async () => {
+export const fetchUserOrders = async () => {
   const user = await getAuthUser();
 
   const orders = await db.order.findMany({
@@ -485,9 +492,9 @@ export const fetchUserOrders = cache(async () => {
     },
   });
   return orders;
-});
+};
 
-export const fetchAdminOrders = cache(async () => {
+export const fetchAdminOrders = async () => {
   await getAdminUser();
   const orders = await db.order.findMany({
     where: {
@@ -498,4 +505,4 @@ export const fetchAdminOrders = cache(async () => {
     },
   });
   return orders;
-});
+};

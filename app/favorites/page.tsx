@@ -4,6 +4,7 @@ import { fetchUserFavorites } from "@/utils/actions";
 
 async function FavoritesPage() {
   const favorites = await fetchUserFavorites();
+  
   if (favorites.length === 0) {
     return (
       <section className="min-h-[calc(100dvh-64px)] flex items-center justify-center">

@@ -1,18 +1,19 @@
 "use client";
 
-import { useLoading } from "@/context/LoadingContext";
+import { useGlobal } from "@/context/GlobalContext";
 import { usePathname } from "next/navigation";
 
 function NavbarClient({ children }: { children: React.ReactNode }) {
-  const { isInitialLoad, isLoading } = useLoading();
+  const { loading } = useGlobal();
+  const { isInitialLoad, isLoading } = loading;
   const pathname = usePathname();
 
   const navClasses = () => {
     if (pathname != '/' || isInitialLoad && isLoading) {
-      return "translate-y-0";
+      return "translate-y-0 opacity-100";
     }
     if (isInitialLoad && !isLoading) {
-      return "-translate-y-[150%]";
+      return "-translate-y-[150%] opacity-0";
     }
   };
   return (

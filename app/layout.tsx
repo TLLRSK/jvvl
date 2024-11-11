@@ -3,8 +3,8 @@ import Footer from "@/components/global/Footer";
 import Providers from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Metadata } from "next";
-import { LoadingProvider } from "@/context/LoadingContext";
 import NavbarWrapper from "@/components/navbar/NavbarWrapper";
+import GlobalProvider from "@/context/GlobalContext";
 
 export const metadata: Metadata = {
   title: "Jvvl",
@@ -20,13 +20,13 @@ export default function RootLayout({
     <ClerkProvider dynamic>
       <html lang="en">
         <body className="font-sans antialiased [&>section]:mt-[57px]">
-          <LoadingProvider>
+          <GlobalProvider>
             <Providers>
               <NavbarWrapper />
               {children}
               <Footer />
             </Providers>
-          </LoadingProvider>
+          </GlobalProvider>
         </body>
       </html>
     </ClerkProvider>

@@ -9,8 +9,6 @@ export async function generateStaticParams() {
   return products.map((product) => ({ id: product.id }));
 }
 
-export const dynamic = 'force-static';
-
 async function FeaturedProducts() {
   const products = await fetchFeaturedProducts();
   if(products.length === 0) return <EmptyList />

@@ -1,14 +1,15 @@
 "use client";
 
-import { useLoading } from "@/context/LoadingContext";
+import { useGlobal } from "@/context/GlobalContext";
 import { useEffect, useState } from "react";
 
 const title = ["j", "v", "v", "l"];
 
 function Hero() {
-  const { isInitialLoad, isLoading } = useLoading();
+  const { loading } = useGlobal();
+  const { isInitialLoad, isLoading } = loading;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {

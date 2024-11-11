@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
-interface LoadingContextType {
+export interface LoadingContextType {
   isInitialLoad: boolean;
   isLoading: boolean;
   setIsInitialLoad: (value: boolean) => void;
@@ -28,6 +28,7 @@ export const LoadingProvider = ({ children }: { children: React.ReactNode }) => 
     const loaded = setTimeout(() => {
       setIsInitialLoad(false);
     }, 1800)
+    
     return () => {
       clearTimeout(loading)
       clearTimeout(loaded)

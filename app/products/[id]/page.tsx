@@ -9,8 +9,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id: paramsId } = await params;
-  const product = await fetchSingleProduct(paramsId);
+  const id = (await params).id;
+  const product = await fetchSingleProduct( id );
   return {
     title: product.name,
   };
@@ -21,10 +21,9 @@ async function SingleProductPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id: paramsId } = await params;
-  const product = await fetchSingleProduct(paramsId);
+  const id = (await params).id;
+  const product = await fetchSingleProduct(id);
   const {
-    id,
     name,
     galleryImages,
     modelImage,
